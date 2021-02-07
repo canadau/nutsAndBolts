@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import com.nutsandbolts.tools.DBConnection;
 
 public class HomePage {
@@ -22,11 +22,15 @@ public class HomePage {
 			Connection conn = DBConnection.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(createSQL);
 
-			LocalDateTime localDateTime = LocalDateTime.now();
-			DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a");
-			String myDate = localDateTime.format(dateTimeFormatter);
+			/*
+			 * LocalDateTime localDateTime = LocalDateTime.now(); DateTimeFormatter
+			 * dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a");
+			 * String myDate = localDateTime.format(dateTimeFormatter);
+			 */
+			SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+			Date date = new Date(System.currentTimeMillis());
 
-			pstmt.setString(1, myDate);			
+			pstmt.setString(1, formatter.format(date));			
 
 			pstmt.executeUpdate();
 
@@ -57,5 +61,6 @@ public class HomePage {
 		}
 		return date;
 	}
+	
 
 }

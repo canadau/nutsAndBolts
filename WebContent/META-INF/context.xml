@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
 <Context>
-
 <Resource name="jdbc/Nutsandbolts Database"
 auth="Container" type='javax.sql.DataSource'
 maxActive="20" maxIdle="5" maxWait="10000"
 username="purpleteam" password="Capstone2021"
 driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
 url="jdbc:sqlserver://nutsandbolts-1.cxvligjgnozh.us-east-1.rds.amazonaws.com:1433;DatabaseName=Nutsandbolts" />
-	
-	
 </Context>
