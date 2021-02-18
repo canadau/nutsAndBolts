@@ -1,0 +1,54 @@
+*{	 
+	font-family: Verdana, sans-serif;
+}
+
+.header{
+	min-height: 300px;
+	background-color: #F8F9FD;
+}
+
+.header_nav{
+	margin-top: 0;	
+	background-color: #F8F9FD;
+	
+}
+.pi-shopping-cart{
+	font-size: 25px;
+	margin-left: 250px;
+}
+
+.header_nav a{	
+	margin-top: 10px;
+	text-decoration: none;	
+	padding: 10px;
+}
+
+#logo{
+	margin-right: 300px;
+}
+
+.home{
+	min-height: 600px;
+	
+}
+
+.footer{
+	min-height: 300px;
+	background-color: #F8F9FD;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
