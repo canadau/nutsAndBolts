@@ -108,4 +108,16 @@ a:active {
 	text-align: center;
 	margin-top: 50px;
 }
+
+/* Contact Us page starts here */
+
+.textArea{
+	/* text-align: justify; */
+	margin-left: 25%;
+}
+
+.email1 , .fName1 , .lName1 {
+	/* margin-left: 100px; */
+	display: flex;
+}
 	

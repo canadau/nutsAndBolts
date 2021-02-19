@@ -37,41 +37,40 @@
 			</div>
 		
 	</div>
-
-	<div class="normal">
-	
+	<div class="textArea">
+	<div class="contactus">
+		
+		
 		<h1>Contact Us</h1>
 		<h3>Your voice matters!!!</h3>
 		<br/>
 		<p> Your reviews mean so much to us. Let us know if you try our product and if it worked or didn't work for you. All feedback is apprecaited.</p>
 		<h:form>
 		
-		<h:outputLabel for="fstnm">First name:</h:outputLabel>
-		<h:inputText type="text" id="fstnm" name="fstnm"></h:inputText>
+		<h:outputLabel class="fName" for="fName">First name:</h:outputLabel>
+		<h:inputText type="text" class="fName1" id="fName" name="fName"></h:inputText>
 		<br/>
 		
-		<h:outputLabel for="lname">Last name:</h:outputLabel>
-		<h:inputText type="text" id="lstnm" name="lstnm"></h:inputText>
+		<h:outputLabel class="lName" for="lName">Last name:</h:outputLabel>
+		<h:inputText type="text" class="lName1" id="lName" name="lName"></h:inputText>
 		<br/>
 		
-		<h:outputLabel for="email">Email:</h:outputLabel>
-		<h:inputText type="email" id="email" name="email"></h:inputText>
+		<h:outputLabel class="email" for="email">Email:</h:outputLabel>
+		<h:inputText type="email" class="email1" id="email" name="email"></h:inputText>
 		<br/>
-		<h:inputTextarea cols="60" rows="30" value = "HardCoded Message Here" readonly = "true"/>
 		
-		<br/>
+		
+			<h:inputTextarea cols="60" rows="30" value = "HardCoded Message Here" readonly = "true"/>
+		
+		<br/><br/>
 		
 		<h:commandButton id="submit" value="Submit"></h:commandButton>
 		
 		</h:form> 
+		</div>
 		
 	</div>
 
-	<div class="footer">
-
-		<h3>Purple Team</h3>
-
-	</div>	
 	
 	<div class="footer">
 		<h3>© 2021 Purple Team</h3>
