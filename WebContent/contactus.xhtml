@@ -8,28 +8,34 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
 <h:head>
-	<title>Contact Us</title>
+	<title>Nuts and Bolts Hardware Store</title>
 	<h:outputScript library="js" name="timezone.js" />
-	<h:outputStylesheet library="css" name="style.css" />
-	<h:outputStylesheet library="css" name="contactus.css" />
+	<h:outputStylesheet library="css" name="index.css" />
 	<h:outputStylesheet name="primeicons/primeicons.css"
 		library="primefaces" />
+
 
 </h:head>
 
 <h:body id="main">
 
 	<div class="header">
-		<nav class="header_nav">
-			<a id="logo" href="/home/">Nuts and Bolts</a>
-			<a href="/home/">Home</a> | 
-			<a href="/shop/">Shop</a> | 
-			<a href="/about/">About</a> | 
-			<a href="/contact/">Contact Us</a>  |
-			<a href="/login/">Sign In</a>
-			<a class="pi pi-shopping-cart" id="shopping_cart" />
-			
-		</nav>
+		
+			<div class="logo">
+				<a id="logo" href="index.xhtml">NUTS AND BOLTS</a>
+			</div>
+			<div class="header_nav">
+				<a class="flex_items" href="index.xhtml">Home</a>
+				<a class="flex_items" href="shopping.xhtml">Shop</a>
+				<a class="flex_items" href="aboutus.xhtml">About Us</a> 
+				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
+				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
+			</div>
+			<div class="right_nav">
+				<a href="index.xhtml">Sign-In</a>
+				<a class="pi pi-shopping-cart" id="shopping_cart" />
+			</div>
+		
 	</div>
 
 	<div class="normal">
@@ -66,6 +72,10 @@
 		<h3>Purple Team</h3>
 
 	</div>	
+	
+	<div class="footer">
+		<h3>© 2021 Purple Team</h3>
+	</div>
 
 </h:body>
 
