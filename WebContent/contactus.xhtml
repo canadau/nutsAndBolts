@@ -22,19 +22,43 @@
 
 	<div class="header">
 		<nav class="header_nav">
-			<a href="/home/">Home</a> | <a href="/shop/">Shop</a> | <a
-				href="/about/">About</a> | <a href="/contact/">Contact |</a> <a
-				href="/login/">Log In</a>
+			<a id="logo" href="/home/">Nuts and Bolts</a>
+			<a href="/home/">Home</a> | 
+			<a href="/shop/">Shop</a> | 
+			<a href="/about/">About</a> | 
+			<a href="/contact/">Contact Us</a>  |
+			<a href="/login/">Sign In</a>
+			<a class="pi pi-shopping-cart" id="shopping_cart" />
+			
 		</nav>
 	</div>
 
-	<div class="home">
-
-		<h1>Contact Us </h1>
-		<br />
-
-			
-			
+	<div class="normal">
+	
+		<h1>Contact Us</h1>
+		<h3>Your voice matters!!!</h3>
+		<br/>
+		<p> Your reviews mean so much to us. Let us know if you try our product and if it worked or didn't work for you. All feedback is apprecaited.</p>
+		<h:form>
+		
+		<h:outputLabel for="fstnm">First name:</h:outputLabel>
+		<h:inputText type="text" id="fstnm" name="fstnm"></h:inputText>
+		<br/>
+		
+		<h:outputLabel for="lname">Last name:</h:outputLabel>
+		<h:inputText type="text" id="lstnm" name="lstnm"></h:inputText>
+		<br/>
+		
+		<h:outputLabel for="email">Email:</h:outputLabel>
+		<h:inputText type="email" id="email" name="email"></h:inputText>
+		<br/>
+		<h:inputTextarea cols="60" rows="30"></h:inputTextarea>
+		
+		<br/>
+		
+		<h:commandButton id="submit" value="Submit"></h:commandButton>
+		
+		</h:form> 
 		
 	</div>
 
