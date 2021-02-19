@@ -11,6 +11,7 @@
 	<title>Nuts and Bolts Hardware Store</title>
 	<h:outputScript library="js" name="timezone.js" />
 	<h:outputStylesheet library="css" name="index.css" />
+	<h:outputStylesheet library="css" name="login.css" />
 	<h:outputStylesheet name="primeicons/primeicons.css"
 		library="primefaces" />
 
@@ -21,7 +22,6 @@
 
 	<div class="header">
 		<nav class="header_nav">
-<<<<<<< HEAD
 			<a id="logo" href="/home/">Nuts and Bolts</a>
 			<a href="/home/">Home</a> | 
 			<a href="/shop/">Shop</a> | 
@@ -30,25 +30,22 @@
 			<a href="/login/">Sign In</a>
 			<a class="pi pi-shopping-cart" id="shopping_cart" />
 			
-=======
-			<a href="/home/">Home</a> |
-			<a href="/shop/">Shop</a> |
-			<a href="html/aboutus.xhtml">About</a> |
-			<a href="html/contact.html">Contact |</a>
-			<a href="/login/">Log In</a>
->>>>>>> c37b43834c6cc8b0460926bd41b40354914f4a7e
 		</nav>
 	</div>
 
 	<div class="home">
-
 	
-<<<<<<< HEAD
+	<h:form>
+		<h:outputLabel for="email" class="email"> E-mail</h:outputLabel>
+		<h:inputText id="email"> </h:inputText><br/>
+		
+		<h:outputLabel for="email"> Password</h:outputLabel>
+		<h:inputText id="password"> </h:inputText><br/>
+		
+		<h:commandButton id="submit" value="Login"></h:commandButton>
+	</h:form>
+	
 			
-=======
-		<h3>Purple Team</h3>
-		<h4>This is a note from Luke.</h4>
->>>>>>> c37b43834c6cc8b0460926bd41b40354914f4a7e
 		
 	</div>
 
