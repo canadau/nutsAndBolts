@@ -9,16 +9,16 @@
 	xmlns:rich="http://richfaces.org/rich">
 <h:head>
 	<title>Nuts and Bolts Hardware Store</title>
-	<h:outputStylesheet library="css" name="index.css" />
 	<h:outputScript library="js" name="functionsJS.js" />
-	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+	<h:outputStylesheet library="css" name="index.css" />
 	<h:outputScript library="js" name="jquery-ui.js" />
 	<h:outputScript library="js" name="jquery-3.5.1.min.js" />
+	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
 	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
 
 </h:head>
 
-<h:body id="body">
+<h:body onload="getTimeNow()" id="body">
 
 	<div class="header">
 		
@@ -29,8 +29,8 @@
 				<a class="flex_items" href="index.xhtml">Home</a>
 				<a class="flex_items" href="shopping.xhtml">Shop</a>
 				<a class="flex_items" href="aboutus.xhtml">About Us</a> 
-				<a class="flex_items" href="contactus.xhtml">Contact Us</a>		
-				<a class="flex_items" href="FAQ.xhtml">FAQ</a>			
+				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
+				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
 			</div>
 			<div class="right_nav">
 				<a href="index.xhtml">Sign-In</a>
@@ -38,11 +38,18 @@
 			</div>
 		
 	</div>
+	
 	<div class="home">
-
-		<h2>Shopping Page </h2><br/>
 		
-		 
+		<div class="hello">
+		
+			<h:form>
+				<h1>Hello World!!</h1>	<br/>	
+				<p>The time was saved click, the button to see it! #{page1.jScript()}</p><br/>
+				<h:commandButton value="See the time" action="watchTime"></h:commandButton>
+				
+			</h:form>
+		</div>
 	</div>
 	
 	<div class="footer">

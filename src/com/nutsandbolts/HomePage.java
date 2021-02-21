@@ -18,7 +18,7 @@ public class HomePage {
 
 	{		
 		try {			
-
+			System.out.println("Save the time");
 			Connection conn = DBConnection.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(createSQL);
 
@@ -27,7 +27,7 @@ public class HomePage {
 			 * dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a");
 			 * String myDate = localDateTime.format(dateTimeFormatter);
 			 */
-			SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+			SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' hh:mm:ss z");
 			Date date = new Date(System.currentTimeMillis());
 
 			pstmt.setString(1, formatter.format(date));			
@@ -42,6 +42,7 @@ public class HomePage {
 	public String dateFromDB() {
 		String date = null;
 		try {
+			System.out.println("Get the time");
 			/*
 			 * DBConnection inst = DBConnection.getInstance(); Connection conn =
 			 * inst.getConnection();

@@ -9,15 +9,16 @@
 	xmlns:rich="http://richfaces.org/rich">
 <h:head>
 	<title>Nuts and Bolts Hardware Store</title>
-	<h:outputScript library="js" name="timezone.js" />
-	<h:outputStylesheet library="css" name="index.css" />
-	<h:outputStylesheet name="primeicons/primeicons.css"
-		library="primefaces" />
-
+		<h:outputStylesheet library="css" name="index.css" />
+	<h:outputScript library="js" name="functionsJS.js" />
+	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+	<h:outputScript library="js" name="jquery-ui.js" />
+	<h:outputScript library="js" name="jquery-3.5.1.min.js" />
+	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
 
 </h:head>
 
-<h:body id="main">
+<h:body id="body">
 
 	<div class="header">
 		
@@ -37,43 +38,42 @@
 			</div>
 		
 	</div>
+	<div class="home">
 	<div class="textArea">
-	<div class="contactus">
-		
-		
-		<h1>Contact Us</h1>
+
+		<br/>
+		<h1>Contact Us</h1><br/>
 		<h3>Your voice matters!!!</h3>
 		<br/>
 		<p> Your reviews mean so much to us. Let us know if you try our product and if it worked or didn't work for you. All feedback is apprecaited.</p>
+		<br />
 		<h:form>
 		
-		<h:outputLabel class="fName" for="fName">First name:</h:outputLabel>
-		<h:inputText type="text" class="fName1" id="fName" name="fName"></h:inputText>
+		<p:outputLabel class="fName" for="fName">First name:</p:outputLabel>
+		<p:inputText type="text" class="fName1" id="fName" name="fName" placeholder="Your First Name" ></p:inputText>
 		<br/>
 		
-		<h:outputLabel class="lName" for="lName">Last name:</h:outputLabel>
-		<h:inputText type="text" class="lName1" id="lName" name="lName"></h:inputText>
+		<p:outputLabel class="lName" for="lName">Last name:</p:outputLabel>
+		<p:inputText placeholder="Your Last Name" type="text" class="lName1" id="lName" name="lName"></p:inputText>
 		<br/>
 		
-		<h:outputLabel class="email" for="email">Email:</h:outputLabel>
-		<h:inputText type="email" class="email1" id="email" name="email"></h:inputText>
+		<p:outputLabel class="email" for="email">Email:</p:outputLabel>
+		<p:inputText type="email" class="email1" id="email" name="email" placeholder="Your Email" ></p:inputText>
 		<br/>
 		
-		
-			<h:inputTextarea cols="60" rows="30" value = "HardCoded Message Here" readonly = "true"/>
+		<h:inputTextarea cols="60" rows="30" value = "HardCoded Message Here" readonly = "true"/>
 		
 		<br/><br/>
 		
-		<h:commandButton id="submit" value="Submit"></h:commandButton>
+		<p:commandButton id="submit" value="Submit"></p:commandButton>
 		
 		</h:form> 
 		</div>
 		
 	</div>
-
 	
 	<div class="footer">
-		<h3>© 2021 Purple Team</h3>
+		<h3>Copyright© 2021 Purple Team</h3>
 	</div>
 
 </h:body>

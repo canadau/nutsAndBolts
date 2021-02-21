@@ -12,7 +12,7 @@ public class DBConnection {
 	static final String USER = "purpleteam";
 	static final String PASS = "Capstone2021";
 	static final String PORT = "1433";
-	static final String HOST = "nutsandbolts-1.cxvligjgnozh.us-east-1.rds.amazonaws.com";
+	static final String HOST = "database-1.cnzqwwqzkfbd.us-east-1.rds.amazonaws.com";
 	static final String DATABASE = "nutsandbolts";
 
 	// Build connection URL

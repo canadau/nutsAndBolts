@@ -1,3 +1,5 @@
+
+
 function showMessage(){
    alert("Hello World!");	
 };
@@ -36,11 +38,13 @@ function alertFunc() {
 	  alert("Hello!");
 	};
 
-$("#ttt").click( function() {
-	var myTime;
-	var t = new Date();
-	$("#savetime").text(t);
-	myTime = setTimeout(alertFunc, 3000);
-	myTime = setTimeout("clearTime()", 3000);
+
+
+  function getTimeNow(){
 	
-});
+	var t = new Date();
+	var x = document.getElementById("timeNow");
+	$('#timeNow').html("The Time Was Saved <br/><br/>" + t );
+	
+}
+
