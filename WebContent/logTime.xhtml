@@ -7,32 +7,31 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<title>Nuts and Bolts Hardware Store</title>
-	<h:outputScript library="js" name="functionsJS.js" />
 	<h:outputStylesheet library="css" name="index.css" />
+	<h:outputScript library="js" name="functionsJS.js" />
+	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
 	<h:outputScript library="js" name="jquery-ui.js" />
 	<h:outputScript library="js" name="jquery-3.5.1.min.js" />
-	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
 	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
 
 </h:head>
 
-<h:body onload="getTimeNow()" id="body">
-	
-	<div class="home">
-		
+<h:body id="body">
+
+	<div class="home">			
 		<div class="hello">
 		
-			<h:form>
-				<h1>Hello World!!</h1>	<br/>	
-				<p>The time was saved click, the button to see it! #{page1.jScript()}</p><br/>
-				<p:commandButton value="See the time" action="watchTime"></p:commandButton>
-				
-			</h:form>
+		<h:form>
+			<h1> Hello World! </h1><br/>			
+			<p id="savetime0">Please click the button to save the time</p><br/>		
+					
+			<p:commandButton id="submit" value="Submit" action="saveTime" />
+			
+		</h:form>
 		</div>
+
 	</div>
-	
-	
 
+	
 </h:body>
-
 </html>

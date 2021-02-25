@@ -17,25 +17,6 @@
 </h:head>
 
 <h:body  id="body">
-
-	<div class="header">
-		
-			<div class="logo">
-				<a id="logo" href="index.xhtml">NUTS AND BOLTS</a>
-			</div>
-			<div class="header_nav">
-				<a class="flex_items" href="index.xhtml">Home</a>
-				<a class="flex_items" href="shopping.xhtml">Shop</a>
-				<a class="flex_items" href="aboutus.xhtml">About Us</a> 
-				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
-				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
-			</div>
-			<div class="right_nav">
-				<a href="index.xhtml">Sign-In</a>
-				<a class="pi pi-shopping-cart" id="shopping_cart" />
-			</div>
-		
-	</div>
 	
 	<div class="home">
 		
@@ -44,16 +25,11 @@
 				<h1>Hello World!!</h1>	<br/>	
 				<div>The time is</div><br/>	
 				<p>#{page1.timeFromSQL()}</p><br/>				
-				<h:commandButton value="Home" action="index"></h:commandButton>
+				<p:commandButton value="Home" action="logTime"></p:commandButton>
 			</h:form>			
 		</div>
 	</div>
 	
-	
-	<div class="footer">
-		<h3>Copyright© 2021 Purple Team</h3>
-	</div>
-
 </h:body>
 
 </html>

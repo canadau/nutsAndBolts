@@ -37,9 +37,62 @@
 		
 	</div>
 	<div class="home">
+	<br></br>
 
-		<h2> FAQ </h2>
-		<br/>	
+		<h2>Welcome to FAQ page</h2>
+<br></br>
+<br></br>
+	<h3>Most Common Asked Questions</h3>
+<br></br>
+
+<br></br>
+
+
+<button class="accordion">Our Store hours</button>
+<div class="panel">
+  <p>Our store hours are 9 a.m. - 5 p.m.
+  </p>
+  </div>
+
+
+
+<button class="accordion">Our Return Policy</button>
+<div class="panel">
+  <p>We offer a 30 day return policy.
+  </p>
+  </div>
+  
+
+
+<button class="accordion">Our Story</button>
+<div class="panel">
+  <p>It all began...
+  </p>
+  
+  </div>
+
+	<script>
+		var acc = document.getElementsByClassName("accordion");
+		var i;
+		
+		var acc = document.getElementsByClassName("accordion");
+		var i;
+		
+		for (i = 0; i&lt; acc.length; i++) {
+		  acc[i].addEventListener("click", function() {
+		    this.classList.toggle("active");
+		    var panel = this.nextElementSibling;
+		    if (panel.style.display === "block") {
+		      panel.style.display = "none";
+		    } else {
+		      panel.style.display = "block";
+		    }
+		  });
+		}
+  
+	</script>
+      
+<br/>	
 		
 	</div>
 	

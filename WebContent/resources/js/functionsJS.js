@@ -1,6 +1,8 @@
 $(document).ready(function(){
 	var t = new Date();
 		$("#timeNow").html("<br/>" + t );
+		
+		
 	
 	
 });
