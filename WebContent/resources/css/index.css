@@ -183,7 +183,60 @@ a:active {
 }
 .faq_page {text-align: center;
 }
-.faq_page {text-align:center;
+
+	/* Add products page starts here */
+	
+.add_product > h1 {
+	text-align: center;
+	margin-top: 50px;
 }
 
+.add_product {
+	width: 300px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  padding: 20px;
+  margin-top: 50px;
+  align-items: center;
+  background-color: white;
+}
+
+.home_addProduct {
+  /* background-color: white; */
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+/* Update products page starts here */
+
+.updateProduct > h1 {
+	text-align: center;
+	margin-top: 50px;
+}
+
+.updateProduct {
+	width: 300px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  padding: 20px;
+  margin-top: 50px;
+  align-items: center;
+  background-color: white;
+}
+
+.home_updateProduct {
+  /* background-color: white; */
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
 	

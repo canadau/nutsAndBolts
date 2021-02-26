@@ -37,27 +37,33 @@
 		
 	</div>
 
-	<div class="home">			
+	<div class="home_addProduct">			
+		<div class="add_product">
+		
 		<h1>Add Products</h1>
 		
-		<h:form>
-		<h:messages />
-			<br/><br/>
-			<h:outputLabel for="sku">SKU:</h:outputLabel>
-			<h:inputText value="#{addProductB.sku}" required = "true" requiredMessage = "SKU is required"></h:inputText><br/><br/>
+			<h:form>
 			
-			<h:outputLabel for="name">Name:</h:outputLabel>
-			<h:inputText value="#{addProductB.name}" required = "true" requiredMessage = "Name is required"></h:inputText><br/><br/>
+				<br/><br/>
+				<h:outputLabel for="sku">SKU:</h:outputLabel><br/>
+				<h:inputText id="sku" value="#{addProductB.sku}" required = "true" requiredMessage = "SKU is required"></h:inputText><br/><br/>
+				
+				<h:outputLabel for="name">Name:</h:outputLabel><br/>
+				<h:inputText id="name" value="#{addProductB.name}" required = "true" requiredMessage = "Name is required"></h:inputText><br/><br/>
+				
+				<h:outputLabel for="price">Price:</h:outputLabel><br/>
+				<h:inputText id="price" value="#{addProductB.price}" required = "false" requiredMessage = "Price is required"></h:inputText><br/><br/>
+				
+				<h:outputLabel for="description">Description:</h:outputLabel>
+				<h:inputTextarea style="width: 300px; height: 150px;" id="description" value="#{addProductB.description}" required = "true" requiredMessage = "Description is required"></h:inputTextarea><br/><br/>
+
+				<h:commandButton id="addToDB" value="Add a Product" action="#{addProductB.addProductToDB}" update="message" />
 			
-			<h:outputLabel for="description">Description:</h:outputLabel>
-			<h:inputText value="#{addProductB.description}" required = "true" requiredMessage = "Description is required"></h:inputText><br/><br/>
-			
-			<h:outputLabel for="price">Price:</h:outputLabel>
-			<h:inputText value="#{addProductB.price}" required = "false" requiredMessage = "Price is required"></h:inputText><br/><br/>
-			
-			<h:commandButton id="addToDB" value="Add a Product" action="#{addProductB.addProductToDB}" update="message" />
+				<h:messages />
+				
+			</h:form>
 		
-		</h:form>
+		</div>
 
 	</div>
 
