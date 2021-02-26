@@ -4,9 +4,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich">
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<title>Nuts and Bolts Hardware Store</title>
 	<h:outputStylesheet library="css" name="index.css" />
@@ -27,8 +25,8 @@
 			</div>
 			<div class="header_nav">
 				<a class="flex_items" href="index.xhtml">Home</a>
-				<a class="flex_items" href="shopping.xhtml">Shop</a>
-				<a class="flex_items" href="aboutus.xhtml">About Us</a> 
+				<a class="flex_items" href="addProduct.xhtml">Add Products</a>
+				<a class="flex_items" href="updateProduct.xhtml">Update Products</a> 
 				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
 				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
 			</div>
@@ -42,11 +40,12 @@
 	<div class="home">
 	
 	<h:form>
+	<br/><br/>
 		<h:outputLabel for="email" class="email"> E-mail</h:outputLabel>
-		<h:inputText id="email"> </h:inputText><br/>
+		<h:inputText id="email"> </h:inputText><br/><br/>
 		
 		<h:outputLabel for="email"> Password</h:outputLabel>
-		<h:inputText id="password"> </h:inputText><br/>
+		<h:inputText id="password"> </h:inputText><br/><br/>
 		
 		<h:commandButton id="submit" value="Login"></h:commandButton>
 	</h:form>

@@ -158,11 +158,14 @@ a:active {
 }
 
 .panel {
-  padding: 0 18px;
+  padding: 15px 18px;
   display: none;
   background-color: white;
   text-align: center;
   overflow: hidden;
+  background-color: #d9d9d9;
+  height: 50px;
+  
 }
 .accordion:after {
   content: '\02795';
@@ -170,14 +173,17 @@ a:active {
   color: #777;
   float: right;
   margin-left: 5px;
+
+
 }
 
 .active:after {
   content: "\2796"; 
+  
 }
-h2 {text-align: center;
+.faq_page {text-align: center;
 }
-h3 {text-align:center;
+.faq_page {text-align:center;
 }
 
 	

@@ -26,22 +26,37 @@
 			</div>
 			<div class="header_nav">
 				<a class="flex_items" href="index.xhtml">Home</a>
-				<a class="flex_items" href="shopping.xhtml">Shop</a>
-				<a class="flex_items" href="aboutus.xhtml">About Us</a> 
+				<a class="flex_items" href="addProduct.xhtml">Add Products</a>
+				<a class="flex_items" href="updateProduct.xhtml">Update Products</a> 
 				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
 				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
 			</div>
 			<div class="right_nav">
-				<a href="index.xhtml">Sign-In</a>
+				<a href="login.xhtml">Sign-In</a>
 				<a class="pi pi-shopping-cart" id="shopping_cart" />
 			</div>
 		
 	</div>
 	<div class="home">
 	<div class="textArea">
+	
+		<div>
+		<br/>
+			<h1>Contact Us</h1><br/>
+			
+			<h2>Address:</h2><br/>
+			<p>123 Main St</p><br/>
+			<p>Colombus, OH 43024</p><br/>
+			
+			<h3>Email: </h3><br/>
+			<p>nutsandbolts@support.com</p><br/>
+			<h3>Phone Number: </h3><br/>
+			<p>(614) 123-1234</p><br/>
+		
+		</div>
 
 		<br/>
-		<h1>Contact Us</h1><br/>
+		
 		<h3>Your voice matters!!!</h3>
 		<br/>
 		<p> Your reviews mean so much to us. Let us know if you try our product and if it worked or didn't work for you. All feedback is apprecaited.</p>
@@ -60,11 +75,11 @@
 		<p:inputText type="email" class="email1" id="email" name="email" placeholder="Your Email" value="" ></p:inputText>
 		<br/>
 		
-		<p:inputTextarea cols="60" rows="30" value = "HardCoded Message Here" readonly = "true"/>
+		<p:inputTextarea cols="60" rows="30" value = "" readonly = "true"/>
 		
 		<br/><br/>
 		
-		<p:commandButton id="submit" value="Submit"></p:commandButton>
+		<p:commandButton id="submit" value="Submit" action="index" ></p:commandButton>
 		
 		</h:form> 
 		</div>

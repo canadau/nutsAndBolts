@@ -7,7 +7,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<title>Nuts and Bolts Hardware Store</title>
-		<h:outputStylesheet library="css" name="index.css" />
+	<h:outputStylesheet library="css" name="index.css" />
 	<h:outputScript library="js" name="functionsJS.js" />
 	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
 	<h:outputScript library="js" name="jquery-ui.js" />
@@ -28,7 +28,7 @@
 				<a class="flex_items" href="addProduct.xhtml">Add Products</a>
 				<a class="flex_items" href="updateProduct.xhtml">Update Products</a> 
 				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
-				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
+				<a class="flex_items" href="FAQ.xhtml">FAQ</a>			
 			</div>
 			<div class="right_nav">
 				<a href="login.xhtml">Sign-In</a>
@@ -36,70 +36,31 @@
 			</div>
 		
 	</div>
-	<div class="home">
-	<br></br>
 
-				<h2 class="faq_page">Welcome to FAQ page</h2>
-		<br></br>
-		<br></br>
-			<h3 class="faq_page">Most Common Asked Questions</h3>
-		<br></br>
+	<div class="home">		
+	<h1>Update Products</h1>	
 		
-		<br></br>
+		<h:form>
+			<br/><br/>
+			<h:outputLabel value="SKU: "></h:outputLabel>
+			<h:inputText></h:inputText> <h:commandButton value="Search"></h:commandButton>
+			<br/><br/>
+			
+			<h:outputLabel value="Name: "></h:outputLabel>
+			<h:inputText></h:inputText><br/><br/>
+			
+			<h:outputLabel value="Description: "></h:outputLabel>
+			<h:inputText></h:inputText><br/><br/>
+			
+			<h:commandButton value="Update"></h:commandButton>
 		
-		
-		<button class="accordion">Our Store hours</button>
-		<div class="panel">
-		  <p>Our store hours are 9 a.m. - 5 p.m.
-		  </p>
-		  </div>
-		
-		
-		
-		<button class="accordion">Our Return Policy</button>
-		<div class="panel">
-		  <p>We offer a 30 day return policy.
-		  </p>
-		  </div>
-		  
-		
-		
-		<button class="accordion">Our Story</button>
-		<div class="panel">
-		  <p>It all began...
-		  </p>
-  
-  </div>
+		</h:form>
 
-	<script>
-		var acc = document.getElementsByClassName("accordion");
-		var i;
-		
-		var acc = document.getElementsByClassName("accordion");
-		var i;
-		
-		for (i = 0; i&lt; acc.length; i++) {
-		  acc[i].addEventListener("click", function() {
-		    this.classList.toggle("active");
-		    var panel = this.nextElementSibling;
-		    if (panel.style.display === "block") {
-		      panel.style.display = "none";
-		    } else {
-		      panel.style.display = "block";
-		    }
-		  });
-		}
-  
-	</script>
-      
-<br/>	
-		
 	</div>
-	
+
 	<div class="footer">
 		<h3>Copyright© 2021 Purple Team</h3>
-	</div>
-
+	</div>	
+	
 </h:body>
-
 </html>
