@@ -3,11 +3,10 @@ package com.nutsandbolts.beans;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import com.nutsandbolts.tools.DBConnection;
-
+import com.nutsandbolts.tools.ShowMessages;
 
 @ManagedBean(name="addProductB")
 @RequestScoped
@@ -52,12 +51,11 @@ public class ProductsBeans implements Serializable {
 		this.fPrice = price;
 	}
 	
-	public String addProductToDB( ) {
+	public void addProductToDB( ) {
 		Connection conn = null;
-		String str = "afterAdding";
+		
 		try {
-			System.out.println("It is going to push the product to DB");
-
+			
 			String createSQL = "INSERT INTO products (sku, name, description, price) VALUES (?, ?, ?, ?)";
 			conn = DBConnection.getConnection();
 
@@ -67,23 +65,22 @@ public class ProductsBeans implements Serializable {
 			pst.setString(3, fDescription);
 			pst.setDouble(4, fPrice);
 
-			pst.executeQuery();
+			int rs = pst.executeUpdate();
 			
-			str = "addProduct";
-			
+			if (rs > 0) {
+				ShowMessages.showSuccessMessage("The Product Was added successfully");
+			} else {
+				 ShowMessages.showErrorMessage("Error, the product was not added, please try again"); 
+			}			
+				
 			pst.close();
 		} catch (Exception e) {
 			e.getCause();
 			System.out.println(e.getCause());
 		} finally {
 			DBConnection.close(conn);
-		}
-		System.out.println(str);
+		}		
 		
-		return str;
-		
-	}
-	
-	
+	}	
 
 }
