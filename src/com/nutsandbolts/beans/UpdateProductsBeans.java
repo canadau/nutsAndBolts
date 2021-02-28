@@ -14,6 +14,7 @@ import com.nutsandbolts.tools.ShowMessages;
 @ManagedBean (name="updateProducts")
 @RequestScoped
 public class UpdateProductsBeans implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 	private int fSku;
 	private String fName;
@@ -99,6 +100,11 @@ public class UpdateProductsBeans implements Serializable {
 		}	
 	}
 	
+	/*
+	 * public void updateProductsINDB(int sku, String name, Double ) {
+	 * 
+	 * }
+	 */
 	
 
 }
