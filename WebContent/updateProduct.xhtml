@@ -45,14 +45,17 @@
 				<h:form>
 					<br/><br/>
 					<h:outputLabel for="sku" value="SKU: "></h:outputLabel>
-					<h:inputText id="sku" ></h:inputText> <h:commandButton value="Search"></h:commandButton>
+					<h:inputText id="sku" value="updateProducts.fSku"></h:inputText> 
+					<h:commandButton value="Search" action="updateProducts.getProductsFromDB">
+					
+					</h:commandButton>
 					<br/><br/>
 					
 					<h:outputLabel for="name" value="Name: "></h:outputLabel>
-					<h:inputText id="name"></h:inputText><br/><br/>
+					<h:inputText id="name" value="updateProducts.fName"></h:inputText><br/><br/>
 					
 					<h:outputLabel for="price">Price:</h:outputLabel>
-					<h:inputText id="price" ></h:inputText><br/><br/>
+					<h:inputText id="price" value="updateProducts.fPrice" ></h:inputText><br/><br/>
 					
 					<h:outputLabel for="description:" value="Description: "></h:outputLabel>
 					<h:inputTextarea style="width: 300px; height: 150px;" id="description"></h:inputTextarea><br/><br/>
