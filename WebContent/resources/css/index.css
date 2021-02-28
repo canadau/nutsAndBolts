@@ -201,6 +201,7 @@ a:active {
   margin-top: 50px;
   align-items: center;
   background-color: white;
+  margin-bottom: 200px;
 }
 
 .home_addProduct {
@@ -229,6 +230,8 @@ a:active {
   margin-top: 50px;
   align-items: center;
   background-color: white;
+  margin-bottom: 200px;
+  
 }
 
 .home_updateProduct {
@@ -237,6 +240,7 @@ a:active {
   display: flex;
   flex-direction: column;
   align-items: center;
+  
   
 }
 	
