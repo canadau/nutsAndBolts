@@ -13,6 +13,22 @@
 	<h:outputScript library="js" name="jquery-ui.js" />
 	<h:outputScript library="js" name="jquery-3.5.1.min.js" />
 	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+	
+<style>
+#login_page {
+	text-align: center;
+	padding: 10px;
+}
+
+.email {
+	margin-left: 0px ;
+}
+
+.password {
+	margin-left: 0px ;
+}
+
+</style>
 
 </h:head>
 
@@ -40,21 +56,25 @@
 	
 	<div class="home">
 	
-	<h:form>
-	<br/><br/>
-		<p:outputLabel for="email" class="email"> E-mail: </p:outputLabel>
-		<p:inputText id="email" required="true"> </p:inputText><br/><br/>
-		
-		<p:outputLabel for="email"> Password: </p:outputLabel>
-		<p:inputText id="password" required="true"> </p:inputText><br/><br/>
-		
-		<p:commandButton id="submit" value="Login"></p:commandButton>
-	</h:form>
+	<div id="login_page" >
+	
+		<h:form>
+			<br/>
+			<p:outputLabel for="email" class="email"> E-mail: </p:outputLabel>
+			<p:inputText id="email" required="true"> </p:inputText><br/><br/>
+			
+			<p:outputLabel for="password" class="password" > Password: </p:outputLabel>
+			<p:inputText id="password" required="true"> </p:inputText><br/><br/>
+			
+			<p:commandButton id="submit" value="Login"></p:commandButton>
+		</h:form>
 		
 	</div>
 	
 	<div class="footer">
 		<h3>Copyright© 2021 Purple Team</h3>
+	</div>
+	
 	</div>
 
 </h:body>
