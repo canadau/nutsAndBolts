@@ -4,6 +4,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<title>Nuts and Bolts Hardware Store</title>
@@ -26,13 +27,18 @@
 			<div class="header_nav">
 				<a class="flex_items" href="index.xhtml">Home</a>
 				<a class="flex_items" href="products.xhtml">Products</a>
-				<a class="flex_items" href="addProduct.xhtml">Add Products</a>
-				<a class="flex_items" href="updateProduct.xhtml">Update Products</a> 
+				
+				<c:if test="#{employeelogin.employee.userName != null}">
+					<a class="flex_items" href="addProduct.xhtml">Add Products</a>
+					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>			       
+			    </c:if>
+				
 				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
-				<a class="flex_items" href="FAQ.xhtml">FAQ</a>			
+				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
 			</div>
 			<div class="right_nav">
-				<a href="login.xhtml">Sign-In</a>
+				<a><span>Welcome #{employeelogin.employee.userName != null? employeelogin.employee.userName : 'Guest'} </span></a>
+				<a href="login.xhtml">#{employeelogin.employee.userName != null ? 'Sign Out' : 'Sign In'}</a>
 				<a class="pi pi-shopping-cart" id="shopping_cart" />
 			</div>
 		

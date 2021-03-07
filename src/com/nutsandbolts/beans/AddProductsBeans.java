@@ -68,7 +68,7 @@ public class AddProductsBeans implements Serializable {
 			int rs = pst.executeUpdate();
 			
 			if (rs > 0) {
-				ShowMessages.showSuccessMessage("The Product Was added successfully");
+				ShowMessages.showSuccessMessage("The product was added successfully");
 			} else {
 				 ShowMessages.showErrorMessage("Error, the product was not added, please try again"); 
 			}			

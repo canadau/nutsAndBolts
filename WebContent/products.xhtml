@@ -4,6 +4,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<title>Nuts and Bolts Hardware Store</title>
@@ -13,12 +14,84 @@
 	<h:outputScript library="js" name="jquery-ui.js" />
 	<h:outputScript library="js" name="jquery-3.5.1.min.js" />
 	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
-<style>.product {background-color:grey;
-color:black;
-border-style: solid;
-border-width: thick;
-margin: 40px;
-padding: 40px;}</style>
+	<!-- <h:outputScript library="bootstrap" name="bootstrap.min.js" />
+	<h:outputStylesheet library="bootstrap" name="bootstrap.min.css" /> -->
+
+<style>
+		.card {
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+			width: 400px;
+			height: 300px;
+			margin: 15px;
+			/* text-align: center; */
+			font-family: arial;	
+			position: relative;		
+		}
+		
+		.price {
+			color: grey;
+			font-size: 22px;
+			margin: 10px;
+		}
+		
+		.description {
+			margin: 10px;
+		}
+		
+		.name {
+			margin: 10px;
+		}
+		
+		.card_button {
+			
+			position: absolute;
+			bottom: 5px;
+			border: none;
+			/* outline: 0; */
+			padding: 12px;
+			color: white;
+			background-color: #000;
+			text-align: center;
+			cursor: pointer;
+			width: 100%;
+			font-size: 18px;
+		}
+		
+		.card button:hover {
+		  opacity: 0.7;
+		}
+		
+		.home_products {
+			justify-content: center;
+		    margin-left: auto;
+		    margin-right: auto;
+		    max-width: 1500px;
+		    min-height: 100vh;
+		    z-index: -1;
+		    background-color: white;
+		}
+		
+		.contener_row {
+			 display: grid;
+			margin-left: 5px;
+			margin-right: 5px; 
+			justify-content: space-evenly;
+			z-index: -1;
+
+		}
+		
+		.col {		 
+		    diaplay: in-line;
+		}
+		
+		.btn{
+			padding: 5px;
+			color: white;
+			background-color: #000;
+		}
+		
+	</style>
+
 </h:head>
 
 <h:body id="body">
@@ -31,53 +104,40 @@ padding: 40px;}</style>
 			<div class="header_nav">
 				<a class="flex_items" href="index.xhtml">Home</a>
 				<a class="flex_items" href="products.xhtml">Products</a>
-				<a class="flex_items" href="addProduct.xhtml">Add Products</a>
-				<a class="flex_items" href="updateProduct.xhtml">Update Products</a> 
+				
+				<c:if test="#{employeelogin.employee.userName != null}">
+					<a class="flex_items" href="addProduct.xhtml">Add Products</a>
+					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>			       
+			    </c:if>
+				
 				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
-				<a class="flex_items" href="FAQ.xhtml">FAQ</a>			
+				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
 			</div>
 			<div class="right_nav">
-				<a href="login.xhtml">Sign-In</a>
+				<a><span>Welcome #{employeelogin.employee.userName != null? employeelogin.employee.userName : 'Guest'} </span></a>
+				<a href="login.xhtml">#{employeelogin.isLoggedin() == true ? 'Sign Out' : 'Sign In'}</a>
 				<a class="pi pi-shopping-cart" id="shopping_cart" />
 			</div>
 		
 	</div>
 
-	<div class="home">			
-<h1>Welcome, this is our product page! If you see an item that you may enjoy please contact us for more information</h1>
-
-<div class="product">
-<h2> Engraved Hammer - CH980KTR </h2>
-<p> Our engraved hammers are truly as unique as you! Made from the strongest steel that we could find (all sourced from local steel mills) and a handle made from Mahogany. There isn't a nail this hammer cannot handle! </p>
-<p> Own your very own for the low price of $125.85 (lay-away and payment plans are available) </p>
-</div>
-
-<div class="product">
-<h2> Drill - TD460TED </h2>
-<p> Our drills are truly unique! Made from the same local sourced steel as our hammers, this drill can either be ran on battery or on cord. Why settle for second best when you can get the best!!! </p>
-<p> Own your very own for the low price of $200.99 (lay-away and payment plans are available) </p>
-</div>
-
-<div class="product">
-<h2> Construction Glue - AG687KTE </h2>
-<p> Construction glue to fit any of your needs! Our proved and tested solution binds to wood, metal, and plastic. It even can adhear to silicon! Try it and be amazed!</p>
-<p> Own your very own for the low price of $24.99 (32oz) </p>
-</div>
-
-<div class="product">
-<h2> Energy Efficient Light Bulbs - LB100RBG </h2>
-<p> Don't choose between seeing where your going at night and the electric bill. With our energy efficient light bulbs, save money while keeping the Boogieman away! </p>
-<p> Own your very own starting at $10.99 </p>
-</div>
-
-
-<div class="product">
-<h2> 2x4: 8ft - TM248FOP </h2>
-<p> Building a house can get expensive, save some money and frustaration and buy our 2x4 Oak lumber. Good for you and sourced responsibly so it's good for the environment!</p>
-<p> Lumber is priced per piece at $3.89</p>
-</div>		
-
+	<div class="home_products">
+	
+		
+			<ui:repeat var="prod" value="#{products.getProductFromDB()}">
+			<div class="contener_row">
+					<div class="card">			  
+					  <h3 class="name">#{prod.name}</h3>
+					  <p class="price">#{prod.price}</p>
+					  <p class="description">#{prod.description}</p>
+					  <button class="card_button">Add to Cart</button>
+					</div>			
+				</div>			
+			</ui:repeat>
+		
+		
 	</div>
+	
 
 	<div class="footer">
 		<h3>Copyright© 2021 Purple Team</h3>

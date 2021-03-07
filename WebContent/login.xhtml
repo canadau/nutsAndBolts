@@ -4,6 +4,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<title>Nuts and Bolts Hardware Store</title>
@@ -42,13 +43,18 @@
 			<div class="header_nav">
 				<a class="flex_items" href="index.xhtml">Home</a>
 				<a class="flex_items" href="products.xhtml">Products</a>
-				<a class="flex_items" href="addProduct.xhtml">Add Products</a>
-				<a class="flex_items" href="updateProduct.xhtml">Update Products</a> 
+				
+				<c:if test="#{employeelogin.employee.userName != null}">
+					<a class="flex_items" href="addProduct.xhtml">Add Products</a>
+					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>			       
+			    </c:if>
+				
 				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
 				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
 			</div>
 			<div class="right_nav">
-				<a href="index.xhtml">Sign-In</a>
+				<a><span>Welcome #{employeelogin.employee.userName != null? employeelogin.employee.userName : 'Guest'} </span></a>
+				<a href="login.xhtml">#{employeelogin.employee.userName == true ? 'Sign Out' : 'Sign In'}</a>
 				<a class="pi pi-shopping-cart" id="shopping_cart" />
 			</div>
 		
@@ -60,14 +66,17 @@
 	
 		<h:form>
 			<br/>
-			<p:outputLabel for="email" class="email"> E-mail: </p:outputLabel>
-			<p:inputText id="email" required="true"> </p:inputText><br/><br/>
+			<h:outputLabel for="email" class="email"> E-mail: </h:outputLabel>
+			<h:inputText id="email" required="true" label="E-mail" value="#{employeelogin.email}"> </h:inputText><br/><br/>
 			
-			<p:outputLabel for="password" class="password" > Password: </p:outputLabel>
-			<p:inputText id="password" required="true"> </p:inputText><br/><br/>
+			<h:outputLabel for="password" class="password" > Password: </h:outputLabel>
+			<h:inputSecret id="password" required="true" label="Password" value="#{employeelogin.password}"> </h:inputSecret><br/><br/>
 			
-			<p:commandButton id="submit" value="Login"></p:commandButton>
+			<h:commandButton id="submit" value="Login" action="#{employeelogin.validateUsernamePassword()}"/>
+			<br/><br/>
+			<h:messages infoStyle="color:green" errorStyle="color:red" />
 		</h:form>
+				
 		
 	</div>
 	

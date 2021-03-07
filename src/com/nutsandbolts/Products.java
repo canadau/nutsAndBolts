@@ -3,7 +3,6 @@ package com.nutsandbolts;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import com.nutsandbolts.tools.DBConnection;
 
 
@@ -13,6 +12,8 @@ public class Products {
 	private String description;
 	private double price;
 	
+	
+	public Products() {}
 	public Products(int sku, String name, String description, double price) {
 		super();
 		this.sku = sku;
@@ -54,7 +55,7 @@ public class Products {
 	}
 
 	public void addProduct(int sku, String name, String description, double price ) {
-		
+
 		try {
 			System.out.println("It is going to push the product to DB");
 
@@ -72,10 +73,10 @@ public class Products {
 
 		} catch (Exception e) {
 			e.getMessage();
-		}
-		
-		 
+		}		 
 	}
+	
+	
 	
 }
 	
