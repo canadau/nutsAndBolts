@@ -115,7 +115,7 @@
 			</div>
 			<div class="right_nav">
 				<a><span>Welcome #{employeelogin.employee.userName != null? employeelogin.employee.userName : 'Guest'} </span></a>
-				<a href="login.xhtml">#{employeelogin.isLoggedin() == true ? 'Sign Out' : 'Sign In'}</a>
+				<a href="login.xhtml">#{employeelogin.employee.userName != null ? 'Sign Out' : 'Sign In'}</a>
 				<a class="pi pi-shopping-cart" id="shopping_cart" />
 			</div>
 		
