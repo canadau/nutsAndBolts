@@ -1,5 +1,6 @@
 package com.nutsandbolts.beans;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,12 +15,14 @@ import com.nutsandbolts.tools.DBConnection;
 
 @ManagedBean (name = "products")
 @RequestScoped
-public class ProductsDB {
+public class ProductsDB implements Serializable {
 	
-	Products productsBeans;
+	private static final long serialVersionUID = 1L;
+	
 	private Products product;
 	private List<Products> products = new ArrayList<>();
 	
+	public ProductsDB() {}
 	public List<Products> getProductFromDB(){		
 		
 		try {
