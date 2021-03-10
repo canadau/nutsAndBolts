@@ -29,6 +29,8 @@ public class EmployeeLogin implements Serializable {
 	public static boolean isLoggedin = false;
 	public static Employee sessionCustomer = null;
 	public int attempt = 0;
+	public long start;
+	public boolean valid;
 	
 	public EmployeeLogin() {}
 
@@ -89,20 +91,39 @@ public class EmployeeLogin implements Serializable {
 	}
 
 	public String validateUsernamePassword() {
-
-		boolean valid = validatePass(email, password);
-
-		if (valid) {
+		
+		if (attempt < 2) {
+		valid = validatePass(email, password);
+		} else {
+			valid = false;
+		}
+			
+		if (attempt >= 3) {
+			
+			if (System.currentTimeMillis() - start > 900000) {
+				// Only allow the timer to reset once 15 minutes have passed.
+				attempt = 0;
+				return "login";
+			}
+			ShowMessages.showErrorMessage("Too many failed login attempts.  Wait 15 minutes.");
+			return "login";
+		
+		} else if (valid && attempt < 2) {
 
 			HttpSession session = SessionManagement.getSession();
 			session.setAttribute("admin", email);
 			setLoggedin(true);
+			attempt = 0;
 			return "index?faces-redirect=true";
 			
 		} else {
 			
 			ShowMessages.showErrorMessage("Incorrect username or password!");
-			
+			attempt++;
+			if (attempt >= 3) {
+				// Get the start time for the counter.
+				start = System.currentTimeMillis();				
+			}
 			return "login";
 		}
 
