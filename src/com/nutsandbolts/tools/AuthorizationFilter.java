@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
  * and transform the response to implement authentication feature.
  * for the website's back-end.
  *
- * @author www.codejava.net
  */
 @WebFilter(filterName = "AuthFilter", urlPatterns = { "*.xhtml" })
 public class AuthorizationFilter implements Filter{
@@ -26,17 +25,15 @@ public class AuthorizationFilter implements Filter{
 	private static final String[] customerLoginRequiredURLs = {"/changeAddress.xhtml",
             "/manageAccount.xhtml"};
 	
-	private static final String[] adminLoginRequiredURLs = {"/employeeManagement.xhtml", "/adminProducts.xhtml",
+	private static final String[] adminLoginRequiredURLs = {"/employeeManagement.xhtml", "/registerEmployee.xhtml",
 			"/adminOrders.xhtml", "/addProduct.xhtml", "/updateProduct.xhtml"};
 	public AuthorizationFilter() {};
-	
-	
+		
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 
 	}
      
-	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws ServletException {
@@ -74,7 +71,8 @@ public class AuthorizationFilter implements Filter{
 	        		//EmployeeLogin.isLoggedin = false;
 	        		System.out.println("Cleaning");
 	        	resp.sendRedirect(httpRequest.getContextPath() + "/faces/employeeManagement.xhtml");
-	        	}  else if(isCustomerLoggedIn) {
+	        	}  else if(isCustomerLoggedIn && isLoginPage) {
+	        		session.invalidate();
 	        		// the customer is already logged in and he's trying to login again
 		            // then forward to the manage account page   
 	        		System.out.println("Cleaning 2");
@@ -100,10 +98,6 @@ public class AuthorizationFilter implements Filter{
 		}
 	}
 	
-	/**
-	 * To check if the requested page is restricted to logged in customers.
-	 * @return True if the page is restricted, false otherwise.
-	 */
 	private boolean isCustomerLoginRequired() {
         String requestURL = httpRequest.getRequestURL().toString();
  
@@ -115,11 +109,7 @@ public class AuthorizationFilter implements Filter{
  
         return false;
     }
-	
-	/**
-	 * To check if the requested page is restricted to logged in admins.
-	 * @return true if the page is restricted, false otherwise.
-	 */
+		
 	private boolean isAdminLoginRequired() {
         String requestURL = httpRequest.getRequestURL().toString();
  
@@ -132,8 +122,6 @@ public class AuthorizationFilter implements Filter{
         return false;
     }
 	
-	
-
 	@Override
 	public void destroy() {
 }

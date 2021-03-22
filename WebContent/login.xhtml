@@ -53,8 +53,8 @@
 				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
 			</div>
 			<div class="right_nav">
-				<a>Welcome <span class="welcome_name">#{employeelogin.employee.userName != null? employeelogin.employee.userName : 'Guest'} </span></a>
-				<a href="login.xhtml">#{employeelogin.employee.userName == true ? 'Sign Out' : 'Sign In'}</a>
+				<a>Welcome <span class="welcome_name">#{employeelogin.session.getAttribute("name") != null? employeelogin.session.getAttribute("name") : 'Guest'} </span></a>
+				<a href="login.xhtml">#{employeelogin.session.getAttribute("name") != null ? 'Sign Out' : 'Sign In'}</a>
 				<a class="pi pi-shopping-cart" id="shopping_cart" />
 			</div>
 		
@@ -66,14 +66,15 @@
 		
 			<h:form>
 				<br/>
-				<h:outputLabel for="email" class="email"> E-mail: </h:outputLabel>
-				<h:inputText id="email" required="true" label="E-mail" value="#{employeelogin.email}"> </h:inputText><br/><br/>
+				<p:outputLabel for="email" class="email"> E-mail: </p:outputLabel>
+				<p:inputText id="email" required="true" label="E-mail" value="#{employeelogin.email}"> </p:inputText><br/><br/>
 				
-				<h:outputLabel for="password" class="password" > Password: </h:outputLabel>
-				<h:inputSecret id="password" required="true" label="Password" value="#{employeelogin.password}"> </h:inputSecret><br/><br/>
+				<p:outputLabel for="password" class="password" > Password: </p:outputLabel>
+				<p:password id="password" required="true" label="Password" value="#{employeelogin.password}"> </p:password><br/><br/>
 				
-				<h:commandButton id="submit" value="Login" action="#{employeelogin.validateUsernamePassword()}"/>
+				<p:commandButton id="submit" update="@form" value="Login" action="#{employeelogin.validateUsernamePassword()}"/>
 				<br/><br/>
+				
 				<h:messages infoStyle="color:green" errorStyle="color:red" />
 			</h:form>
 					
