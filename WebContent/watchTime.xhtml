@@ -28,7 +28,23 @@
 				<p:commandButton value="Home" action="logTime"></p:commandButton>
 			</h:form>			
 		</div>
+		
+		<!-- <p id="te" onclick="gt()"> Here</p> -->
 	</div>
+
+	
+		
+	<script>
+	function gt(){
+		
+		var t = new Date();
+		var time = '#{page1.timeFromSQL()}';
+		/* var x = document.getElementById("te"); */
+		$('#te').html("The Time Was Saved <br/><br/>" + t );
+			
+			
+		}
+	</script>
 	
 </h:body>
 
