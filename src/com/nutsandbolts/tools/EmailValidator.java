@@ -20,5 +20,9 @@ public class EmailValidator {
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
     }
+    
+    public static boolean isLowercaseEmail(String email) {
+    	return (email.equals(email.toLowerCase()));
+    }
 
 }

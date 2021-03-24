@@ -108,13 +108,13 @@ public class RegisterEmployee implements Serializable {
 		
 		if(!PasswordValidator.isValid(password)) {
 			
-			ShowMessages.showErrorMessage("Password must have at least one lowercase letter, "
-					+ "one uppercase, one number, and a special character.");
+			ShowMessages.showErrorMessage("Password must be at least one lowercase letter, "
+					+ "one uppercase letter, one number, a special character, and 8 characters long.");
 			return;
 			
-		} else if (!EmailValidator.isValidEmailAddress(email)) {
+		} else if (!EmailValidator.isValidEmailAddress(email) || !EmailValidator.isLowercaseEmail(email)) {
 			
-			ShowMessages.showErrorMessage("You need to use your employee email to complete this process, 'example@nab.com'");
+			ShowMessages.showErrorMessage("The email must be lower case, and you need to use your employee email to complete this process, 'example@nab.com'");
 			return;
 			
 		} else if (!isExistEmp()) {
@@ -135,7 +135,7 @@ public class RegisterEmployee implements Serializable {
 				int rs = pst.executeUpdate();
 				
 				if (rs > 0) {
-					ShowMessages.showSuccessMessage("The account was added successfully");				
+					ShowMessages.showSuccessMessage("The account was created successfully");				
 				} else {
 					ShowMessages.showErrorMessage("Error, please try again!");
 				}
@@ -148,7 +148,7 @@ public class RegisterEmployee implements Serializable {
 				DBConnection.close(conn);
 			}
 		} else {
-			ShowMessages.showErrorMessage("Your already have an account please call customer support for help!");
+			ShowMessages.showErrorMessage("You already have an account please call customer support for help!");
 		}
 				
 	}
