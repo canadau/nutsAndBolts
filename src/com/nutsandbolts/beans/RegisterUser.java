@@ -83,8 +83,8 @@ public class RegisterUser implements Serializable {
 		
 	}	
 
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> 3648764db9e92a4ae5cd42ddc0e8a7ea9d978d92
+
+
+
