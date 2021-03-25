@@ -68,9 +68,9 @@ public class RegisterUser implements Serializable {
 			int rs = pst.executeUpdate();
 			
 			if (rs > 0) {
-				ShowMessages.showSuccessMessage("The product was added successfully");
+				ShowMessages.showSuccessMessage("The user was added successfully");
 			} else {
-				 ShowMessages.showErrorMessage("Error, the product was not added, please try again"); 
+				 ShowMessages.showErrorMessage("Error, the user was not added, please try again"); 
 			}			
 				
 			pst.close();
