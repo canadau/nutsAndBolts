@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Nuts and Bolts Hardware Store</title>
+	<h:outputStylesheet library="css" name="index.css" />
+	<h:outputScript library="js" name="functionsJS.js" />
+	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+	<h:outputScript library="js" name="jquery-ui.js" />
+	<h:outputScript library="js" name="jquery-3.5.1.min.js" />
+	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+
+<style>
+.register_page {
+	background-color: white;
+	position: relative; 
+	padding: 10px;
+	margin: 5% auto;
+	width: 30%;
+	border: 3px solid gray;
+	height: 550px;
+	border-radius: 10px; 
+	text-align: center;
+	/* display: grid; */
+	/* width: 400px; */
+	
+	
+/* 	text-align: center; */
+}
+
+.firstName  .email  .password .lastName {
+	padding: 20px;
+}
+
+#firstname  #email  #password #lastname {
+	padding: 20px;
+}
+
+.submit {
+ 	/* position: absolute; */
+ 	buttom: 0;
+ 	margin: auto;
+ 	display: block;
+ 	/* left: 25%; */
+ 	/* left: 0;
+ 	top: 0;
+ 	right: 0;
+ 	buttom: 0; */
+ 	/* margin-right: 50%; */
+ 	/* display: flex; 
+ 	justify-content: center; */
+
+}
+
+
+</style>
+</h:head>
+
+<h:body id="body">
+
+	<div class="header">
+		
+			<div class="logo">
+				<a id="logo" href="index.xhtml">NUTS AND BOLTS</a>
+			</div>
+			<div class="header_nav">
+				<a class="flex_items" href="index.xhtml">Home</a>
+				<a class="flex_items" href="products.xhtml">Products</a>
+				<a class="flex_items" href="RegisterCustomer.xhtml"> Customer Registration</a>
+								
+				<c:if test="#{employeelogin.employee.userName != null}">
+					<a class="flex_items" href="addProduct.xhtml">Add Products</a>
+					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>	
+					<a class="flex_items" href="registerEmployee.xhtml">Add Employees</a>		       
+			    </c:if>
+				
+				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
+				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
+			</div>
+			<div class="right_nav">
+				<a>Welcome <span class="welcome_name">#{employeelogin.session.getAttribute("name") != null? employeelogin.session.getAttribute("name") : 'Guest'} </span></a>
+				<a href="login.xhtml">#{employeelogin.session.getAttribute("name") != null ? 'Sign Out' : 'Sign In'}</a>
+				<a class="pi pi-shopping-cart" id="shopping_cart" />
+			</div>
+		
+	</div>
+	<div class="home">
+		
+		<div class="register_page">			
+				
+			<h:form >
+				<h2>User Registration</h2><br/><br/>
+				
+				<p:outputLabel for="firstname" class="firstname" value="First Name:" ></p:outputLabel><br/>
+				<p:inputText id="firstname" required="true" value="#{RegisterUser.firstName}" validatorMessage="Your first name can have only Alphabets"> 
+					<f:validateRegex pattern="[a-zA-Z]+"/>
+				</p:inputText><br/><br/>
+				
+				<p:outputLabel for="lastname" class="lastname" value="Last Name:" ></p:outputLabel><br/>
+				<p:inputText id="lastname" required="true" value="#{RegisterUser.lastName}" validatorMessage="Your last name can have only Alphabets"> 
+					<f:validateRegex pattern="[a-zA-Z]+"/>
+				</p:inputText><br/><br/>
+				
+				<p:outputLabel for="email" class="email" value="E-mail:"></p:outputLabel><br/>
+				<p:inputText id="email" required="true" value="#{RegisterUser.email}"> 
+				</p:inputText><br/><br/>
+				
+				<p:outputLabel for="password" class="password" value="Password:"></p:outputLabel><br/>
+				<p:password id="password" label="Password 1" required="true" match="pwd2" value="#{RegisterUser.password}"></p:password><br/><br/>	
+				
+				<p:outputLabel for="pwd2" class="password2" value="Repeat your password:"></p:outputLabel><br/>
+				<p:password id="pwd2" label="Password 2" required="true" value="#{RegisterUser.password}"></p:password><br/><br/>			
+				
+				<p:commandButton class="submit" id="submitt" update="@form" value="Register User" 
+				action="#{RegisterUser.registerEmp()}"/>
+				
+				<!-- <p:messages id="messages" showDetail="true" closable="true">
+            		<p:autoUpdate/>
+        		</p:messages> -->
+        		
+        		<p:messages infoStyle="color:green" errorStyle="color:red" closable="true" />
+        
+			</h:form>				
+		
+		</div>
+		
+				
+	</div>
+	
+	<div class="footer">
+		<h3>Copyright© 2021 Purple Team</h3>
+	</div>
+
+</h:body>
+
+</html>
