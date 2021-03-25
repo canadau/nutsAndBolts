@@ -112,7 +112,7 @@ public class RegisterUser implements Serializable {
 					+ "one uppercase letter, one number, a special character, and 8 characters long.");
 			return;
 			
-		} else if (!EmailValidator.isValidEmailAddress(email) || !EmailValidator.isLowercaseEmail(email)) {
+		} else if (!EmailValidator.isLowercaseEmail(email)) {
 			
 			ShowMessages.showErrorMessage("The email must be lower case, and you need to use your employee email to complete this process, 'example@nab.com'");
 			return;

@@ -97,27 +97,27 @@
 				<h2>User Registration</h2><br/><br/>
 				
 				<p:outputLabel for="firstname" class="firstname" value="First Name:" ></p:outputLabel><br/>
-				<p:inputText id="firstname" required="true" value="#{RegisterUser.firstName}" validatorMessage="Your first name can have only Alphabets"> 
+				<p:inputText id="firstname" required="true" value="#{registerUser.firstName}" validatorMessage="Your first name can have only Alphabets"> 
 					<f:validateRegex pattern="[a-zA-Z]+"/>
 				</p:inputText><br/><br/>
 				
 				<p:outputLabel for="lastname" class="lastname" value="Last Name:" ></p:outputLabel><br/>
-				<p:inputText id="lastname" required="true" value="#{RegisterUser.lastName}" validatorMessage="Your last name can have only Alphabets"> 
+				<p:inputText id="lastname" required="true" value="#{registerUser.lastName}" validatorMessage="Your last name can have only Alphabets"> 
 					<f:validateRegex pattern="[a-zA-Z]+"/>
 				</p:inputText><br/><br/>
 				
 				<p:outputLabel for="email" class="email" value="E-mail:"></p:outputLabel><br/>
-				<p:inputText id="email" required="true" value="#{RegisterUser.email}"> 
+				<p:inputText id="email" required="true" value="#{registerUser.email}"> 
 				</p:inputText><br/><br/>
 				
 				<p:outputLabel for="password" class="password" value="Password:"></p:outputLabel><br/>
-				<p:password id="password" label="Password 1" required="true" match="pwd2" value="#{RegisterUser.password}"></p:password><br/><br/>	
+				<p:password id="password" label="Password 1" required="true" match="pwd2" value="#{registerUser.password}"></p:password><br/><br/>	
 				
 				<p:outputLabel for="pwd2" class="password2" value="Repeat your password:"></p:outputLabel><br/>
-				<p:password id="pwd2" label="Password 2" required="true" value="#{RegisterUser.password}"></p:password><br/><br/>			
+				<p:password id="pwd2" label="Password 2" required="true" value="#{registerUser.password}"></p:password><br/><br/>			
 				
 				<p:commandButton class="submit" id="submitt" update="@form" value="Register User" 
-				action="#{RegisterUser.registerEmp()}"/>
+				action="#{registerUser.registerUser()}"/>
 				
 				<!-- <p:messages id="messages" showDetail="true" closable="true">
             		<p:autoUpdate/>
