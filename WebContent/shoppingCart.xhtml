@@ -22,18 +22,17 @@
 	<div class="header">
 		
 			<div class="logo">
-				<a id="logo" href="index.xhtml">NUTS AND BOLTS</a>
+				<a id="logo" href="index.xhtml">Shopping Cart</a>
 			</div>
 			<div class="header_nav">
 				<a class="flex_items" href="index.xhtml">Home</a>
-				<a class="flex_items" href="products.xhtml">Products</a>
-					
+				<a class="flex_items" href="shoppingCart.xhtml">Shopping Cart</a>
+								
 				<c:if test="#{employeelogin.employee.userName != null}">
 					<a class="flex_items" href="addProduct.xhtml">Add Products</a>
-					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>
-					<a class="flex_items" href="registerEmployee.xhtml">Add Employees</a>	
-					<a class="flex_items" href="shoppingCart.xhtml">Shopping Cart</a>
-								       
+					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>	
+					<a class="flex_items" href="registerEmployee.xhtml">Add Employees</a>
+					<a class="flex_items" href="products.xhtml">Products</a>		       
 			    </c:if>
 				
 				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
@@ -47,31 +46,27 @@
 		
 	</div>
 
-	<div class="home">			
-		<div class="hello">
+	<div class="home">
+	
+		<div class="home_products">
+			<ui:repeat var="prod" value="#{products.getProductFromDB()}">
+			<div class="contener_row">
+					<div class="card">			  
+					  <h3 class="name">#{prod.name}</h3>
+					  <p class="price">$#{prod.price}</p>
+					  <p class="description">#{prod.description}</p>
+					  <button class="card_button">Add to Cart</button>
+					</div>			
+				</div>			
+			</ui:repeat>
 		
-		<h:form>
-			<h1> Home Page </h1><br/>
-			<h2>Welcome to Nuts and Bolts. Here you can absolutely buy a product.**</h2>	
-			<br></br>
-			<br></br>
-			<h3>*not really</h3>	
-			<h4>*not yet</h4>
-			<br></br>	
-			<p id="savetime0">Please click the button to save the time</p><br/>		
-					
-			<h:commandButton id="submit" value="Submit" action="saveTime" />
-			
-		</h:form>
 		</div>
-		
-
 	</div>
 	
+
 	<div class="footer">
 		<h3>Copyright© 2021 Purple Team</h3>
 	</div>	
 	
 </h:body>
-	
 </html>
