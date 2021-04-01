@@ -360,3 +360,107 @@ a:active {
 		    background-color: white;
 		}
 
+/*shoppingCart begins here
+*/
+.cart_card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	height: 100px;
+	margin: 15px;
+	text-align: center; 
+	font-family: arial;
+	
+	
+}
+
+.cart_price {
+	color: black;
+	font-size: 15px;
+	margin: 10px;
+}
+
+
+}
+
+.cart_name {
+	margin: 10px;
+	
+
+
+
+}
+
+.view_cart {
+	justify-content: center;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	/* min-heigh: 100%; */
+	z-index: -1;
+	background-color: white;
+}
+
+.qty_button {
+	border: none;
+	color: black;
+	text-align: center;
+	text-decoration: none;
+	width:10%;
+	cursor: pointer;
+	padding-left:10px;
+	
+}
+.total{
+	width:10%;
+	padding-left:15px;
+}
+
+.row {
+	margin-left: 5px;
+	margin-right: 5px;
+	justify-content: space-evenly;
+	z-index: -1;
+}
+
+.col {
+	diaplay: in-line;
+}
+
+.btn {
+	padding: 5px;
+	color: white;
+	background-color: #000;
+}
+
+.checkout {
+	bottom: 0;
+	background-color: grey;
+	width: 30%;
+	font-size: 20px;
+}
+.Subtotal{
+	width:10%;
+	
+}
+.Tax{
+width:10%;
+}
+.Total{
+width:10%;
+}
+.totalCart {
+	height:100px;
+	padding: 15px;
+}
+
+.Tax{
+	padding-right: 40px;
+}
+	.Total{
+	padding-right: 30px;}
+}
+	
+	
+}
+
+	}
+}

@@ -10,63 +10,97 @@
 	<title>Nuts and Bolts Hardware Store</title>
 	<h:outputStylesheet library="css" name="index.css" />
 	<h:outputScript library="js" name="functionsJS.js" />
-	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
 	<h:outputScript library="js" name="jquery-ui.js" />
 	<h:outputScript library="js" name="jquery-3.5.1.min.js" />
-	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+	<h:outputScript library="primefaces" name="jquery/jquery.js"
+		target="head" />
 
 </h:head>
 
 <h:body id="body">
 
 	<div class="header">
-		
-			<div class="logo">
-				<a id="logo" href="index.xhtml">Shopping Cart</a>
-			</div>
-			<div class="header_nav">
-				<a class="flex_items" href="index.xhtml">Home</a>
-				<a class="flex_items" href="shoppingCart.xhtml">Shopping Cart</a>
-								
-				<c:if test="#{employeelogin.employee.userName != null}">
-					<a class="flex_items" href="addProduct.xhtml">Add Products</a>
-					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>	
-					<a class="flex_items" href="registerEmployee.xhtml">Add Employees</a>
-					<a class="flex_items" href="products.xhtml">Products</a>		       
-			    </c:if>
-				
-				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
-				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
-			</div>
-			<div class="right_nav">
-				<a>Welcome <span class="welcome_name">#{employeelogin.session.getAttribute("name") != null? employeelogin.session.getAttribute("name") : 'Guest'} </span></a>
-				<a href="login.xhtml">#{employeelogin.session.getAttribute("name") != null ? 'Sign Out' : 'Sign In'}</a>
-				<a class="pi pi-shopping-cart" id="shopping_cart" />
-			</div>
-		
+
+		<div class="logo">
+			<a id="logo" href="index.xhtml">Shopping Cart</a>
+		</div>
+		<div class="header_nav">
+			<a class="flex_items" href="index.xhtml">Home</a>
+
+
+			<c:if test="#{employeelogin.employee.userName != null}">
+				<a class="flex_items" href="addProduct.xhtml">Add Products</a>
+				<a class="flex_items" href="updateProduct.xhtml">Update Products</a>
+				<a class="flex_items" href="registerEmployee.xhtml">Add
+					Employees</a>
+
+			</c:if>
+
+			<a class="flex_items" href="contactus.xhtml">Contact Us</a> <a
+				class="flex_items" href="FAQ.xhtml">FAQ</a> <a class="flex_items"
+				href="products.xhtml">Products</a>
+		</div>
+		<div class="right_nav">
+			<a>Welcome <span class="welcome_name">#{employeelogin.session.getAttribute("name")
+					!= null? employeelogin.session.getAttribute("name") : 'Guest'} </span></a> <a
+				href="login.xhtml">#{employeelogin.session.getAttribute("name")
+				!= null ? 'Sign Out' : 'Sign In'}</a> <a class="pi pi-shopping-cart"
+				id="shopping_cart" href="shoppingCart.xhtml"></a>
+		</div>
+
 	</div>
 
 	<div class="home">
-	
-		<div class="home_products">
+		<div class="view_cart">
 			<ui:repeat var="prod" value="#{products.getProductFromDB()}">
-			<div class="contener_row">
-					<div class="card">			  
-					  <h3 class="name">#{prod.name}</h3>
-					  <p class="price">$#{prod.price}</p>
-					  <p class="description">#{prod.description}</p>
-					  <button class="card_button">Add to Cart</button>
-					</div>			
-				</div>			
+				<div class="row">
+					<div class="cart_card">
+						<h3 class="cart_name">#{prod.name}</h3>
+						<p class="cart_price">$#{prod.price}</p>
+
+						<p:outputLabel class="qty_button" for="qty_button">QTY: </p:outputLabel>
+						<p:inputText type="qty_button" class="qty_button" id="qty_button"
+							name="qty_button" placeholder="" value=""></p:inputText>
+							
+						<p:outputLabel class="total" for="total">Sub total: </p:outputLabel>
+						<p:inputText type="total" class="total" id="total" name="total"
+							placeholder="" value=""></p:inputText>
+
+
+
+					</div>
+				</div>
 			</ui:repeat>
-		
+			<div class="totalCart">
+			
+			<p:outputLabel class="Subtotal" for="Subtotal">Sub total: </p:outputLabel>
+						<p:inputText  class="Subtotal" id="Subtotal" name="Subtotal"
+							placeholder="" value=""></p:inputText>
+							<br></br> <br></br>
+							
+							<p:outputLabel class="Tax" for="Tax">Tax: </p:outputLabel>
+						<p:inputText type="Tax" class="Tax" id="Tax" name="Tax"
+							placeholder="" value=""></p:inputText>
+							<br></br> <br></br>
+							<p:outputLabel class="Total" for="Total">Total: </p:outputLabel>
+						<p:inputText type="Total" class="Total" id="Total" name="Total"
+							placeholder="" value=""></p:inputText>
+			<br></br> <br></br>
+			
+			
+			</div>
+			<br></br> <br></br>
+			<button class="checkout">Check out</button>
+			
 		</div>
 	</div>
-	
+
 
 	<div class="footer">
 		<h3>Copyright© 2021 Purple Team</h3>
-	</div>	
-	
+	</div>
+
 </h:body>
 </html>
