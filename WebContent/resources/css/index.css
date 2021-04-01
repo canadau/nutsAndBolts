@@ -365,10 +365,10 @@ a:active {
 .cart_card {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	height: 100px;
-	margin: 15px;
+	margin: 25px 15px 10px 60px;
 	text-align: center; 
 	font-family: arial;
-	
+	width: 400px;
 	
 }
 
@@ -393,10 +393,11 @@ a:active {
 	justify-content: center;
 	margin-left: auto;
 	margin-right: auto;
-	width: 50%;
+	width: 100%;
 	/* min-heigh: 100%; */
 	z-index: -1;
 	background-color: white;
+	display: flex;
 }
 
 .qty_button {
@@ -450,17 +451,14 @@ width:10%;
 .totalCart {
 	height:100px;
 	padding: 15px;
+	width: 30%;
 }
-
 .Tax{
 	padding-right: 40px;
 }
-	.Total{
-	padding-right: 30px;}
+.Total{
+	padding-right: 30px;
 }
-	
-	
-}
-
-	}
+.view_cart_left {
+	width: 70%;
 }
