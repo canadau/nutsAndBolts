@@ -40,7 +40,7 @@
 			<div class="right_nav">
 				<a>Welcome <span class="welcome_name">#{employeelogin.session.getAttribute("name") != null? employeelogin.session.getAttribute("name") : 'Guest'} </span></a>
 				<a href="login.xhtml">#{employeelogin.session.getAttribute("name") != null ? 'Sign Out' : 'Sign In'}</a>
-				<a class="pi pi-shopping-cart" id="shopping_cart" />
+				<a href="shoppingCart.xhtml" class="pi pi-shopping-cart" id="shopping_cart" ><span id="item_number"></span></a>
 			</div>
 		
 	</div>
@@ -48,17 +48,23 @@
 	<div class="home">
 	
 		<div class="home_products">
+		<h:form>
 			<ui:repeat var="prod" value="#{products.getProductFromDB()}">
 			<div class="contener_row">
 					<div class="card">			  
-					  <h3 class="name">#{prod.name}</h3>
+					  <h3 class="name" id="item_name">#{prod.name}</h3>
 					  <p class="price">$#{prod.price}</p>
+					  <p class="price">sku##{prod.sku}</p>
 					  <p class="description">#{prod.description}</p>
-					  <button class="card_button">Add to Cart</button>
+					
+					  <h:commandButton type="button" class="card_button" value="Add to Cart" action="#{cart.addTo(prod.sku)}" >
+					  	<f:ajax render="@none" />
+					  </h:commandButton>
+					
 					</div>			
 				</div>			
 			</ui:repeat>
-		
+		</h:form>
 		</div>
 	</div>
 	
@@ -66,6 +72,6 @@
 	<div class="footer">
 		<h3>Copyright© 2021 Purple Team</h3>
 	</div>	
-	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </h:body>
 </html>
