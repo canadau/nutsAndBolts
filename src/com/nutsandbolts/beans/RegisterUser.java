@@ -1,9 +1,13 @@
 package com.nutsandbolts.beans;
 
 import java.io.Serializable;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import com.nutsandbolts.tools.DBConnection;
@@ -101,7 +105,7 @@ public class RegisterUser implements Serializable {
 		return stat;
 	}
 	
-	public void registerUser() {
+	public void registerUser() throws NoSuchAlgorithmException{
 		
 		Connection conn = null;
 		PreparedStatement pst = null;
@@ -126,6 +130,11 @@ public class RegisterUser implements Serializable {
 				firstName = firstName.trim().substring(0,1).toUpperCase() + firstName.substring(1);
 				lastName = lastName.trim().substring(0,1).toUpperCase() + lastName.substring(1);
 				email = email.trim().toLowerCase();
+				
+				
+				// Hash the password here
+				password = encryptThisString(password);
+				
 				pst = conn.prepareStatement(createSQL);	
 				pst.setString(1, firstName);
 				pst.setString(2, lastName);
@@ -152,6 +161,39 @@ public class RegisterUser implements Serializable {
 		}
 				
 	}
+
+	//Method for hashing with sha-512
+	public static String encryptThisString(String input)
+    {
+        try {
+            // getInstance() method is called with algorithm SHA-512
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+  
+            // digest() method is called
+            // to calculate message digest of the input string
+            // returned as array of byte
+            byte[] messageDigest = md.digest(input.getBytes());
+  
+            // Convert byte array into signum representation
+            BigInteger no = new BigInteger(1, messageDigest);
+  
+            // Convert message digest into hex value
+            String hashtext = no.toString(16);
+  
+            // Add preceding 0s to make it 32 bit
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+  
+            // return the HashText
+            return hashtext;
+        }
+  
+        // For specifying wrong message digest algorithms
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
 	
 
 }
