@@ -57,7 +57,8 @@ public class AddProductsBeans implements Serializable {
 		try {
 			
 			String createSQL = "INSERT INTO products (sku, name, description, price) VALUES (?, ?, ?, ?)";
-			conn = DBConnection.getConnection();
+			DBConnection inst = DBConnection.getInstance();
+			conn = inst.getConnection();
 
 			PreparedStatement pst = conn.prepareStatement(createSQL);	
 			pst.setInt(1, fSku);

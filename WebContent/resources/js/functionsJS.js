@@ -51,3 +51,17 @@ function showMessage(){
 		$('#timeNow').html("The Time Was Saved <br/><br/>" + t );
 		
 	}
+	  
+	  function GFG_Fun() {
+      	var x = document.getElementById('row_cart');
+      	console.log(x.length);
+      	var y = document.getElementsByClassName("cart_card");
+      	console.log(y.length);
+      	var i;
+      	console.log("Hello world!");
+      	for(i = 0 ; i < y.length ; i++) {
+          	//x.parentNode.removeChild(x)
+      		y[i].remove(); 
+          	console.log(i);
+          }
+      }

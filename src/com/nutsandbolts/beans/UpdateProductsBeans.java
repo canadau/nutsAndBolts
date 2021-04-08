@@ -65,7 +65,8 @@ public class UpdateProductsBeans implements Serializable {
 		int count = 0;
 		try {
 			String createSQL = "SELECT sku, name, description, price FROM products WHERE sku = ?;";
-			conn = DBConnection.getConnection();
+			DBConnection inst = DBConnection.getInstance();
+			conn = inst.getConnection();
 
 			PreparedStatement pst = conn.prepareStatement(createSQL); 
 			pst.setInt(1, skuNumber);
@@ -96,7 +97,8 @@ public class UpdateProductsBeans implements Serializable {
 
 		try {
 			String createSQL = "UPDATE products SET sku = ?, name = ?, description = ?, price = ? WHERE sku = ?;";
-			conn = DBConnection.getConnection();
+			DBConnection inst = DBConnection.getInstance();
+			conn = inst.getConnection();
 
 			PreparedStatement pst = conn.prepareStatement(createSQL); 
 			pst.setInt(1, sku);

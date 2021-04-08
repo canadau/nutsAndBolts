@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.naming.NamingException;
+
 import com.nutsandbolts.tools.DBConnection;
 
 public class HomePage {
@@ -19,7 +22,8 @@ public class HomePage {
 	{		
 		try {			
 			System.out.println("Save the time");
-			Connection conn = DBConnection.getConnection();
+			DBConnection inst = DBConnection.getInstance();
+			Connection conn = inst.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(createSQL);
 
 			/*
@@ -36,6 +40,8 @@ public class HomePage {
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
+		} catch (NamingException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -48,7 +54,8 @@ public class HomePage {
 			 * inst.getConnection();
 			 */
 			String createSQL = "SELECT time from login where id = 1 ";
-			Connection conn = DBConnection.getConnection();
+			DBConnection inst = DBConnection.getInstance();
+			Connection conn = inst.getConnection();
 
 			Statement statement = conn.createStatement();			
 

@@ -19,8 +19,15 @@ public class ShowMessages {
 		  FacesContext facesContext = FacesContext.getCurrentInstance(); 
 		  FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg); 
 		  facesContext.addMessage(null, facesMessage);
-		 
-		
+		 		
 	}
+	
+	public static void addMessage(FacesMessage.Severity severity, String summary, String detail) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getFlash().setKeepMessages(true);
+		context.addMessage(null, new FacesMessage(severity, summary, detail));
+		 
+        
+    }
 
 }

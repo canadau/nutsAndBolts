@@ -28,15 +28,16 @@ public class ProductsDB implements Serializable {
 		try {
 
 
-			String createSQL = "SELECT sku, name, description, price FROM products ";
-			Connection conn = DBConnection.getConnection();
+			String createSQL = "SELECT sku, name, description, price, qty FROM products ";
+			DBConnection inst = DBConnection.getInstance();
+			Connection conn = inst.getConnection();
 
 			PreparedStatement pst = conn.prepareStatement(createSQL);	
 			
 			ResultSet rSet = pst.executeQuery();
 			
 			while (rSet.next()) {
-				product = new Products(rSet.getInt(1), rSet.getString(2), rSet.getString(3), rSet.getDouble(4));
+				product = new Products(rSet.getInt(1), rSet.getString(2), rSet.getString(3), rSet.getDouble(4), rSet.getInt(5));
 				products.add(product);
 			}
 

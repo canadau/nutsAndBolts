@@ -11,17 +11,29 @@ public class Products {
 	private String name;
 	private String description;
 	private double price;
-	
+	public int qty;
+	public int newQty;
 	
 	public Products() {}
-	public Products(int sku, String name, String description, double price) {
+	public Products(int sku, String name, String description, double price, int qty) {
 		super();
 		this.sku = sku;
 		this.name = name;
 		this.description = description;
 		this.price = price;
+		this.qty = qty;
 	}
-
+	
+	public Products(int sku, String name, String description, double price, int qty, int newQty) {
+		super();
+		this.sku = sku;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.qty = qty;
+		this.newQty = newQty;
+	}
+	
 	public int getSku() {
 		return sku;
 	}
@@ -54,13 +66,27 @@ public class Products {
 		this.price = price;
 	}
 
+	public int getQty() {
+		return qty;
+	}
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+	
+	public int getNewQty() {
+		return newQty;
+	}
+	public void setNewQty(int newQty) {
+		this.newQty = newQty;
+	}
 	public void addProduct(int sku, String name, String description, double price ) {
 
 		try {
 			System.out.println("It is going to push the product to DB");
 
 			String createSQL = "INSERT INTO products (sku, name, description, price) VALUES (?, ?, ?, ?)";
-			Connection conn = DBConnection.getConnection();
+			DBConnection inst = DBConnection.getInstance();
+			Connection conn = inst.getConnection();
 
 			PreparedStatement pst = conn.prepareStatement(createSQL);	
 			pst.setInt(1, sku);

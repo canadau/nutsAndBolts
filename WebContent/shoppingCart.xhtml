@@ -10,17 +10,14 @@
 	<title>Nuts and Bolts Hardware Store</title>
 	<h:outputStylesheet library="css" name="index.css" />
 	<h:outputScript library="js" name="functionsJS.js" />
-	<h:outputStylesheet name="primeicons/primeicons.css"
-		library="primefaces" />
+	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
 	<h:outputScript library="js" name="jquery-ui.js" />
 	<h:outputScript library="js" name="jquery-3.5.1.min.js" />
-	<h:outputScript library="primefaces" name="jquery/jquery.js"
-		target="head" />
-
+	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
 </h:head>
 
 <h:body id="body">
-
+	
 	<div class="header">
 		
 			<div class="logo">
@@ -29,73 +26,84 @@
 			<div class="header_nav">
 				<a class="flex_items" href="index.xhtml">Home</a>
 				<a class="flex_items" href="products.xhtml">Products</a>
-				
-					
+									
 				<c:if test="#{employeelogin.employee.userName != null}">
 					<a class="flex_items" href="addProduct.xhtml">Add Products</a>
 					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>
-					<a class="flex_items" href="registerEmployee.xhtml">Add Employees</a>	
-					<a class="pi pi-shopping-cart" id="shopping_cart" href="shoppingCart.xhtml"></a> 
-					
-								       
+					<a class="flex_items" href="registerEmployee.xhtml">Add Employees</a>								       
 			    </c:if>
 				
 				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
 				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
 			</div>
-			<div class="right_nav">
+			<div class="right_nav" id="cart_icon">
 				<a>Welcome <span class="welcome_name">#{employeelogin.session.getAttribute("name") != null? employeelogin.session.getAttribute("name") : 'Guest'} </span></a>
 				<a href="login.xhtml">#{employeelogin.session.getAttribute("name") != null ? 'Sign Out' : 'Sign In'}</a>
-				<a class="pi pi-shopping-cart" id="shopping_cart" href="shoppingCart.xhtml"></a> 
+				<a class="pi pi-shopping-cart" id="shopping_cart" href="shoppingCart.xhtml"></a>
 			</div>
 		
 	</div>
 
 	<div class="home">
-		<div class="view_cart">
-			<div class="view_cart_left">
-				<ui:repeat var="prod" value="#{products.getProductFromDB()}">
-				<div class="row">
-					<div class="cart_card">
-						<h3 class="cart_name">#{prod.name}</h3>
-						<p class="cart_price">Price: $#{prod.price}</p>
-						<p:outputLabel class="Total">Qty: 2 </p:outputLabel>
-						<button>Remove</button>
-
-
-
+	<h:form id="form">
+		<div class="view_cart">		
+			<div class="view_cart_left">			
+				<h1 class="hello_cart">Your Shopping Cart</h1>
+				<hr style="width:70%; margin:auto !important"/>
+					<ui:repeat var="prod" value="#{cart.productsList()}">
+					<div id="row_cart" class="row">
+						<div id="cart_element" class="cart_card">
+							<h3 class="cart_name">#{prod.name}</h3>
+							<h6 class="cart_name">sku##{prod.sku}</h6>
+							<p class="cart_price">Price: $#{prod.price}</p>
+							
+							<p:outputLabel class="qty">Qty: </p:outputLabel>
+							<p:commandButton class="qty_button_left" icon="pi pi-minus" ajax="true" update="form" actionListener="#{cart.decreaseQty(prod)}" />
+								<span class="qty_count"> #{prod.newQty} </span> 
+							<p:commandButton class="qty_button_right" icon="pi pi-plus" ajax="true" update="form" actionListener="#{cart.increaseQty(prod)}" >
+								
+							</p:commandButton>
+							
+							<p:commandButton class="cart_remove" ajax="true" update="form"  value="REMOVE" actionListener="#{cart.clearItem(prod)}" />
+						
+						</div>
 					</div>
-				</div>
-			</ui:repeat>
+				</ui:repeat>
 			</div>
 			<div class="totalCart">
 			
-			<p:outputLabel class="Subtotal">Quantity: 6 items</p:outputLabel>
-			<br></br> <br></br>
-			<p:outputLabel class="Subtotal">Sub total: $66.99</p:outputLabel>
-						
-							<br></br> <br></br>
-							
-							<p:outputLabel class="Tax">Tax: $66.99 </p:outputLabel>
-						
-							<br></br> <br></br>
-							<p:outputLabel class="Total">Total: $66.99 </p:outputLabel>
-							
-						
-			<br></br> <br></br>
-			
-			<br></br> <br></br>
-			<button class="checkout">Check out</button>
+				<p:outputLabel class="quantity">Quantity: <span class="cart_span">#{cart.quantity()} items</span></p:outputLabel>
+				<br></br> <br></br>
+				
+				<p:outputLabel class="Subtotal">Sub total: <span class="cart_span">$#{cart.subTotal()}</span></p:outputLabel>
+				<br></br> <br></br>
+								
+				<p:outputLabel class="Tax">Tax: <span class="cart_span">$#{cart.tax()}</span> </p:outputLabel>
+				<br></br> <br></br>
+				
+				<p:outputLabel class="Total">Total: <span class="cart_span"> $#{cart.totalCart()} </span> 
+					
+				</p:outputLabel>
+				<br></br> <br></br>
+				
+				<p:commandButton  value="CHECK OUT" />
+				<br></br> <br></br>				
+				
+				<p:commandButton class="cart_removeAll" ajax="true" update="form"  value="CLEAR CART" actionListener="#{cart.clearAll()}" disabled="true" />
+				<br></br> <br></br>				  	
+				
 			</div>
 			
-			
 		</div>
+		</h:form>
 	</div>
-
-
+	
 	<div class="footer">
 		<h3>Copyright© 2021 Purple Team</h3>
 	</div>
-
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
+	
 </h:body>
 </html>

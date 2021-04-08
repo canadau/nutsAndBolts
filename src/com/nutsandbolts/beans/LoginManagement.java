@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.servlet.http.HttpSession;
-
 import com.nutsandbolts.Customer;
 import com.nutsandbolts.Employee;
 import com.nutsandbolts.tools.DBConnection;
@@ -193,7 +192,8 @@ public class LoginManagement implements Serializable {
 			try {
 				
 				String createSQL = "SELECT id, firstName, lastName, email, password FROM userLogin WHERE email = ? AND password = ?;";
-				conn = DBConnection.getConnection();
+				DBConnection inst = DBConnection.getInstance();
+				conn = inst.getConnection();
 				
 				password = encryptThisString(password);
 
@@ -227,7 +227,8 @@ public class LoginManagement implements Serializable {
 			try {
 				
 				String createSQL = "SELECT id, userName, email, password FROM employeeLogin WHERE email = ? AND password = ?;";
-				conn = DBConnection.getConnection();
+				DBConnection inst = DBConnection.getInstance();
+				conn = inst.getConnection();
 				
 				//Hash the password with sha-512
 				password = encryptThisString(password);
@@ -272,7 +273,8 @@ public class LoginManagement implements Serializable {
 			try {
 				
 				String createSQL = "SELECT email FROM userLogin WHERE email = ?;";
-				conn = DBConnection.getConnection();
+				DBConnection inst = DBConnection.getInstance();
+				conn = inst.getConnection();
 
 				pst = conn.prepareStatement(createSQL);	
 				pst.setString(1, email);
@@ -303,7 +305,8 @@ public class LoginManagement implements Serializable {
 			try {
 				
 				String createSQL = "SELECT email FROM employeeLogin WHERE email = ?;";
-				conn = DBConnection.getConnection();
+				DBConnection inst = DBConnection.getInstance();
+				conn = inst.getConnection();
 
 				pst = conn.prepareStatement(createSQL);	
 				pst.setString(1, email);

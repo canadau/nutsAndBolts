@@ -22,11 +22,10 @@ import javax.servlet.http.HttpSession;
 public class AuthorizationFilter implements Filter{
 	
 	private HttpServletRequest httpRequest;
-	private static final String[] customerLoginRequiredURLs = {"/changeAddress.xhtml",
-            "/manageAccount.xhtml"};
+	private static final String[] customerLoginRequiredURLs = {"/page.xhtml"};
 	
-	private static final String[] adminLoginRequiredURLs = {"/employeeManagement.xhtml", "/registerEmployee.xhtml",
-			"/adminOrders.xhtml", "/addProduct.xhtml", "/updateProduct.xhtml"};
+	private static final String[] adminLoginRequiredURLs = {"/registerEmployee.xhtml",
+			"/addProduct.xhtml", "/updateProduct.xhtml"};
 	public AuthorizationFilter() {};
 		
 	@Override
@@ -69,19 +68,19 @@ public class AuthorizationFilter implements Filter{
 	        		session.invalidate();
 	        		//EmployeeLogin.sessionCustomer = null;
 	        		//EmployeeLogin.isLoggedin = false;
-	        		System.out.println("Cleaning");
-	        	resp.sendRedirect(httpRequest.getContextPath() + "/faces/employeeManagement.xhtml");
+	        		//System.out.println("Cleaning");
+	        	resp.sendRedirect(httpRequest.getContextPath() + "/faces/index.xhtml");
 	        	}  else if(isCustomerLoggedIn && isLoginPage) {
 	        		session.invalidate();
 	        		// the customer is already logged in and he's trying to login again
 		            // then forward to the manage account page   
-	        		System.out.println("Cleaning 2");
+	        		//System.out.println("Cleaning 2");
 		        	resp.sendRedirect(httpRequest.getContextPath() + "/faces/login.xhtml");
 		        	
 	        	} else {
 		            // for other requested pages that require authentication
 		            // or the user is already logged in, continue to the destination
-	        		System.out.println("Cleaning 3");
+	        		//System.out.println("Cleaning 3");
 		            chain.doFilter(request, response);
 		        }
 	 
@@ -89,7 +88,7 @@ public class AuthorizationFilter implements Filter{
 	        else {
 	            // for other requested pages that do not require authentication
 	            // continue to the destination
-	        	System.out.println("Cleaning 4");
+	        	//System.out.println("Cleaning 4");
 	            chain.doFilter(request, response);
 	        }
 	            

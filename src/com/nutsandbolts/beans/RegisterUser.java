@@ -79,7 +79,8 @@ public class RegisterUser implements Serializable {
 		try {
 			
 			String createSQL = "SELECT email FROM userLogin WHERE email = ?;";
-			conn = DBConnection.getConnection();
+			DBConnection inst = DBConnection.getInstance();
+			conn = inst.getConnection();
 
 			pst = conn.prepareStatement(createSQL);	
 			pst.setString(1, email);
@@ -125,7 +126,8 @@ public class RegisterUser implements Serializable {
 				
 				String createSQL = "INSERT INTO userLogin (firstName, lastName, email, password) "
 						+ "VALUES (?,?,?,?);";
-				conn = DBConnection.getConnection();
+				DBConnection inst = DBConnection.getInstance();
+				conn = inst.getConnection();
 				firstName = firstName.trim().substring(0,1).toUpperCase() + firstName.substring(1);
 				lastName = lastName.trim().substring(0,1).toUpperCase() + lastName.substring(1);
 				email = email.trim().toLowerCase();

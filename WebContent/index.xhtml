@@ -32,10 +32,7 @@
 				<c:if test="#{employeelogin.employee.userName != null}">
 					<a class="flex_items" href="addProduct.xhtml">Add Products</a>
 					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>
-					<a class="flex_items" href="registerEmployee.xhtml">Add Employees</a>	
-					<a class="pi pi-shopping-cart" id="shopping_cart" href="shoppingCart.xhtml"></a> 
-					
-								       
+					<a class="flex_items" href="registerEmployee.xhtml">Add Employees</a>								       
 			    </c:if>
 				
 				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
@@ -44,7 +41,7 @@
 			<div class="right_nav">
 				<a>Welcome <span class="welcome_name">#{employeelogin.session.getAttribute("name") != null? employeelogin.session.getAttribute("name") : 'Guest'} </span></a>
 				<a href="login.xhtml">#{employeelogin.session.getAttribute("name") != null ? 'Sign Out' : 'Sign In'}</a>
-				<a class="pi pi-shopping-cart" id="shopping_cart" href="shoppingCart.xhtml"></a> 
+				<h:form id="ico"><a class="pi pi-shopping-cart" id="shopping_cart" href="shoppingCart.xhtml">#{cart.quantity()}</a></h:form> 
 			</div>
 		
 	</div>
