@@ -67,7 +67,10 @@
 					<h:outputLabel for="description:" value="Description: "></h:outputLabel>
 					<h:inputTextarea label="Description:" required="false" value="#{updateProducts.fDescription}" style="width: 300px; height: 150px;" id="description"></h:inputTextarea><br/><br/>
 					
-					<h:commandButton value="Update" action="#{updateProducts.updateProductsINDB(updateProducts.fSku, updateProducts.fName, updateProducts.fPrice, updateProducts.fDescription)}"></h:commandButton>
+					<h:outputLabel for="quantity">Quantity:</h:outputLabel>
+					<h:inputText label="Quantity" required="false" id="quantity" value="#{updateProducts.fQuantity}" ></h:inputText><br/><br/>
+					
+					<h:commandButton value="Update" action="#{updateProducts.updateProductsINDB(updateProducts.fSku, updateProducts.fName, updateProducts.fPrice, updateProducts.fDescription, updateProducts.fQuantity)}"></h:commandButton>
 					<h:messages></h:messages>
 				
 				</h:form>

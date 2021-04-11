@@ -19,6 +19,8 @@ public class UpdateProductsBeans implements Serializable {
 	private String fName;
 	private String fDescription;
 	private double fPrice;
+	private int fQuantity;
+	
 	public UpdateProductsBeans() {}
 
 
@@ -60,11 +62,21 @@ public class UpdateProductsBeans implements Serializable {
 	public void setfPrice(double fPrice) {
 		this.fPrice = fPrice;
 	}
+	
+	public int getfQuantity() {
+		return fQuantity;
+	}
+
+
+	public void setfQuantity(int fQuantity) {
+		this.fQuantity = fQuantity;
+	}
+
 	public void getProductsFromDB(int skuNumber) {
 		Connection conn = null; 
 		int count = 0;
 		try {
-			String createSQL = "SELECT sku, name, description, price FROM products WHERE sku = ?;";
+			String createSQL = "SELECT sku, name, description, price, qty FROM products WHERE sku = ?;";
 			DBConnection inst = DBConnection.getInstance();
 			conn = inst.getConnection();
 
@@ -77,6 +89,7 @@ public class UpdateProductsBeans implements Serializable {
 				fName = rs.getString(2);
 				fDescription = rs.getString(3);
 				fPrice = rs.getDouble(4);
+				fQuantity = rs.getInt(5);
 				count++;
 			}
 			if (count > 0) {
@@ -92,11 +105,11 @@ public class UpdateProductsBeans implements Serializable {
 			DBConnection.close(conn);
 		} 
 	}
-	public void updateProductsINDB(int sku, String name, Double price, String description ) {
+	public void updateProductsINDB(int sku, String name, Double price, String description , int fQuantity) {
 		Connection conn = null; 
 
 		try {
-			String createSQL = "UPDATE products SET sku = ?, name = ?, description = ?, price = ? WHERE sku = ?;";
+			String createSQL = "UPDATE products SET sku = ?, name = ?, description = ?, price = ?, qty = ? WHERE sku = ?;";
 			DBConnection inst = DBConnection.getInstance();
 			conn = inst.getConnection();
 
@@ -105,7 +118,8 @@ public class UpdateProductsBeans implements Serializable {
 			pst.setString(2, name);
 			pst.setString(3, description);
 			pst.setDouble(4, price);
-			pst.setInt(5, sku);
+			pst.setInt(5, fQuantity);
+			pst.setInt(6, sku);
 
 			int rs = pst.executeUpdate();
 			if (rs > 0) {
