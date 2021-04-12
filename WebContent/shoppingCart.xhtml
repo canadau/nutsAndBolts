@@ -86,10 +86,10 @@
 				</p:outputLabel>
 				<br></br> <br></br>
 				
-				<p:commandButton  value="CHECK OUT" action="#{cart.viewReceipt()}"/>
+				<p:commandButton  value="CHECK OUT" disabled="#{cart.productsList().size()>0? false:true}" action="#{cart.viewReceipt()}"/>
 				<br></br> <br></br>				
 				
-				<p:commandButton class="cart_removeAll" ajax="true" update="form"  value="CLEAR CART" actionListener="#{cart.clearAll()}" disabled="false" />
+				<p:commandButton class="cart_removeAll" ajax="true" update="form"  value="CLEAR CART" actionListener="#{cart.clearAll()}" disabled="#{cart.productsList().size()>0? false:true}" />
 				<br></br> <br></br>				  	
 				
 			</div>

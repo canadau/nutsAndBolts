@@ -40,7 +40,7 @@
 			<div class="right_nav">
 				<a>Welcome <span class="welcome_name">#{employeelogin.session.getAttribute("name") != null? employeelogin.session.getAttribute("name") : 'Guest'} </span></a>
 				<a href="login.xhtml">#{employeelogin.session.getAttribute("name") != null ? 'Sign Out' : 'Sign In'}</a>
-				<h:form id="ico"><a class="pi pi-shopping-cart" id="shopping_cart" href="shoppingCart.xhtml">#{cart.quantity()}</a></h:form>
+				<h:form id="ico"><a class="pi pi-shopping-cart" id="shopping_cart" href="shoppingCart.xhtml">#{cart.quantity(cart.getProductsListNoDub())}</a></h:form>
 			</div>
 		
 	</div>
@@ -63,14 +63,13 @@
 				
 				<h:outputLabel for="price">Price:</h:outputLabel><br/>
 				<h:inputText id="price" value="#{addProductB.price}" required = "false" requiredMessage = "Price is required"></h:inputText><br/><br/>
-				
+					
 				<h:outputLabel for="description">Description:</h:outputLabel>
 				<h:inputTextarea style="width: 300px; height: 150px;" id="description" value="#{addProductB.description}" required = "true" requiredMessage = "Description is required"></h:inputTextarea><br/><br/>
 
 				<h:outputLabel for="quantity">Quantity:</h:outputLabel>
-				<h:inputTextarea  id="quantity" value="#{addProductB.quantity}" required = "false" requiredMessage = "Quantity is required"></h:inputTextarea><br/><br/>
-
-
+				<h:inputText  id="quantity" value="#{addProductB.quantity}" required = "false" requiredMessage = "Quantity is required"></h:inputText><br/><br/>
+				
 				<h:commandButton id="addToDB" value="Add a Product" action="#{addProductB.addProductToDB}" update="message" />
 				<br/><br/>
 				<h:messages infoStyle="color:green" errorStyle="color:red" />

@@ -24,7 +24,10 @@ public class Cart implements Serializable {
 
 	// A product template
 	public Products products2 = null;
-
+	
+	// Unique Identifier
+	public String UID = null;
+	
 	// A list of products no duplicated items only use qty to know the quantity
 	public List<Products> productsListNoDub = new ArrayList<Products>();
 	public List<Products> productsReceipt = new ArrayList<Products>();
@@ -140,7 +143,13 @@ public class Cart implements Serializable {
 		this.productsListNoDub = productsListNoDub;
 	}
 	
+	public String getUID() {
+		return UID;
+	}
+	
+	// A method to create a receipt and clear the cart
 	public String viewReceipt() {
+		orderNumber();
 		productsReceipt.clear();
 		productsReceipt.addAll(productsListNoDub);
 		clearAll();
@@ -153,7 +162,8 @@ public class Cart implements Serializable {
 	}
 	
 	public String orderNumber() {
-		return UUID.randomUUID().toString();
+		UID = UUID.randomUUID().toString().substring(19);
+		return UID;
 	}
 
 }
