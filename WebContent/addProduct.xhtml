@@ -67,6 +67,10 @@
 				<h:outputLabel for="description">Description:</h:outputLabel>
 				<h:inputTextarea style="width: 300px; height: 150px;" id="description" value="#{addProductB.description}" required = "true" requiredMessage = "Description is required"></h:inputTextarea><br/><br/>
 
+				<h:outputLabel for="quantity">Quantity:</h:outputLabel>
+				<h:inputTextarea  id="quantity" value="#{addProductB.quantity}" required = "false" requiredMessage = "Quantity is required"></h:inputTextarea><br/><br/>
+
+
 				<h:commandButton id="addToDB" value="Add a Product" action="#{addProductB.addProductToDB}" update="message" />
 				<br/><br/>
 				<h:messages infoStyle="color:green" errorStyle="color:red" />
