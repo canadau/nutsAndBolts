@@ -72,24 +72,24 @@
 			</div>
 			<div class="totalCart">
 			
-				<p:outputLabel class="quantity">Quantity: <span class="cart_span">#{cart.quantity()} items</span></p:outputLabel>
+				<p:outputLabel class="quantity">Quantity: <span class="cart_span">#{cart.quantity(cart.getProductsListNoDub())} items</span></p:outputLabel>
 				<br></br> <br></br>
 				
-				<p:outputLabel class="Subtotal">Sub total: <span class="cart_span">$#{cart.subTotal()}</span></p:outputLabel>
+				<p:outputLabel class="Subtotal">Sub total: <span class="cart_span">$#{cart.subTotal(cart.getProductsListNoDub())}</span></p:outputLabel>
 				<br></br> <br></br>
 								
-				<p:outputLabel class="Tax">Tax: <span class="cart_span">$#{cart.tax()}</span> </p:outputLabel>
+				<p:outputLabel class="Tax">Tax: <span class="cart_span">$#{cart.tax(cart.getProductsListNoDub())}</span> </p:outputLabel>
 				<br></br> <br></br>
 				
-				<p:outputLabel class="Total">Total: <span class="cart_span"> $#{cart.totalCart()} </span> 
+				<p:outputLabel class="Total">Total: <span class="cart_span"> $#{cart.totalCart(cart.getProductsListNoDub())} </span> 
 					
 				</p:outputLabel>
 				<br></br> <br></br>
 				
-				<p:commandButton  value="CHECK OUT" />
+				<p:commandButton  value="CHECK OUT" action="#{cart.viewReceipt()}"/>
 				<br></br> <br></br>				
 				
-				<p:commandButton class="cart_removeAll" ajax="true" update="form"  value="CLEAR CART" actionListener="#{cart.clearAll()}" disabled="true" />
+				<p:commandButton class="cart_removeAll" ajax="true" update="form"  value="CLEAR CART" actionListener="#{cart.clearAll()}" disabled="false" />
 				<br></br> <br></br>				  	
 				
 			</div>

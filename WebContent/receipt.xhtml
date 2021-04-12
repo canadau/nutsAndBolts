@@ -11,11 +11,13 @@
 	<h:outputStylesheet library="css" name="index.css" />
 	<h:outputScript library="js" name="functionsJS.js" />
 	<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+	<h:outputScript library="js" name="jquery-ui.js" />
+	<h:outputScript library="js" name="jquery-3.5.1.min.js" />
 	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
 </h:head>
 
 <h:body id="body">
-
+	
 	<div class="header">
 		
 			<div class="logo">
@@ -24,54 +26,67 @@
 			<div class="header_nav">
 				<a class="flex_items" href="index.xhtml">Home</a>
 				<a class="flex_items" href="products.xhtml">Products</a>
-								
+									
 				<c:if test="#{employeelogin.employee.userName != null}">
 					<a class="flex_items" href="addProduct.xhtml">Add Products</a>
-					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>	
-					<a class="flex_items" href="registerEmployee.xhtml">Add Employees</a>		       
+					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>
+					<a class="flex_items" href="registerEmployee.xhtml">Add Employees</a>								       
 			    </c:if>
 				
 				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
 				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
 			</div>
-			<div class="right_nav">
+			<div class="right_nav" id="cart_icon">
 				<a>Welcome <span class="welcome_name">#{employeelogin.session.getAttribute("name") != null? employeelogin.session.getAttribute("name") : 'Guest'} </span></a>
 				<a href="login.xhtml">#{employeelogin.session.getAttribute("name") != null ? 'Sign Out' : 'Sign In'}</a>
-				<h:form id="ico"><a class="pi pi-shopping-cart" id="shopping_cart" href="shoppingCart.xhtml">#{cart.quantity(cart.getProductsListNoDub())}</a></h:form> 
+				<a class="pi pi-shopping-cart" id="shopping_cart" href="shoppingCart.xhtml"></a>
 			</div>
 		
 	</div>
 
-	<p:growl id="growl" showDetail="true" life="2000" redisplay="true" />
-		<div class="home_products">
-		
-		<ui:repeat var="prod" value="#{products.getProductFromDB()}">
-			 
-			<div class="contener_row">
-										
-	        		<h:form id="form">
-	        		<div class="card">
-						  <h3 class="name">#{prod.name}</h3>
-						  <h6 class="sku">sku##{prod.sku}</h6>
-						  <p class="price">$#{prod.price}</p>						  
-						  <p class="description">#{prod.description}</p>
-						<div class="card_button"> 
-						<p:commandButton ajax="true" update="growl ico"  value="Add to Cart" actionListener="#{cart.addToCart2(prod)}" />
-						</div>  
-					</div>		
-					</h:form>					
-									
-				</div>	
-						
-			</ui:repeat>		
-		</div>
+	<div class="home">
+	<h:form id="form">
 	
-
+		<div class="view_cart">		
+			<div class="view_cart_left">			
+				<h1 class="hello_cart">Your Receipt</h1>
+				<hr style="width:70%; margin:auto !important"/>
+				<br/>
+				<h6>Order Number: #{cart.orderNumber()}</h6>
+				
+					<ui:repeat var="prod" value="#{cart.productsReceipt()}">
+					<div id="row_cart" class="row">
+						<div id="cart_element" class="cart_card">
+							<h3 class="cart_name">#{prod.name}</h3>
+							<h6 class="cart_name">sku##{prod.sku}</h6>
+							<p class="cart_price">Price: $#{prod.price}</p>
+							
+							<p:outputLabel class="qty">Qty: #{prod.newQty}</p:outputLabel>
+							
+						
+						</div>
+					</div>
+				</ui:repeat>
+				<div class="receipt_total">
+					<h3 class="numbers">Quantity: #{cart.quantity(cart.productsReceipt())}</h3>
+					<h3 class="numbers">Sub-total: $#{cart.subTotal(cart.productsReceipt())}</h3>
+					<h3 class="numbers">Tax: $#{cart.tax(cart.productsReceipt())}</h3>
+					<h3 class="numbers">Total: $#{cart.totalCart(cart.productsReceipt())}</h3>					
+				</div>
+				
+			</div>
+			
+			
+		</div>
+		</h:form>
+	</div>
+	
 	<div class="footer">
 		<h3>Copyright© 2021 Purple Team</h3>
-	</div>	
+	</div>
 	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
+	
 </h:body>
 </html>

@@ -4,15 +4,18 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 import com.nutsandbolts.Products;
 import com.nutsandbolts.tools.ShowMessages;
 
 // ApplicationScoped Java Class "It lasts as long as the app is running on AWS server"
 @ManagedBean(name = "cart")
-@ApplicationScoped
+@SessionScoped
 public class Cart implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -24,6 +27,7 @@ public class Cart implements Serializable {
 
 	// A list of products no duplicated items only use qty to know the quantity
 	public List<Products> productsListNoDub = new ArrayList<Products>();
+	public List<Products> productsReceipt = new ArrayList<Products>();
 
 	// Add to cart method
 	public void addToCart2(Products pro) {
@@ -77,37 +81,37 @@ public class Cart implements Serializable {
 	public List<Products> productsList() { return productsListNoDub; }
 	
 	// Total items in the cart
-	public int quantity() {
+	public int quantity(List<Products> list) {
 		int qty = 0;
 		
-		for(Products pro : productsListNoDub) {
+		for(Products pro : list) {
 			qty = pro.newQty + qty;
 		}		
 		return qty;
 	}
 	
 	// To calculate the subtotal 
-	public double subTotal() {
+	public double subTotal(List<Products> list) {
 		double subtotal = 0;
 		DecimalFormat df = new DecimalFormat("#.00");
 		
-		for(Products pro : productsListNoDub) {
+		for(Products pro : list) {
 			subtotal = pro.getPrice() * pro.getNewQty() + subtotal;
 		}		
 		return Double.valueOf(df.format(subtotal));
 	}
 	
 	// I am using Ohio tax rate 7.5
-	public double tax() {
+	public double tax(List<Products> list) {
 		DecimalFormat df = new DecimalFormat("#.00");
-		return Double.valueOf(df.format(subTotal() * .075));
+		return Double.valueOf(df.format(subTotal(list) * .075));
 	}
 	
 	//Calculate the total
-	public double totalCart() {
+	public double totalCart(List<Products> list) {
 		DecimalFormat df = new DecimalFormat("#.00");
 		
-		return Double.valueOf(df.format(subTotal() + tax()));
+		return Double.valueOf(df.format(subTotal(list) + tax(list)));
 	}
 	
 	// Increase item qty
@@ -136,6 +140,20 @@ public class Cart implements Serializable {
 		this.productsListNoDub = productsListNoDub;
 	}
 	
+	public String viewReceipt() {
+		productsReceipt.clear();
+		productsReceipt.addAll(productsListNoDub);
+		clearAll();
+		
+		return "receipt?faces-redirect=true";
+	}
 	
+	public List<Products> productsReceipt() {
+		return productsReceipt;
+	}
+	
+	public String orderNumber() {
+		return UUID.randomUUID().toString();
+	}
 
 }

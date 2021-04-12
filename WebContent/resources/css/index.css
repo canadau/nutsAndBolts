@@ -475,3 +475,10 @@ width:10%;
 .qty_count {
 	font-weight: bold;
 }
+/* Receipt page begins here*/
+.receipt_total {
+	padding: 20px;		
+}
+.numbers {
+	padding: 5px;		
+}
