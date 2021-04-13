@@ -8,15 +8,12 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.naming.NamingException;
-
 import com.nutsandbolts.Products;
 import com.nutsandbolts.tools.DBConnection;
-import com.nutsandbolts.tools.SessionManagement;
 import com.nutsandbolts.tools.ShowMessages;
 
 // ApplicationScoped Java Class "It lasts as long as the app is running on AWS server"
