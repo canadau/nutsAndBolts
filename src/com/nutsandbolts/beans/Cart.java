@@ -1,6 +1,9 @@
 package com.nutsandbolts.beans;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +12,11 @@ import java.util.UUID;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.naming.NamingException;
 
 import com.nutsandbolts.Products;
+import com.nutsandbolts.tools.DBConnection;
+import com.nutsandbolts.tools.SessionManagement;
 import com.nutsandbolts.tools.ShowMessages;
 
 // ApplicationScoped Java Class "It lasts as long as the app is running on AWS server"
@@ -21,7 +27,10 @@ public class Cart implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public Cart() {}
-
+	
+	//
+	//public int isInStock;
+	
 	// A product template
 	public Products products2 = null;
 	
@@ -52,7 +61,7 @@ public class Cart implements Serializable {
 			productsListNoDub.get(existIndex).newQty++;
 
 		} else {
-
+			
 			products2 = new Products(pro.getSku(),pro.getName(),pro.getDescription(),pro.getPrice(),pro.getQty(), 1);
 			productsListNoDub.add(products2);
 		}
@@ -134,36 +143,77 @@ public class Cart implements Serializable {
 		System.out.println("decrease");	
 	}
 	
-	// Getter and Setter for the productsListNoDub list
+	// Getter for the productsListNoDub list
 	public List<Products> getProductsListNoDub() {
 		return productsListNoDub;
 	}
-
+	
+	// Setter for the productsListNoDub list
 	public void setProductsListNoDub(List<Products> productsListNoDub) {
 		this.productsListNoDub = productsListNoDub;
 	}
 	
+	// A simple method to get the order number
 	public String getUID() {
 		return UID;
 	}
 	
 	// A method to create a receipt and clear the cart
 	public String viewReceipt() {
-		orderNumber();
+		orderNumber();		
 		productsReceipt.clear();
 		productsReceipt.addAll(productsListNoDub);
+		reduceInventory(productsReceipt);
 		clearAll();
 		
 		return "receipt?faces-redirect=true";
 	}
 	
+	// A method to get a list of products for the receipt page
 	public List<Products> productsReceipt() {
 		return productsReceipt;
 	}
 	
+	// To generate a random number as an order number
 	public String orderNumber() {
 		UID = UUID.randomUUID().toString().substring(19);
 		return UID;
 	}
+	
+	//method to reduct the inventory
+	public void reduceInventory(List<Products> list) {
+		PreparedStatement pst = null; 
+		Connection conn = null;
+		
+		//sql query that updates the DB
+		String sqlQuery = "UPDATE products SET qty = ? WHERE sku = ?";
+		
+		//holds the difference between the products qty in the inventory and the cart
+		int inventoryProductQty = 0;
+			
+		// Try block to keep the app safe in case of resource failure "table not found", "database not found", or "database is down" 
+			try {
+				
+				conn = DBConnection.getInstance().getConnection();
+				
+				pst = conn.prepareStatement(sqlQuery);
+				
+				// For each loop to loop through the products list, calculate the qty, and push the new qty to our database
+				for (Products prod : list) {
+					inventoryProductQty = prod.getQty() - prod.getNewQty();
+					pst.setInt(1, inventoryProductQty);
+					pst.setInt(2, prod.getSku());
+					pst.executeUpdate();
+				}
+				// catch statement to catch any error while connecting to our database. This saves the app from crash in case of an error occurs
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+
+			} catch (NamingException e) {
+				System.out.println(e.getMessage());
+			}
+	}
+	
+	
 
 }
