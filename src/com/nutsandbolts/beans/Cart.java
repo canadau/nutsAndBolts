@@ -14,6 +14,7 @@ import javax.faces.bean.SessionScoped;
 import javax.naming.NamingException;
 import com.nutsandbolts.Products;
 import com.nutsandbolts.tools.DBConnection;
+import com.nutsandbolts.tools.SessionManagement;
 import com.nutsandbolts.tools.ShowMessages;
 
 // ApplicationScoped Java Class "It lasts as long as the app is running on AWS server"
@@ -53,19 +54,22 @@ public class Cart implements Serializable {
 
 		//System.out.println("IsExist " +isExist);
 
-		if (isExist) {
+		if (isExist && productsListNoDub.get(existIndex).newQty < pro.qty) {
 
 			productsListNoDub.get(existIndex).newQty++;
+			ShowMessages.addMessage(FacesMessage.SEVERITY_INFO, "Info Message", "The product was added to the cart");
+			System.out.println(pro.getName() + " was added");
+		
+		} else if (existIndex == -1) {
 
-		} else {
-			
 			products2 = new Products(pro.getSku(),pro.getName(),pro.getDescription(),pro.getPrice(),pro.getQty(), 1);
 			productsListNoDub.add(products2);
+			ShowMessages.addMessage(FacesMessage.SEVERITY_INFO, "Info Message", "The product was added to the cart");
+			System.out.println(pro.getName() + " was added");
+		
+		} else {
+			ShowMessages.addMessage(FacesMessage.SEVERITY_ERROR, "Info Message", "Only "+pro.getQty()+" avaliable" );
 		}
-
-		System.out.println(pro.getName() + " was added");
-		ShowMessages.addMessage(FacesMessage.SEVERITY_INFO, "Info Message", "The product was added to the cart");
-		//return "products?faces-redirect=true";
 	}
 
 	// Clear all items in the cart
@@ -127,7 +131,12 @@ public class Cart implements Serializable {
 	public void increaseQty(Products pro) {
 		int itemIndex;
 		itemIndex = productsListNoDub.indexOf(pro);
-		if (itemIndex >= 0 && pro.newQty >=0) productsListNoDub.get(itemIndex).newQty++;
+		
+		if (itemIndex >= 0 && pro.newQty >=0 && productsListNoDub.get(itemIndex).getNewQty() < pro.getQty()) {
+			productsListNoDub.get(itemIndex).newQty++;
+		} else {
+			ShowMessages.addMessage(FacesMessage.SEVERITY_ERROR, "Info Message", "Only "+pro.getQty()+" avalabile");
+		}
 		System.out.println("increase");
 	}
 	
@@ -160,6 +169,7 @@ public class Cart implements Serializable {
 		orderNumber();		
 		productsReceipt.clear();
 		productsReceipt.addAll(productsListNoDub);
+		pushProductsToDB(productsReceipt);
 		reduceInventory(productsReceipt);
 		clearAll();
 		
@@ -211,6 +221,33 @@ public class Cart implements Serializable {
 			}
 	}
 	
-	
+	// push a list of products from the cart to the database after buying
+			public void pushProductsToDB(List<Products> products) {
+				PreparedStatement pst = null;
+				Connection conn = null;
+				String associateUser = "guest";
+				
+				if (SessionManagement.getUserId() != null) associateUser = SessionManagement.getUserId();
+				
+				try {
+					String sqlQuery = "INSERT INTO orders (associateUser, orderNumber,sku,name,price,qty) VALUES(?,?,?,?,?,?)";
+					conn = DBConnection.getInstance().getConnection();
+					pst = conn.prepareStatement(sqlQuery);
+					
+					for (Products product : products) {
+						pst.setString(1, associateUser);
+						pst.setString(2, UID);
+						pst.setInt(3, product.getSku());
+						pst.setString(4, product.getName());
+						pst.setDouble(5, product.getPrice());
+						pst.setInt(6, product.getNewQty());
+						
+						pst.execute();
+					}
+					
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
 
 }

@@ -130,6 +130,7 @@ public class LoginManagement implements Serializable {
 				session = SessionManagement.getSession();
 				session.setAttribute("customer", customer.getFirstName());
 				session.setAttribute("name", customer.getFirstName());
+				session.setAttribute("email", customer.getEmail());
 			} else {
 				
 				employee = tempEmployee;
@@ -137,6 +138,7 @@ public class LoginManagement implements Serializable {
 				session = SessionManagement.getSession();
 				session.setAttribute("admin", employee.getUserName());
 				session.setAttribute("name", employee.getUserName());
+				session.setAttribute("email", employee.getEmail());
 			}
 
 			return "index?faces-redirect=true";

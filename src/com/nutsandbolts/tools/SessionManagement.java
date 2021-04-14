@@ -25,7 +25,7 @@ public class SessionManagement {
 	public static String getUserId() {
 		HttpSession session = getSession();
 		if (session != null)
-			return (String) session.getAttribute("id");
+			return (String) session.getAttribute("email");
 		else
 			return null;
 	}
