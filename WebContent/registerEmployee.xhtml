@@ -84,6 +84,9 @@
 			<div class="right_nav">
 				<a>Welcome <span class="welcome_name">#{employeelogin.session.getAttribute("name") != null? employeelogin.session.getAttribute("name") : 'Guest'} </span></a>
 				<a href="login.xhtml">#{employeelogin.session.getAttribute("name") != null ? 'Sign Out' : 'Sign In'}</a>
+				<c:if test="#{employeelogin.employee.userName != null or employeelogin.customer.firstName != null }">
+				<a href="orderHistory.xhtml">Orders</a>
+				</c:if>
 				<h:form id="ico"><a class="pi pi-shopping-cart" id="shopping_cart" href="shoppingCart.xhtml">#{cart.quantity(cart.getProductsListNoDub())}</a></h:form>
 			</div>
 		

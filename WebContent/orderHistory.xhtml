@@ -14,11 +14,10 @@
 	<h:outputScript library="js" name="jquery-ui.js" />
 	<h:outputScript library="js" name="jquery-3.5.1.min.js" />
 	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
-
 </h:head>
 
 <h:body id="body">
-
+	
 	<div class="header">
 		
 			<div class="logo">
@@ -27,65 +26,63 @@
 			<div class="header_nav">
 				<a class="flex_items" href="index.xhtml">Home</a>
 				<a class="flex_items" href="products.xhtml">Products</a>
-								
+									
 				<c:if test="#{employeelogin.employee.userName != null}">
 					<a class="flex_items" href="addProduct.xhtml">Add Products</a>
-					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>	
-					<a class="flex_items" href="registerEmployee.xhtml">Add Employees</a>		       
+					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>
+					<a class="flex_items" href="registerEmployee.xhtml">Add Employees</a>								       
 			    </c:if>
 				
 				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
 				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
 			</div>
-			<div class="right_nav">
+			<div class="right_nav" id="cart_icon">
 				<a>Welcome <span class="welcome_name">#{employeelogin.session.getAttribute("name") != null? employeelogin.session.getAttribute("name") : 'Guest'} </span></a>
 				<a href="login.xhtml">#{employeelogin.session.getAttribute("name") != null ? 'Sign Out' : 'Sign In'}</a>
 				<c:if test="#{employeelogin.employee.userName != null or employeelogin.customer.firstName != null }">
 				<a href="orderHistory.xhtml">Orders</a>
 				</c:if>
-				<h:form id="ico"><a class="pi pi-shopping-cart" id="shopping_cart" href="shoppingCart.xhtml">#{cart.quantity(cart.getProductsListNoDub())}</a></h:form>
+				<a class="pi pi-shopping-cart" id="shopping_cart" href="shoppingCart.xhtml"></a>
 			</div>
 		
 	</div>
 
-	<div class="home_addProduct">			
-		<div class="add_product">
-		
-		<h1>Add Products</h1>
-		
-			<h:form>
+	<div class="home">
+	<h:form id="form">
+	
+		<div class="order_history">		
+			<h1 class="order_header">Your Orders History</h1>
+			<br />
+			<hr style="width:70%; margin:auto !important"/>
+			<br />
 			
-				<br/><br/>
-				<h:outputLabel for="sku">SKU:</h:outputLabel><br/>
-				<h:inputText id="sku" value="#{addProductB.sku}" label="SKU" required = "true" requiredMessage = "SKU is required">
-				<f:validateLength for = "sku" minimum = "2" maximum = "20" />
-				</h:inputText><br/><br/>
+			<p:repeat var="order" value="#{ordersHistory.ordersNumbers()}" >
+				<h3 class="order_number">Order#: #{order}</h3>
 				
-				<h:outputLabel for="name">Name:</h:outputLabel><br/>
-				<h:inputText id="name" value="#{addProductB.name}" required = "true" requiredMessage = "Name is required"></h:inputText><br/><br/>
-				
-				<h:outputLabel for="price">Price:</h:outputLabel><br/>
-				<h:inputText id="price" value="#{addProductB.price}" required = "false" requiredMessage = "Price is required"></h:inputText><br/><br/>
-					
-				<h:outputLabel for="description">Description:</h:outputLabel>
-				<h:inputTextarea style="width: 300px; height: 150px;" id="description" value="#{addProductB.description}" required = "true" requiredMessage = "Description is required"></h:inputTextarea><br/><br/>
-
-				<h:outputLabel for="quantity">Quantity:</h:outputLabel>
-				<h:inputText  id="quantity" value="#{addProductB.quantity}" required = "false" requiredMessage = "Quantity is required"></h:inputText><br/><br/>
-				
-				<h:commandButton id="addToDB" value="Add a Product" action="#{addProductB.addProductToDB}" update="message" />
-				<br/><br/>
-				<h:messages infoStyle="color:green" errorStyle="color:red" />
-				
-			</h:form>
-		
+					<p:repeat var="products" value="#{ordersHistory.productsList(order)}" >
+						<p class="product_details">Product Name: #{products.getName()} &#160; price: #{products.getPrice()} &#160; qty:#{products.getQty()} </p>
+						
+						
+					</p:repeat>
+					<br/>
+					<p class="numbers_history">Quantity: #{ordersHistory.quantity(ordersHistory.getProductsList())} item(s)</p>
+					<p class="numbers_history">Sub-total: $#{ordersHistory.subTotal(ordersHistory.getProductsList())}</p>
+					<p class="numbers_history">Tax: $#{ordersHistory.tax(ordersHistory.getProductsList())}</p>
+					<p class="numbers_history">Total: $#{ordersHistory.totalCart(ordersHistory.getProductsList())}</p>
+					<br/>
+			</p:repeat>
+			
+			
 		</div>
-
+		</h:form>
 	</div>
-
+	
 	<div class="footer">
 		<h3>Copyright© 2021 Purple Team</h3>
-	</div>	
+	</div>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
 	
 </h:body>
 </html>

@@ -22,10 +22,10 @@ import javax.servlet.http.HttpSession;
 public class AuthorizationFilter implements Filter{
 	
 	private HttpServletRequest httpRequest;
-	private static final String[] customerLoginRequiredURLs = {"/page.xhtml"};
+	private static final String[] customerLoginRequiredURLs = {"/1orderHistory.xhtml"};
 	
 	private static final String[] adminLoginRequiredURLs = {"/registerEmployee.xhtml",
-			"/addProduct.xhtml", "/updateProduct.xhtml"};
+			"/addProduct.xhtml", "/updateProduct.xhtml", "/1orderHistory.xhtml"};
 	public AuthorizationFilter() {};
 		
 	@Override
@@ -57,7 +57,7 @@ public class AuthorizationFilter implements Filter{
 	        
 	        boolean isLoginPage = httpRequest.getRequestURI().endsWith("login.xhtml");
 	        	        
-	        if((!isAdminLoggedIn && isAdminLoginRequired()) || (!isCustomerLoggedIn && isCustomerLoginRequired())) {
+if((!isAdminLoggedIn && isAdminLoginRequired()) || (!isCustomerLoggedIn && isCustomerLoginRequired())) {
 	        	
 	        	resp.sendRedirect(httpRequest.getContextPath() + "/faces/login.xhtml");
 	        	

@@ -13,6 +13,9 @@ public class Products {
 	private double price;
 	public int qty;
 	public int newQty;
+	private String associateUser;
+	private String orderNumber;
+	private String dateTime;
 	
 	public Products() {}
 	public Products(int sku, String name, String description, double price, int qty) {
@@ -24,6 +27,7 @@ public class Products {
 		this.qty = qty;
 	}
 	
+	// For cart and receipt pages
 	public Products(int sku, String name, String description, double price, int qty, int newQty) {
 		super();
 		this.sku = sku;
@@ -32,6 +36,16 @@ public class Products {
 		this.price = price;
 		this.qty = qty;
 		this.newQty = newQty;
+	}
+	
+	// For order history page
+	public Products(int sku, String name, double price, int qty, String dateTime) {
+		super();
+		this.sku = sku;
+		this.name = name;
+		this.price = price;
+		this.qty = qty;
+		this.dateTime = dateTime;
 	}
 	
 	public int getSku() {
@@ -78,6 +92,25 @@ public class Products {
 	}
 	public void setNewQty(int newQty) {
 		this.newQty = newQty;
+	}
+	
+	public String getAssociateUser() {
+		return associateUser;
+	}
+	public void setAssociateUser(String associateUser) {
+		this.associateUser = associateUser;
+	}
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+	public String getDateTime() {
+		return dateTime;
+	}
+	public void setDateTime(String dateTime) {
+		this.dateTime = dateTime;
 	}
 	public void addProduct(int sku, String name, String description, double price ) {
 

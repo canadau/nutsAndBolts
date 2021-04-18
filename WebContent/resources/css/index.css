@@ -482,3 +482,33 @@ width:10%;
 .numbers {
 	padding: 5px;		
 }
+
+/* order history page begins here */
+
+.order_history {
+	max-width: 1500px;
+	justify-content: center;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	min-height: 90vh;
+	z-index: -1;
+	background-color: white;
+	/* display: flex; */
+	
+}
+.order_header{
+	padding: 15px;
+}
+.order_number{
+	margin-left: 30px;
+	padding: 15px;
+}
+.product_details{
+	margin-left: 50px;
+	padding: 5px;
+}
+.numbers_history{
+	padding: 5px;
+	margin-left: 50px;
+}
