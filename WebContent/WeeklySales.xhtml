@@ -44,7 +44,31 @@
 			</div>
 		
 	</div>
-<!--  Need to replace this part with columns
+	<p:growl id="growl" showDetail="true" life="2000" redisplay="true" />
+		<div class="home_products">
+		
+		<ui:repeat var="order" value="#{weeklySales.getOrdersFromDB(0)}">
+			 
+			<div class="contener_row">
+										
+	        		<h:form id="form">
+	        		<div class="card">
+						  <h3 class="name">#{order.name}</h3>
+						  <h6 class="sku">sku##{order.sku}</h6>
+						  <p class="price">$#{order.price}</p>						  
+						  <p class="quantity">#{order.qty}</p>
+						<div class="card_button"> 
+						<p:commandButton ajax="true" update="growl ico" value="Push to run code" actionListener="#{weeklySales.getOrdersFromDB(0)}"/>
+						</div>  
+					</div>		
+					</h:form>					
+									
+				</div>	
+						
+			</ui:repeat>		
+		</div>
+	
+<!--  Keeping this for reference
 	<p:growl id="growl" showDetail="true" life="2000" redisplay="true" />
 		<div class="home_products">
 		

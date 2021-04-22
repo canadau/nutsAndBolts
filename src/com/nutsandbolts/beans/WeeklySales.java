@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.time.LocalDate;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -213,14 +214,23 @@ public class WeeklySales implements Serializable {
 		return W;
 	}
 	
-	// TODO finish this function
-	public long findWeeksBetweenDates(String date1, String date2) {
+	/* So this function currently should only be used to find the number of weeks
+	   between the earliest date in the database and the current time.
+	*/
+	public long findWeeksBetweenDates(String date1) {
 		// Initialize variable I probably don't need
 		long f = 0;
 		
+		// This gets the current time in string formate to parse to localdate
+		Date testdate = new Date(System.currentTimeMillis());
+		String testdate2 = String.valueOf(testdate);
+		
 		// Parse strings to weird localdate type
 		LocalDate localdate1 = LocalDate.parse(date1);
-		LocalDate localdate2 = LocalDate.parse(date2);
+		
+		// Note that this one currently takes testdate2.  If you want you can use date2
+		// to make use of a second argument.
+		LocalDate localdate2 = LocalDate.parse(testdate2);
 		
 		// Use this godsend chronounit function
 		f = ChronoUnit.WEEKS.between(localdate1, localdate2);
@@ -249,10 +259,66 @@ public class WeeklySales implements Serializable {
 			System.out.println(e.getCause());
 		} finally {
 			DBConnection.close(conn);
-			return date;
 		} 
+		return date;
 	}
-
+	
+	public void getOrdersFromDB(int WeeksAgo) {
+		// WeekAgo will be how many weeks in the past we want to go
+		Connection conn = null; 
+		int count = 0;
+		try {
+			String createSQL = "SELECT id, associateUser, orderNumber, sku, name, price, qty, dateTime FROM orders WHERE dateTime between '?' and '?';";
+			DBConnection inst = DBConnection.getInstance();
+			conn = inst.getConnection();
+			
+			/* So this is where I will attempt to get the correct dates for the sql query
+			 * We need the dates to be formatted 'YYYY-MM-DD'.  We can work with a few 
+			 * different data types but I think strings will be the easiest.
+			 * Based on WeeksAgo, we need to grab results from a particular week.
+			 * So like '2021-04-07' to '2021-04-14'.  We'll need to do math on these strings 
+			 * so some conversions will be necessary.
+			 */
+			
+			// This should return the current date a certain number of weeks ago
+			long DAY_IN_MS = 1000 * 60 * 60 * 24;
+			Date date1 = new Date(System.currentTimeMillis() - (7 * WeeksAgo * DAY_IN_MS));
+			Date date2 = new Date(System.currentTimeMillis() - (7 * (WeeksAgo + 1) * DAY_IN_MS));
+			
+			// This is where the dates will have to be input
+			PreparedStatement pst = conn.prepareStatement(createSQL); 
+			
+			// These take the date variables and cast them to the java.sql.date type
+			pst.setDate(1, (java.sql.Date) date1);
+			pst.setDate(2, (java.sql.Date) date2);
+			
+			// This is where we get results back
+			ResultSet rs = pst.executeQuery();
+			if (rs.next()) {
+				id = rs.getInt(1);
+				associateUser = rs.getString(2);
+				orderNumber = rs.getString(3);
+				sku = rs.getInt(4);
+				name = rs.getString(5);
+				price = rs.getFloat(6);
+				qty = rs.getInt(7);
+				dateTime = rs.getString(8);
+				count++;
+			}
+			if (count > 0) {
+				ShowMessages.showSuccessMessage("The order was retrieved");
+			} else {
+				ShowMessages.showErrorMessage("Error, the order is not in the inventory"); 
+			} 
+			pst.close();
+		} catch (Exception e) {
+			e.getCause();
+			System.out.println(e.getCause());
+		} finally {
+			DBConnection.close(conn);
+		} 
+		
+	}
 	
 	/* Commenting this here for reference
 	public void getProductsFromDB(int skuNumber) {
