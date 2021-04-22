@@ -23,7 +23,6 @@ public class WeeklySales implements Serializable {
 	private float price;
 	private int qty;
 	private String dateTime;
-	private int W;
 	
 	public WeeklySales() {}
 
@@ -94,8 +93,76 @@ public class WeeklySales implements Serializable {
 	public int whichWeekDay(String dateTime){
 		/* This function needs to parse dateTime, do math, and probably return 
 		   the integer corresponding to the day of the week.
-		   So far I will leave my reference and my python code as notes.  
+		   I will leave my reference and my python code as notes.  
 		   https://cs.uwaterloo.ca/~alopez-o/math-faq/node73.html
+		*/
+		// W will store the value 0-6 corresponding to 0=Sunday,...,6=Saturday
+		int W;
+		
+		// This bit of code should read the day from the database to string d.
+		char placeholder = dateTime.charAt(8);
+		String d = Character.toString(placeholder);
+		placeholder = dateTime.charAt(9);
+		d.concat(Character.toString(placeholder));
+		System.out.println(d);
+		
+		// This code should read the month into string m.
+		placeholder = dateTime.charAt(5);
+		String m = Character.toString(placeholder);
+		placeholder = dateTime.charAt(6);
+		m.concat(Character.toString(placeholder));
+		System.out.println(m);
+		
+		// This should read the century to C.  (1987 would read 19)
+		placeholder = dateTime.charAt(0);
+		String C = Character.toString(placeholder);
+		placeholder = dateTime.charAt(1);
+		C.concat(Character.toString(placeholder));
+		System.out.println(C);
+		
+		// This should read the year to Y. (1987 would read 87)
+		placeholder = dateTime.charAt(2);
+		String Y = Character.toString(placeholder);
+		placeholder = dateTime.charAt(3);
+		Y.concat(Character.toString(placeholder));
+		System.out.println(Y);
+		
+		// We will now convert what we've read to integers.
+		int dint = Integer.parseInt(d);
+		int mint = Integer.parseInt(m);
+		int Cint = Integer.parseInt(C);
+		int Yint = Integer.parseInt(Y);
+		
+		/* With that bad code out of the way, we can begin to manipulate our data.
+		   We will need to edit month to (1-12; 1=Mar,...,10=Dec,11=Jan,12=Feb)
+		   when it is already 1=Jan,...,12=Dec.
+		 */
+		if (mint == 01) {
+			mint = 11;
+		} else if (mint == 02){
+			mint = 12;
+		} else {
+			mint = mint - 2;
+		}
+		
+		// We will also need to manipulate year to be the previous year if m = Jan or Feb
+		if (Yint == 11 || Yint == 12 && Yint != 00) {
+			Yint = Yint - 1;
+		} else if (Yint == 11 || Yint == 12){
+			Yint = 99;
+		}
+		
+		/* Here is the overall calculation, we'll take it step by step since
+		   we are relying on integers truncating at certain steps
+		   W = (d + (2.6*m - 0.2) - 2*C + Y + Y/4 + C/4) % 7
+		*/ 
+		Double mdouble = Double.valueOf(mint);
+		Double mfix = 2.6 * mdouble - 0.2;
+		int mfixed = mfix.intValue();
+		
+		W = (dint + mfixed - 2*Cint + Yint + Yint/4 + Cint/4) % 7;
+		
+		/*
 		   -------------------------------------------------------------------
 		    # d for Day (1 - 31)
     		d = int(input("What is the day of the month (1-31): "))
@@ -140,11 +207,10 @@ public class WeeklySales implements Serializable {
 		   -------------------------------------------------------------------
 		*/
 		
-		
-		
 		// Return the integer (could also return String if we want)
 		return W;
 	}
+
 	
 	/* Commenting this out for later reference
 	public void getProductsFromDB(int skuNumber) {
