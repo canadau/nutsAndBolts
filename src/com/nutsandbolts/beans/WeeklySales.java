@@ -2,6 +2,7 @@ package com.nutsandbolts.beans;
 
 import java.io.Serializable;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +14,9 @@ import javax.faces.bean.RequestScoped;
 
 import com.nutsandbolts.tools.DBConnection;
 import com.nutsandbolts.tools.ShowMessages;
+
+import java.text.DateFormat;  
+import java.text.SimpleDateFormat; 
 
 @ManagedBean (name="weeklySales")
 @RequestScoped
@@ -268,7 +272,7 @@ public class WeeklySales implements Serializable {
 		Connection conn = null; 
 		int count = 0;
 		try {
-			String createSQL = "SELECT id, associateUser, orderNumber, sku, name, price, qty, dateTime FROM orders WHERE dateTime between '?' and '?';";
+			String createSQL = "SELECT id, associateUser, orderNumber, sku, name, price, qty, dateTime FROM orders WHERE dateTime between ? and ?;";
 			DBConnection inst = DBConnection.getInstance();
 			conn = inst.getConnection();
 			
@@ -284,17 +288,34 @@ public class WeeklySales implements Serializable {
 			long DAY_IN_MS = 1000 * 60 * 60 * 24;
 			Date date1 = new Date(System.currentTimeMillis() - (7 * WeeksAgo * DAY_IN_MS));
 			Date date2 = new Date(System.currentTimeMillis() - (7 * (WeeksAgo + 1) * DAY_IN_MS));
+			System.out.println(date1);
+			
+			// Three substring calls on each date 
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String strDate1 = dateFormat.format(date1);
+			System.out.println(strDate1);
+			String year1 = strDate1.substring(0, 4);
+			String month1 = strDate1.substring(5, 7);
+			String day1 = strDate1.substring(8, 10);
+			System.out.println("Year: " + year1 + " Month: " + month1 + " Day: " + day1);
+			
+			String strDate2 = dateFormat.format(date2);
+			System.out.println(strDate2);
+			String year2 = strDate2.substring(0, 4);
+			String month2 = strDate2.substring(5, 7);
+			String day2 = strDate2.substring(8, 10);
+			System.out.println("Year: " + year2 + " Month: " + month2 + " Day: " + day2);
 			
 			// This is where the dates will have to be input
 			PreparedStatement pst = conn.prepareStatement(createSQL); 
 			
 			// These take the date variables and cast them to the java.sql.date type
-			pst.setDate(1, (java.sql.Date) date1);
-			pst.setDate(2, (java.sql.Date) date2);
+			pst.setString(1, strDate2);
+			pst.setString(2, strDate1);
 			
 			// This is where we get results back
 			ResultSet rs = pst.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				id = rs.getInt(1);
 				associateUser = rs.getString(2);
 				orderNumber = rs.getString(3);
@@ -304,6 +325,7 @@ public class WeeklySales implements Serializable {
 				qty = rs.getInt(7);
 				dateTime = rs.getString(8);
 				count++;
+				System.out.println(dateTime);
 			}
 			if (count > 0) {
 				ShowMessages.showSuccessMessage("The order was retrieved");
@@ -314,6 +336,7 @@ public class WeeklySales implements Serializable {
 		} catch (Exception e) {
 			e.getCause();
 			System.out.println(e.getCause());
+			System.out.println("Your query did not get anything from the database");
 		} finally {
 			DBConnection.close(conn);
 		} 
