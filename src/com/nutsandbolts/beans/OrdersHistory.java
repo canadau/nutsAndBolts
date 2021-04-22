@@ -23,10 +23,11 @@ public class OrdersHistory implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	public List<String> orderNumberList = new ArrayList<>();
+	public List<String> dateList = new ArrayList<>();
 	public List<Products> productsList = new ArrayList<>();
 	public Products products;
 
-	
+
 	// Method to get all the order numbers associate with the user name
 	public List<String> ordersNumbers() {
 
@@ -35,7 +36,7 @@ public class OrdersHistory implements Serializable {
 		Connection conn = null;
 		ResultSet rSet = null;
 		
-		String sqlQuery = "SELECT DISTINCT orderNumber FROM orders WHERE associateUser = ? ";
+		String sqlQuery = "SELECT orderNumber FROM orders WHERE associateUser = ? GROUP BY orderNumber ORDER BY MIN(dateTime) DESC";
 		
 		try {
 			
@@ -45,7 +46,7 @@ public class OrdersHistory implements Serializable {
 			rSet = pst.executeQuery();
 			
 			while (rSet.next()) {
-				orderNumberList.add(rSet.getString(1));
+				orderNumberList.add(rSet.getString(1));				
 				
 			}
 			//System.out.println(orderNumberList);
@@ -117,6 +118,11 @@ public class OrdersHistory implements Serializable {
 		DecimalFormat df = new DecimalFormat("#.00");
 		
 		return Double.valueOf(df.format(subTotal(list) + tax(list)));
+	}
+	
+	// to get the date time of an order
+	public String getDatetime(List<Products> list) {		
+		return list.get(0).getDateTime().substring(0,16);
 	}
 	
 	// Getter and setter start here

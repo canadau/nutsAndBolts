@@ -68,30 +68,42 @@
 				<div class="orderDisplay">
 
 					<p:repeat var="order" value="#{ordersHistory.ordersNumbers()}">
-
+						<div class="products_history">
+						
 						<h3 class="order_number">Order#: #{order}</h3>
-
-						<p:repeat var="products"
-							value="#{ordersHistory.productsList(order)}">
-							<p class="product_details">Product Name:
-								#{products.getName()} &#160; price: #{products.getPrice()}
-								&#160; qty:#{products.getQty()}</p>
-
-
-						</p:repeat>
-
+						
+						
+						<p:dataTable var="product" value="#{ordersHistory.productsList(order)}">
+							<p:column headerText="Name">
+								<h:outputText value="#{product.getName()}" />
+							</p:column>
+							
+							<p:column headerText="Price">
+								<h:outputText value="$#{product.getPrice()}" />
+							</p:column>
+							
+							<p:column headerText="Quantity">
+								<h:outputText value="#{product.getQty()}" />
+							</p:column>
+						
+						</p:dataTable>
+						
+						
 						<br />
-						<p class="numbers_history">Quantity:
+						<p class="numbers_history"><span class="inNumbers">Quantity:</span>
 							#{ordersHistory.quantity(ordersHistory.getProductsList())}
 							item(s)</p>
-						<p class="numbers_history">Sub-total:
+						<p class="numbers_history"><span class="inNumbers">Sub-total:</span>
 							$#{ordersHistory.subTotal(ordersHistory.getProductsList())}</p>
-						<p class="numbers_history">Tax:
+						<p class="numbers_history"><span class="inNumbers">Tax:</span>
 							$#{ordersHistory.tax(ordersHistory.getProductsList())}</p>
-						<p class="numbers_history">Total:
+						<p class="numbers_history"><span class="inNumbers">Total:</span>
 							$#{ordersHistory.totalCart(ordersHistory.getProductsList())}</p>
+							
+						<h3 class="order_number">Date: #{ordersHistory.getDatetime(ordersHistory.getProductsList())}</h3>
+						
 						<br />
-
+						</div>
 					</p:repeat>
 				</div>
 			</div>

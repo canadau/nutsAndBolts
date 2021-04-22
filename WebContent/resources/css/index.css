@@ -487,38 +487,23 @@ width:10%;
 /* order history page begins here */
 
 .order_history {
-	display: flex;
-	flex-direction: column;
+	max-width: 1500px;
 	justify-content: center;
 	margin-left: auto;
 	margin-right: auto;
+	width: 100%;
+	min-height: 90vh;
 	z-index: -1;
-	height: 300px;
-	margin: 15px;
-	font-family: arial;
-	position: relative;
-	background-color: #f2f1f3;
-	text-align: center;
-	width: 75%;
-	height: 100%;
-	padding-left: 175px;
-	padding: 15px;
-	margin: 50px auto;
-	border:2px solid black;
-	}
-
-
+	background-color: white;
+	/* display: flex; */
+	
+}
 .order_header{
 	padding: 15px;
-	
-
-	
 }
 .order_number{
 	margin-left: 30px;
 	padding: 15px;
-		
-	
 }
 .product_details{
 	margin-left: 50px;
@@ -527,4 +512,12 @@ width:10%;
 .numbers_history{
 	padding: 5px;
 	margin-left: 50px;
+}
+.products_history {
+	margin: 30px;
+	background-color: #E5E7E9;
+	
+}
+.inNumbers {
+	font-weight: bold;
 }
