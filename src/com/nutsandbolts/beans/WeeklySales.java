@@ -1,10 +1,12 @@
 package com.nutsandbolts.beans;
 
 import java.io.Serializable;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -210,9 +212,49 @@ public class WeeklySales implements Serializable {
 		// Return the integer (could also return String if we want)
 		return W;
 	}
+	
+	// TODO finish this function
+	public long findWeeksBetweenDates(String date1, String date2) {
+		// Initialize variable I probably don't need
+		long f = 0;
+		
+		// Parse strings to weird localdate type
+		LocalDate localdate1 = LocalDate.parse(date1);
+		LocalDate localdate2 = LocalDate.parse(date2);
+		
+		// Use this godsend chronounit function
+		f = ChronoUnit.WEEKS.between(localdate1, localdate2);
+		
+		// Return the result
+		return f;
+	}
+	
+	public String findEarliestDate() {
+		Connection conn = null;
+		String date = null;
+		try {
+			String createSQL = "select MIN(dateTime) from orders";
+			DBConnection inst = DBConnection.getInstance();
+			conn = inst.getConnection();
+
+			PreparedStatement pst = conn.prepareStatement(createSQL); 
+
+			ResultSet rs = pst.executeQuery();
+			date = rs.getString(0);
+			
+			
+			pst.close();
+		} catch (Exception e) {
+			e.getCause();
+			System.out.println(e.getCause());
+		} finally {
+			DBConnection.close(conn);
+			return date;
+		} 
+	}
 
 	
-	/* Commenting this out for later reference
+	/* Commenting this here for reference
 	public void getProductsFromDB(int skuNumber) {
 		Connection conn = null; 
 		int count = 0;
