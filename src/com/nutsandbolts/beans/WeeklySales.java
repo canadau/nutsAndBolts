@@ -100,6 +100,8 @@ public class WeeklySales implements Serializable {
 	public int whichWeekDay(String dateTime){
 		/* This function needs to parse dateTime, do math, and probably return 
 		   the integer corresponding to the day of the week.
+		   An important note is that since we are using magic numbers that the
+		   date input will need to be well formatted. ("YYYY-MM-DD")
 		   I will leave my reference and my python code as notes.  
 		   https://cs.uwaterloo.ca/~alopez-o/math-faq/node73.html
 		*/
@@ -107,32 +109,16 @@ public class WeeklySales implements Serializable {
 		int W;
 		
 		// This bit of code should read the day from the database to string d.
-		char placeholder = dateTime.charAt(8);
-		String d = Character.toString(placeholder);
-		placeholder = dateTime.charAt(9);
-		d.concat(Character.toString(placeholder));
-		System.out.println(d);
+		String d = dateTime.substring(8, 10);
 		
 		// This code should read the month into string m.
-		placeholder = dateTime.charAt(5);
-		String m = Character.toString(placeholder);
-		placeholder = dateTime.charAt(6);
-		m.concat(Character.toString(placeholder));
-		System.out.println(m);
+		String m = dateTime.substring(5, 7);
 		
 		// This should read the century to C.  (1987 would read 19)
-		placeholder = dateTime.charAt(0);
-		String C = Character.toString(placeholder);
-		placeholder = dateTime.charAt(1);
-		C.concat(Character.toString(placeholder));
-		System.out.println(C);
+		String C = dateTime.substring(0, 2);
 		
 		// This should read the year to Y. (1987 would read 87)
-		placeholder = dateTime.charAt(2);
-		String Y = Character.toString(placeholder);
-		placeholder = dateTime.charAt(3);
-		Y.concat(Character.toString(placeholder));
-		System.out.println(Y);
+		String Y = dateTime.substring(2, 4);
 		
 		// We will now convert what we've read to integers.
 		int dint = Integer.parseInt(d);
@@ -144,18 +130,18 @@ public class WeeklySales implements Serializable {
 		   We will need to edit month to (1-12; 1=Mar,...,10=Dec,11=Jan,12=Feb)
 		   when it is already 1=Jan,...,12=Dec.
 		 */
-		if (mint == 01) {
+		if (mint == 1) {
 			mint = 11;
-		} else if (mint == 02){
+		} else if (mint == 2){
 			mint = 12;
 		} else {
 			mint = mint - 2;
 		}
 		
 		// We will also need to manipulate year to be the previous year if m = Jan or Feb
-		if (Yint == 11 || Yint == 12 && Yint != 00) {
+		if (mint == 11 || mint == 12 && Yint != 00) {
 			Yint = Yint - 1;
-		} else if (Yint == 11 || Yint == 12){
+		} else if (mint == 11 || mint == 12){
 			Yint = 99;
 		}
 		
@@ -166,8 +152,15 @@ public class WeeklySales implements Serializable {
 		Double mdouble = Double.valueOf(mint);
 		Double mfix = 2.6 * mdouble - 0.2;
 		int mfixed = mfix.intValue();
+		int Yfixed = Yint/4;
+		int Cfixed = Cint/4;
 		
-		W = (dint + mfixed - 2*Cint + Yint + Yint/4 + Cint/4) % 7;
+		W = (dint + mfixed - 2*Cint + Yint + Yfixed + Cfixed) % 7;
+		
+		// If W ends up negative add 7
+		if (W < 0) {
+			W = W + 7;
+		}
 		
 		/*
 		   -------------------------------------------------------------------
@@ -225,9 +218,12 @@ public class WeeklySales implements Serializable {
 		// Initialize variable I probably don't need
 		long f = 0;
 		
-		// This gets the current time in string formate to parse to localdate
+		// This gets the current time in string format to parse to localdate
 		Date testdate = new Date(System.currentTimeMillis());
-		String testdate2 = String.valueOf(testdate);
+		
+		// Attempt to resolve formatting issue
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String testdate2 = dateFormat.format(testdate);
 		
 		// Parse strings to weird localdate type
 		LocalDate localdate1 = LocalDate.parse(date1);
@@ -254,13 +250,17 @@ public class WeeklySales implements Serializable {
 			PreparedStatement pst = conn.prepareStatement(createSQL); 
 
 			ResultSet rs = pst.executeQuery();
-			date = rs.getString(0);
+			
+			// Use rs.next() to make the pointer point to the first row
+			rs.next();
+			date = rs.getString(1);
 			
 			
 			pst.close();
 		} catch (Exception e) {
 			e.getCause();
 			System.out.println(e.getCause());
+			System.out.println("Your running into an exception.");
 		} finally {
 			DBConnection.close(conn);
 		} 
@@ -309,7 +309,6 @@ public class WeeklySales implements Serializable {
 			// This is where the dates will have to be input
 			PreparedStatement pst = conn.prepareStatement(createSQL); 
 			
-			// These take the date variables and cast them to the java.sql.date type
 			pst.setString(1, strDate2);
 			pst.setString(2, strDate1);
 			
