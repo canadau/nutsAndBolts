@@ -1,6 +1,7 @@
 package com.nutsandbolts.beans;
 
 import java.io.Serializable;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -104,27 +105,28 @@ public class Cart implements Serializable {
 	}
 	
 	// To calculate the subtotal 
-	public double subTotal(List<Products> list) {
+	public String subTotal(List<Products> list) {
 		double subtotal = 0;
-		DecimalFormat df = new DecimalFormat("#.00");
+		DecimalFormat df = new DecimalFormat("0.00");
 		
 		for(Products pro : list) {
 			subtotal = pro.getPrice() * pro.getNewQty() + subtotal;
 		}		
-		return Double.valueOf(df.format(subtotal));
+		return df.format(subtotal);
 	}
 	
 	// I am using Ohio tax rate 7.5
-	public double tax(List<Products> list) {
-		DecimalFormat df = new DecimalFormat("#.00");
-		return Double.valueOf(df.format(subTotal(list) * .075));
+	public String tax(List<Products> list) {
+		DecimalFormat df = new DecimalFormat("0.00");
+		df.setRoundingMode(RoundingMode.DOWN);
+		return df.format(Double.valueOf(subTotal(list)) * (0.075));
 	}
 	
 	//Calculate the total
-	public double totalCart(List<Products> list) {
-		DecimalFormat df = new DecimalFormat("#.00");
+	public String totalCart(List<Products> list) {
+		DecimalFormat df = new DecimalFormat("0.00");
 		
-		return Double.valueOf(df.format(subTotal(list) + tax(list)));
+		return df.format(Double.valueOf(subTotal(list)) + Double.valueOf(tax(list)));
 	}
 	
 	// Increase item qty

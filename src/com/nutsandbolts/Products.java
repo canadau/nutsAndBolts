@@ -2,7 +2,6 @@ package com.nutsandbolts;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import com.nutsandbolts.tools.DBConnection;
 
 
@@ -127,7 +126,7 @@ public class Products {
 			pst.setString(3, description);
 			pst.setDouble(4, price);
 
-			ResultSet rSet = pst.executeQuery();
+			pst.executeQuery();
 
 
 		} catch (Exception e) {
