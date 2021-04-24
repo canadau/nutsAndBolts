@@ -67,43 +67,48 @@
 
 				<div class="orderDisplay">
 
-					<p:repeat var="order" value="#{ordersHistory.ordersNumbers()}">
-						<div class="products_history">
+					<p:repeat var="order" value="#{ordersHistory.ordersNumbers().entrySet().toArray()}">
 						
-						<h3 class="order_number">Order#: #{order}</h3>
+						<div class="products_history">						
+						 <p class="order_number"><span class="inNumbers">Order#:</span> #{order.getKey()} | 
+						 <span class="inNumbers">Date: </span>#{order.getValue().get(0).getDateTime()} | 
+						 <span class="inNumbers">Total: </span>$#{ordersHistory.totalCart(order.getValue())} 
+						 <span class="seemore">Click to see details...</span></p>
 						
-						
-						<p:dataTable var="product" value="#{ordersHistory.productsList(order)}">
-							<p:column headerText="Name">
-								<h:outputText value="#{product.getName()}" />
-							</p:column>
-							
-							<p:column headerText="Price">
-								<h:outputText value="$#{product.getPrice()}" />
-							</p:column>
-							
-							<p:column headerText="Quantity">
-								<h:outputText value="#{product.getQty()}" />
-							</p:column>
-						
-						</p:dataTable>
+						<div class="table">
+							<p:dataTable var="product" value="#{order.getValue()}">
+								<p:column headerText="Name">
+									<h:outputText value="#{product.getName()}" />
+								</p:column>
+								
+								<p:column headerText="Price">
+									<h:outputText value="$#{product.getPrice()}" />
+								</p:column>
+								
+								<p:column headerText="Quantity">
+									<h:outputText value="#{product.getQty()}" />
+								</p:column>						
+							</p:dataTable>
 						
 						
 						<br />
-						<p class="numbers_history"><span class="inNumbers">Quantity:</span>
-							#{ordersHistory.quantity(ordersHistory.getProductsList())}
-							item(s)</p>
-						<p class="numbers_history"><span class="inNumbers">Sub-total:</span>
-							$#{ordersHistory.subTotal(ordersHistory.getProductsList())}</p>
-						<p class="numbers_history"><span class="inNumbers">Tax:</span>
-							$#{ordersHistory.tax(ordersHistory.getProductsList())}</p>
-						<p class="numbers_history"><span class="inNumbers">Total:</span>
-							$#{ordersHistory.totalCart(ordersHistory.getProductsList())}</p>
-							
-						<h3 class="order_number">Date: #{ordersHistory.getDatetime(ordersHistory.getProductsList())}</h3>
+							<p class="numbers_history"><span class="inNumbers">Quantity:</span>
+								#{ordersHistory.quantity(order.getValue())}
+								item(s)</p>
+							<p class="numbers_history"><span class="inNumbers">Sub-total:</span>
+								$#{ordersHistory.subTotal(order.getValue())}</p>
+							<p class="numbers_history"><span class="inNumbers">Tax:</span>
+								$#{ordersHistory.tax(order.getValue())}</p>
+							<p class="numbers_history"><span class="inNumbers">Total:</span>
+								$#{ordersHistory.totalCart(order.getValue())}</p>
+								
+							<h3 class="order_number">Date: #{ordersHistory.getDatetime(order.getValue())}</h3>
 						
 						<br />
 						</div>
+						
+						</div>
+						
 					</p:repeat>
 				</div>
 			</div>
@@ -115,6 +120,19 @@
 	<div class="footer">
 		<h3>Copyright© 2021 Purple Team</h3>
 	</div>
+	<script>
+		$(function(){
+
+			$(".order_number").click(
+				function(){
+					var location = $(this).parent();
+					$(".table",location).slideToggle("slow");
+				}		
+			)
+		}
+		)
+	
+	</script>
 
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

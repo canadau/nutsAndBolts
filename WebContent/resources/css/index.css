@@ -504,6 +504,7 @@ width:10%;
 .order_number{
 	margin-left: 30px;
 	padding: 15px;
+	cursor: pointer;
 }
 .product_details{
 	margin-left: 50px;
@@ -520,4 +521,11 @@ width:10%;
 }
 .inNumbers {
 	font-weight: bold;
+}
+.table {
+	display: none;
+}
+.seemore {
+	font-weight: bold;
+	color: green;
 }

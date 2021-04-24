@@ -1,11 +1,13 @@
 package com.nutsandbolts.beans;
 
 import java.io.Serializable;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -24,12 +26,14 @@ public class OrdersHistory implements Serializable {
 	
 	public List<String> orderNumberList = new ArrayList<>();
 	public List<String> dateList = new ArrayList<>();
-	public List<Products> productsList = new ArrayList<>();
+	public List<Products> productsList;
 	public Products products;
+	
+	public HashMap<String, List<Products>> mapProducts = new HashMap<>();
 
 
 	// Method to get all the order numbers associate with the user name
-	public List<String> ordersNumbers() {
+	public HashMap<String, List<Products>> ordersNumbers() {
 
 		orderNumberList.clear();
 		PreparedStatement pst = null;
@@ -46,15 +50,16 @@ public class OrdersHistory implements Serializable {
 			rSet = pst.executeQuery();
 			
 			while (rSet.next()) {
-				orderNumberList.add(rSet.getString(1));				
-				
+				orderNumberList.add(rSet.getString(1));	
+				productsList = new ArrayList<>();
+				mapProducts.put(rSet.getString(1), productsList(rSet.getString(1)));
 			}
 			//System.out.println(orderNumberList);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 
-		return orderNumberList;
+		return mapProducts;
 	}
 	
 	// Method to get all the products that associate with the order number
@@ -73,9 +78,10 @@ public class OrdersHistory implements Serializable {
 			pst = conn.prepareStatement(sqlQuery);
 			pst.setString(1, orderNumber);
 			rSet = pst.executeQuery();
-			
+			productsList = new ArrayList<>();
 			while (rSet.next()) {
 				products = new Products(rSet.getInt(1), rSet.getString(2), rSet.getDouble(3), rSet.getInt(4), rSet.getString(5));
+				
 				productsList.add(products);
 			}
 			//System.out.println(productsList);
@@ -97,32 +103,41 @@ public class OrdersHistory implements Serializable {
 	}
 	
 	// Calculate the sub-total for a single order number
-	public double subTotal(List<Products> list) {
+	public String subTotal(List<Products> list) {
 		double subtotal = 0;
-		DecimalFormat df = new DecimalFormat("#.00");
+		DecimalFormat df = new DecimalFormat("0.00");
 		
 		for(Products pro : list) {
 			subtotal = pro.getPrice() * pro.getQty() + subtotal;
 		}		
-		return Double.valueOf(df.format(subtotal));
+		return df.format(subtotal);
 	}
 	
 	// Ohio tax rate 7.5 -- this method calculates the tax
-	public double tax(List<Products> list) {
-		DecimalFormat df = new DecimalFormat("#.00");
-		return Double.valueOf(df.format(subTotal(list) * .075));
+	public String tax(List<Products> list) {
+		DecimalFormat df = new DecimalFormat("0.00");
+		df.setRoundingMode(RoundingMode.DOWN);
+		double sub = Double.valueOf(subTotal(list));
+		return df.format(sub * 0.075);
 	}
 	
 	// Calculate the total for a single order number
-	public double totalCart(List<Products> list) {
-		DecimalFormat df = new DecimalFormat("#.00");
+	public String totalCart(List<Products> list) {
+		DecimalFormat df = new DecimalFormat("0.00");
 		
-		return Double.valueOf(df.format(subTotal(list) + tax(list)));
+		return df.format(Double.valueOf(subTotal(list)) + Double.valueOf(tax(list)));
 	}
 	
 	// to get the date time of an order
 	public String getDatetime(List<Products> list) {		
 		return list.get(0).getDateTime().substring(0,16);
+	}
+	
+	// Method to get the date of the order
+	public String getDateTime(String ordeNumber) {
+		
+		String time = productsList(ordeNumber).get(0).getDateTime();
+		return time.substring(0,16);
 	}
 	
 	// Getter and setter start here
@@ -149,6 +164,15 @@ public class OrdersHistory implements Serializable {
 	public void setProducts(Products products) {
 		this.products = products;
 	}
+
+	public HashMap<String, List<Products>> getMapProducts() {
+		return mapProducts;
+	}
+
+	public void setMapProducts(HashMap<String, List<Products>> mapProducts) {
+		this.mapProducts = mapProducts;
+	}
+	
 	// Getter and setter ends here
 	
 	
