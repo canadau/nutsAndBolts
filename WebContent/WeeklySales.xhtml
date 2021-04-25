@@ -45,54 +45,122 @@
 		
 	</div>
 	<p:growl id="growl" showDetail="true" life="2000" redisplay="true" />
-		<div class="home_products">
+		<div class="weeklySales">
+		<h1 class="weeklySales_header">Weekly Sales</h1>
+			<br />
+			<hr style="width: 70%; margin: auto !important" />
+			<br />
 		
-		<ui:repeat var="order" value="#{weeklySales.getOrdersFromDB(0)}">
-			 
-			<div class="contener_row">
-										
-	        		<h:form id="form">
-	        		<div class="card">
-						  <h3 class="name">#{order.name}</h3>
-						  <h6 class="sku">sku##{order.sku}</h6>
-						  <p class="price">$#{order.price}</p>						  
-						  <p class="quantity">#{order.qty}</p>
-						<div class="card_button"> 
-						<p:commandButton ajax="true" update="growl ico" value="Push to run code" actionListener="#{weeklySales.getOrdersFromDB(0)}"/>
-						</div>  
-					</div>		
-					</h:form>					
-									
-				</div>	
-						
-			</ui:repeat>		
+		<h:form>
+		<div class="weekly_select">
+			<h3>Please select a week</h3>
+			<p:selectOneMenu id="group" value="#{selectOneMenuView.countryGroup}">
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+                    <f:selectItems value="#{selectOneMenuView.countriesGroup}"/>
+                </p:selectOneMenu>
 		</div>
-	
-<!--  Keeping this for reference
-	<p:growl id="growl" showDetail="true" life="2000" redisplay="true" />
-		<div class="home_products">
-		
-		<ui:repeat var="prod" value="#{products.getProductFromDB()}">
-			 
-			<div class="contener_row">
-										
-	        		<h:form id="form">
-	        		<div class="card">
-						  <h3 class="name">#{prod.name}</h3>
-						  <h6 class="sku">sku##{prod.sku}</h6>
-						  <p class="price">$#{prod.price}</p>						  
-						  <p class="description">#{prod.description}</p>
-						<div class="card_button"> 
-						<p:commandButton ajax="true" update="growl ico" value="#{prod.qty > 0? 'Add to Cart':'Out of Stock'}" actionListener="#{cart.addToCart2(prod)}" disabled="#{prod.qty > 0? false:true}"/>
-						</div>  
-					</div>		
-					</h:form>					
-									
-				</div>	
-						
-			</ui:repeat>		
+			<div class="sales_tables">
+			<p:dataTable >
+				<f:facet name="header">
+            		Monday
+        		</f:facet>
+				<p:column headerText="Name">
+					<h:outputText value="call products name here" />
+				</p:column>
+				<p:column headerText="Quantity">
+					<h:outputText value="call products quantities here" />
+				</p:column>
+			</p:dataTable>
+			<br /><br />
+			<p:dataTable >
+				<f:facet name="header">
+            		Tusday
+        		</f:facet>
+				<p:column headerText="Name">
+					<h:outputText value="call products name here" />
+				</p:column>
+				<p:column headerText="Quantity">
+					<h:outputText value="call products quantities here" />
+				</p:column>
+			</p:dataTable>
+			<br /><br />
+			<p:dataTable >
+				<f:facet name="header">
+            		Wedensday
+        		</f:facet>
+				<p:column headerText="Name">
+					<h:outputText value="call products name here" />
+				</p:column>
+				<p:column headerText="Quantity">
+					<h:outputText value="call products quantities here" />
+				</p:column>
+			</p:dataTable>
+			<br /><br />
+			<p:dataTable >
+				<f:facet name="header">
+            		Thursday
+        		</f:facet>
+				<p:column headerText="Name">
+					<h:outputText value="call products name here" />
+				</p:column>
+				<p:column headerText="Quantity">
+					<h:outputText value="call products quantities here" />
+				</p:column>
+			</p:dataTable>
+			<br /><br />
+			<p:dataTable >
+				<f:facet name="header">
+            		Friday
+        		</f:facet>
+				<p:column headerText="Name">
+					<h:outputText value="call products name here" />
+				</p:column>
+				<p:column headerText="Quantity">
+					<h:outputText value="call products quantities here" />
+				</p:column>
+			</p:dataTable>
+			<br /><br />
+			<p:dataTable >
+				<f:facet name="header">
+            		Saturday
+        		</f:facet>
+				<p:column headerText="Name">
+					<h:outputText value="call products name here" />
+				</p:column>
+				<p:column headerText="Quantity">
+					<h:outputText value="call products quantities here" />
+				</p:column>
+			</p:dataTable>
+			<br /><br />
+			<p:dataTable >
+				<f:facet name="header">
+            		Sunday
+        		</f:facet>
+				<p:column headerText="Name">
+					<h:outputText value="call products name here" />
+				</p:column>
+				<p:column headerText="Quantity">
+					<h:outputText value="call products quantities here" />
+				</p:column>
+			</p:dataTable>
+			<br /><br />
+			<p:dataTable >
+				<f:facet name="header">
+            		Total
+        		</f:facet>
+				<p:column headerText="Name">
+					<h:outputText value="call products name here" />
+				</p:column>
+				<p:column headerText="Quantity">
+					<h:outputText value="call products quantities here" />
+				</p:column>
+			</p:dataTable>
+			
+			</div>
+			</h:form>
+			
 		</div>
-	-->
+
 
 	<div class="footer">
 		<h3>Copyright© 2021 Purple Team</h3>

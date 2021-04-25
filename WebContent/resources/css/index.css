@@ -529,3 +529,22 @@ width:10%;
 	font-weight: bold;
 	color: green;
 }
+ /*weekly sales page begins here*/
+.weeklySales {
+	min-height: 80vh;
+	max-width: 1500px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #f2f2f2;
+}
+.weeklySales_header {
+	text-align: center;
+	padding: 20px;
+}
+.sales_tables {
+	
+}
+.weekly_select {
+	text-align: center;
+	padding: 20px;
+}
