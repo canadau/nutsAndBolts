@@ -15,15 +15,21 @@ public class Products {
 	private String associateUser;
 	private String orderNumber;
 	private String dateTime;
+	private String date;
+	private int day;
+	private int week;
+	private int id;
+	private String picture;
 	
 	public Products() {}
-	public Products(int sku, String name, String description, double price, int qty) {
+	public Products(int sku, String name, String description, double price, int qty, String picture) {
 		super();
 		this.sku = sku;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.qty = qty;
+		this.picture = picture;
 	}
 	
 	// For cart and receipt pages
@@ -47,10 +53,22 @@ public class Products {
 		this.dateTime = dateTime;
 	}
 	
+	// For weekly sales page
+	public Products(int day, int week, String name,Double price, int qty, String date, int id) {
+		super();
+		this.day = day;
+		this.week = week;
+		this.name = name;
+		this.price = price;
+		this.qty = qty;
+		this.date = date;	
+		this.id = id;
+	}
+	
 	public int getSku() {
 		return sku;
 	}
-
+	
 	public void setSku(int sku) {
 		this.sku = sku;
 	}
@@ -111,6 +129,42 @@ public class Products {
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
+	
+	public String getDate() {
+		return date;
+	}
+	public void setString(String date) {
+		this.date = date;
+	}
+	
+	public int getDay() {
+		return day;
+	}
+	public void setDay(int day) {
+		this.day = day;
+	}
+		
+	public int getWeek() {
+		return week;
+	}
+	public void setWeek(int week) {
+		this.week = week;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+	
 	public void addProduct(int sku, String name, String description, double price ) {
 
 		try {

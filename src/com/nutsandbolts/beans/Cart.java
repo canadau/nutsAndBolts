@@ -232,7 +232,8 @@ public class Cart implements Serializable {
 				if (SessionManagement.getUserId() != null) associateUser = SessionManagement.getUserId();
 				
 				try {
-					String sqlQuery = "INSERT INTO orders (associateUser, orderNumber,sku,name,price,qty, dateTime) VALUES(?,?,?,?,?,?,getdate())";
+					String sqlQuery = "INSERT INTO orders (associateUser, orderNumber,sku,name,price,qty, dateTime) "
+							+ "VALUES(?,?,?,?,?,?, GETDATE()-0.2)";
 					conn = DBConnection.getInstance().getConnection();
 					pst = conn.prepareStatement(sqlQuery);
 					

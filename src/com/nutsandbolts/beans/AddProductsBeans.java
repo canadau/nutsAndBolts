@@ -17,6 +17,7 @@ public class AddProductsBeans implements Serializable {
 	private String fDescription;
 	private double fPrice;
 	private int Quantity;
+	private String picture;
 	
 	public AddProductsBeans() {}
 
@@ -60,12 +61,20 @@ public class AddProductsBeans implements Serializable {
 		this.Quantity = Quantity;
 	}
 	
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
 	public void addProductToDB( ) {
 		Connection conn = null;
 		
 		try {
 			
-			String createSQL = "INSERT INTO products (sku, name, description, price, qty) VALUES (?, ?, ?, ?, ?)";
+			String createSQL = "INSERT INTO products (sku, name, description, price, qty, picture) VALUES (?, ?, ?, ?, ?, ?)";
 			DBConnection inst = DBConnection.getInstance();
 			conn = inst.getConnection();
 
@@ -75,6 +84,7 @@ public class AddProductsBeans implements Serializable {
 			pst.setString(3, fDescription);
 			pst.setDouble(4, fPrice);
 			pst.setInt(5, Quantity);
+			pst.setString(6, picture);
 
 			int rs = pst.executeUpdate();
 			

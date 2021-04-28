@@ -20,19 +20,13 @@
 <h:body id="body">
 
 	<div class="header">
-		
+		<div class="regular">
 			<div class="logo">
 				<a id="logo" href="index.xhtml">NUTS AND BOLTS</a>
 			</div>
 			<div class="header_nav">
 				<a class="flex_items" href="index.xhtml">Home</a>
 				<a class="flex_items" href="products.xhtml">Products</a>
-								
-				<c:if test="#{employeelogin.employee.userName != null}">
-					<a class="flex_items" href="addProduct.xhtml">Add Products</a>
-					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>	
-					<a class="flex_items" href="registerEmployee.xhtml">Add Employees</a>		       
-			    </c:if>
 				
 				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
 				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
@@ -40,12 +34,22 @@
 			<div class="right_nav">
 				<a>Welcome <span class="welcome_name">#{employeelogin.session.getAttribute("name") != null? employeelogin.session.getAttribute("name") : 'Guest'} </span></a>
 				<a href="login.xhtml">#{employeelogin.session.getAttribute("name") != null ? 'Sign Out' : 'Sign In'}</a>
+				
 				<c:if test="#{employeelogin.employee.userName != null or employeelogin.customer.firstName != null }">
 				<a href="orderHistory.xhtml">Orders</a>
 				</c:if>
-				<h:form id="ico"><a class="pi pi-shopping-cart" id="shopping_cart" href="shoppingCart.xhtml">#{cart.quantity(cart.getProductsListNoDub())}</a></h:form>
+				
+				<h:form id="ico"><a class="pi pi-shopping-cart" id="shopping_cart" href="shoppingCart.xhtml">#{cart.quantity(cart.getProductsListNoDub())}</a></h:form> 
 			</div>
-		
+		</div>
+			<c:if test="#{employeelogin.employee.userName != null}">
+				<div class="management">
+					<a class="flex_items" href="addProduct.xhtml">Add Products</a>
+					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>
+					<a class="flex_items" href="registerEmployee.xhtml">Add Employees</a>	
+					<a class="flex_items" href="WeeklySales.xhtml">Weekly Sales</a>	
+				</div>							       
+			</c:if>			
 	</div>
 
 	<div class="home_addProduct">			
@@ -69,7 +73,10 @@
 					
 				<h:outputLabel for="description">Description:</h:outputLabel>
 				<h:inputTextarea style="width: 300px; height: 150px;" id="description" value="#{addProductB.description}" required = "true" requiredMessage = "Description is required"></h:inputTextarea><br/><br/>
-
+				
+				<h:outputLabel for="picture">URL:</h:outputLabel>
+				<h:inputTextarea style="width: 300px; height: 100px;" id="picture" value="#{addProductB.picture}" required = "true" requiredMessage = "picture is required"></h:inputTextarea><br/><br/>
+				
 				<h:outputLabel for="quantity">Quantity:</h:outputLabel>
 				<h:inputText  id="quantity" value="#{addProductB.quantity}" required = "false" requiredMessage = "Quantity is required"></h:inputText><br/><br/>
 				

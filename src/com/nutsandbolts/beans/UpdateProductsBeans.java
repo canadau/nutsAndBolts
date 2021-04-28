@@ -20,6 +20,7 @@ public class UpdateProductsBeans implements Serializable {
 	private String fDescription;
 	private double fPrice;
 	private int fQuantity;
+	private String picture;
 	
 	public UpdateProductsBeans() {}
 
@@ -72,11 +73,21 @@ public class UpdateProductsBeans implements Serializable {
 		this.fQuantity = fQuantity;
 	}
 
+	public String getPicture() {
+		return picture;
+	}
+
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+
 	public void getProductsFromDB(int skuNumber) {
 		Connection conn = null; 
 		int count = 0;
 		try {
-			String createSQL = "SELECT sku, name, description, price, qty FROM products WHERE sku = ?;";
+			String createSQL = "SELECT sku, name, description, price, qty, picture FROM products WHERE sku = ?;";
 			DBConnection inst = DBConnection.getInstance();
 			conn = inst.getConnection();
 
@@ -90,6 +101,7 @@ public class UpdateProductsBeans implements Serializable {
 				fDescription = rs.getString(3);
 				fPrice = rs.getDouble(4);
 				fQuantity = rs.getInt(5);
+				picture = rs.getString(6); // null
 				count++;
 			}
 			if (count > 0) {
@@ -105,11 +117,11 @@ public class UpdateProductsBeans implements Serializable {
 			DBConnection.close(conn);
 		} 
 	}
-	public void updateProductsINDB(int sku, String name, Double price, String description , int fQuantity) {
+	public void updateProductsINDB(int sku, String name, Double price, String description , int fQuantity, String picture) {
 		Connection conn = null; 
 
 		try {
-			String createSQL = "UPDATE products SET sku = ?, name = ?, description = ?, price = ?, qty = ? WHERE sku = ?;";
+			String createSQL = "UPDATE products SET sku = ?, name = ?, description = ?, price = ?, qty = ?, picture = ?  WHERE sku = ?;";
 			DBConnection inst = DBConnection.getInstance();
 			conn = inst.getConnection();
 
@@ -119,8 +131,9 @@ public class UpdateProductsBeans implements Serializable {
 			pst.setString(3, description);
 			pst.setDouble(4, price);
 			pst.setInt(5, fQuantity);
-			pst.setInt(6, sku);
-
+			pst.setString(6, picture);
+			pst.setInt(7, sku);
+			
 			int rs = pst.executeUpdate();
 			if (rs > 0) {
 				ShowMessages.showSuccessMessage("The product was updated successfully");

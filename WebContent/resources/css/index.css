@@ -19,8 +19,11 @@
 }
 
 /* Header starts here */
-
-.header{
+.header {
+	position: sticky;
+	top: 0;
+}
+.regular{
 	min-height: 100px;
 	background-color: #F8F9FD;
 	display: flex;
@@ -30,7 +33,15 @@
 	align-items: center;
 	justify-content: space-between;
 	z-index: 1;
+}
 
+.management {
+	min-height: 50px;
+	background-color: #F8F9FD;
+	display: flex;
+	position: -webkit-sticky;
+	align-items: center;
+	justify-content: center;
 }
 
 .header a{
@@ -532,6 +543,7 @@ width:10%;
  /*weekly sales page begins here*/
 .weeklySales {
 	min-height: 80vh;
+	min-width: 90vh;
 	max-width: 1500px;
 	margin-left: auto;
 	margin-right: auto;

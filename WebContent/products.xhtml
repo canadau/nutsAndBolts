@@ -17,19 +17,13 @@
 <h:body id="body">
 
 	<div class="header">
-		
+		<div class="regular">
 			<div class="logo">
 				<a id="logo" href="index.xhtml">NUTS AND BOLTS</a>
 			</div>
 			<div class="header_nav">
 				<a class="flex_items" href="index.xhtml">Home</a>
 				<a class="flex_items" href="products.xhtml">Products</a>
-								
-				<c:if test="#{employeelogin.employee.userName != null}">
-					<a class="flex_items" href="addProduct.xhtml">Add Products</a>
-					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>	
-					<a class="flex_items" href="registerEmployee.xhtml">Add Employees</a>		       
-			    </c:if>
 				
 				<a class="flex_items" href="contactus.xhtml">Contact Us</a>	
 				<a class="flex_items" href="FAQ.xhtml">FAQ</a>				
@@ -37,12 +31,22 @@
 			<div class="right_nav">
 				<a>Welcome <span class="welcome_name">#{employeelogin.session.getAttribute("name") != null? employeelogin.session.getAttribute("name") : 'Guest'} </span></a>
 				<a href="login.xhtml">#{employeelogin.session.getAttribute("name") != null ? 'Sign Out' : 'Sign In'}</a>
+				
 				<c:if test="#{employeelogin.employee.userName != null or employeelogin.customer.firstName != null }">
 				<a href="orderHistory.xhtml">Orders</a>
 				</c:if>
+				
 				<h:form id="ico"><a class="pi pi-shopping-cart" id="shopping_cart" href="shoppingCart.xhtml">#{cart.quantity(cart.getProductsListNoDub())}</a></h:form> 
 			</div>
-		
+		</div>
+			<c:if test="#{employeelogin.employee.userName != null}">
+				<div class="management">
+					<a class="flex_items" href="addProduct.xhtml">Add Products</a>
+					<a class="flex_items" href="updateProduct.xhtml">Update Products</a>
+					<a class="flex_items" href="registerEmployee.xhtml">Add Employees</a>	
+					<a class="flex_items" href="WeeklySales.xhtml">Weekly Sales</a>	
+				</div>							       
+			</c:if>			
 	</div>
 
 	<p:growl id="growl" showDetail="true" life="2000" redisplay="true" />
@@ -56,6 +60,7 @@
 	        		<div class="card">
 						  <h3 class="name">#{prod.name}</h3>
 						  <h6 class="sku">sku##{prod.sku}</h6>
+						  <p:graphicImage value="#{prod.picture}" height="100px" width="100px"></p:graphicImage>
 						  <p class="price">$#{prod.price}</p>						  
 						  <p class="description">#{prod.description}</p>
 						<div class="card_button"> 
