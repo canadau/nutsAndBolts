@@ -308,6 +308,13 @@ a:active {
 	margin: 10px;
 }
 
+div.card .picture {
+	display: block;
+	margin-left: auto;
+ 	margin-right: auto;
+ 	padding: 15px;
+}
+
 .name {
 	margin: 10px;
 }
@@ -374,7 +381,7 @@ a:active {
 	text-align: center; 
 	font-family: arial;
 	width: 400px;
-	height:350px;
+	height:250px;
 	
 }
 

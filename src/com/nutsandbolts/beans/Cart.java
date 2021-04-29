@@ -63,7 +63,7 @@ public class Cart implements Serializable {
 		
 		} else if (existIndex == -1) {
 
-			products2 = new Products(pro.getSku(),pro.getName(),pro.getDescription(),pro.getPrice(),pro.getQty(),pro.getPicture(), 1);
+			products2 = new Products(pro.getSku(),pro.getName(),pro.getDescription(),pro.getPrice(),pro.getQty(), 1, pro.getPicture());
 			productsListNoDub.add(products2);
 			ShowMessages.addMessage(FacesMessage.SEVERITY_INFO, "Info Message", "The product was added to the cart");
 			System.out.println(pro.getName() + " was added");
