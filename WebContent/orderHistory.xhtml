@@ -81,7 +81,9 @@
 								</p:column>
 								
 								<p:column headerText="Price">
-									<h:outputText value="$#{product.getPrice()}" />
+									$<h:outputText value="#{product.getPrice() }" >
+										<f:convertNumber pattern="#0.00" />
+									</h:outputText>
 								</p:column>
 								
 								<p:column headerText="Quantity">
