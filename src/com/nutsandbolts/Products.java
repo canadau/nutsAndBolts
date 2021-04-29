@@ -33,7 +33,7 @@ public class Products {
 	}
 	
 	// For cart and receipt pages
-	public Products(int sku, String name, String description, double price, int qty, int newQty) {
+	public Products(int sku, String name, String description, double price, int qty, int newQty, String picture) {
 		super();
 		this.sku = sku;
 		this.name = name;
@@ -41,6 +41,7 @@ public class Products {
 		this.price = price;
 		this.qty = qty;
 		this.newQty = newQty;
+		this.picture = picture;
 	}
 	
 	// For order history page
