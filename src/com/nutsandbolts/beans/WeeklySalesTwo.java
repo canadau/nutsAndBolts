@@ -146,6 +146,7 @@ public class WeeklySalesTwo implements Serializable {
 		double totalValue = 0;
 		DecimalFormat df = new DecimalFormat("0.00");
 		df.setRoundingMode(RoundingMode.DOWN);
+		
 		for (Products pro : days) {
 			totalValue = (pro.getPrice() * pro.getQty()) + totalValue;
 		}
@@ -167,9 +168,11 @@ public class WeeklySalesTwo implements Serializable {
 		return quantities;
 	}
 	
-	public Double totalSales() {
+	public String totalSales() {
 		double total = 0;
-
+		DecimalFormat df = new DecimalFormat("0.00");
+		df.setRoundingMode(RoundingMode.DOWN);
+		
 		total = Double.parseDouble(total(sunday)) + total;
 		total = Double.parseDouble(total(monday)) + total;
 		total = Double.parseDouble(total(tusday)) + total;
@@ -178,7 +181,7 @@ public class WeeklySalesTwo implements Serializable {
 		total = Double.parseDouble(total(friday)) + total;
 		total = Double.parseDouble(total(saturday)) + total;
 
-		return total;
+		return df.format(total);
 	}
 	
 	public int itemQuantity(List<Products> products) {

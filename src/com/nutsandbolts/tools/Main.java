@@ -4,15 +4,16 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import com.nutsandbolts.Products;
+import com.nutsandbolts.beans.Cart;
 import com.nutsandbolts.beans.OrdersHistory;
 import com.nutsandbolts.beans.WeeklySales;
 import com.nutsandbolts.beans.WeeklySalesTwo;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 				
-		//Cart cart = new Cart();
+		Cart cart = new Cart();
 		//Date date = null;
 		//System.out.println(UUID.randomUUID().toString().substring(19));
 		OrdersHistory ordersHistory = new OrdersHistory();
@@ -58,6 +59,7 @@ public class Main {
 		/*
 		 * for (int in : sale.weeks()) { System.out.println(in); }
 		 */
+		
 	}
 
 }

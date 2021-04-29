@@ -54,6 +54,7 @@
 	<div class="home">
 	
 	<h:form id="form">
+
 	<p:growl id="growl" showDetail="true" life="2000" redisplay="true" />
 		<div class="view_cart">		
 			<div class="view_cart_left">			
@@ -95,7 +96,8 @@
 				</p:outputLabel>
 				<br></br> <br></br>
 				
-				<p:commandButton  value="CHECK OUT" disabled="#{cart.productsList().size()>0? false:true}" action="#{cart.viewReceipt()}"/>
+				<h:inputHidden id="x" value="#{cart.date}" />
+				<p:commandButton onclick="timeJava()" value="CHECK OUT" disabled="#{cart.productsList().size()>0? false:true}" action="#{cart.viewReceipt(cart.date)}"/>
 				<br></br> <br></br>				
 				
 				<p:commandButton class="cart_removeAll" ajax="true" update="form"  value="CLEAR CART" actionListener="#{cart.clearAll()}" disabled="#{cart.productsList().size()>0? false:true}" />
@@ -110,9 +112,18 @@
 	<div class="footer">
 		<h3>Copyright© 2021 Purple Team</h3>
 	</div>
-	
+	<script>
+	function timeJava() {
+		  //var t = dateFormat(new Date(), 'm-d-y h:i:s');
+		  var m = moment().format("MM-DD-YYYY HH:mm:ss");
+		  console.log(m);
+		  document.getElementById("form:x").value = m;
+	  }
+	</script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
+	<script src='https://momentjs.com/downloads/moment.js'></script>
+	<script src='https://momentjs.com/downloads/moment-with-locales.js'></script>
 	
 </h:body>
 </html>

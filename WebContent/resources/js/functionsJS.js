@@ -65,3 +65,11 @@ function showMessage(){
           	console.log(i);
           }
       }
+	  
+	  /*function timeJava() {
+		  //var t = Date();
+		  var m = moment().format("YYYY-DD-MM hh:mm:ss");
+		  console.log(t);
+		  document.getElementById("formId:x").value = m;
+	  }*/
+	  

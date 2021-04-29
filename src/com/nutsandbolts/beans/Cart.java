@@ -18,6 +18,7 @@ import com.nutsandbolts.tools.DBConnection;
 import com.nutsandbolts.tools.SessionManagement;
 import com.nutsandbolts.tools.ShowMessages;
 
+
 // ApplicationScoped Java Class "It lasts as long as the app is running on AWS server"
 @ManagedBean(name = "cart")
 @SessionScoped
@@ -27,8 +28,7 @@ public class Cart implements Serializable {
 
 	public Cart() {}
 	
-	//
-	//public int isInStock;
+	public String date;
 	
 	// A product template
 	public Products products2 = null;
@@ -167,11 +167,11 @@ public class Cart implements Serializable {
 	}
 	
 	// A method to create a receipt and clear the cart
-	public String viewReceipt() {
+	public String viewReceipt(String date) {
 		orderNumber();		
 		productsReceipt.clear();
 		productsReceipt.addAll(productsListNoDub);
-		pushProductsToDB(productsReceipt);
+		pushProductsToDB(productsReceipt, date);
 		reduceInventory(productsReceipt);
 		clearAll();
 		
@@ -224,7 +224,7 @@ public class Cart implements Serializable {
 	}
 	
 	// push a list of products from the cart to the database after buying
-			public void pushProductsToDB(List<Products> products) {
+			public void pushProductsToDB(List<Products> products, String date) {
 				PreparedStatement pst = null;
 				Connection conn = null;
 				String associateUser = "guest";
@@ -233,7 +233,7 @@ public class Cart implements Serializable {
 				
 				try {
 					String sqlQuery = "INSERT INTO orders (associateUser, orderNumber,sku,name,price,qty, dateTime) "
-							+ "VALUES(?,?,?,?,?,?, GETDATE()-0.2)";
+							+ "VALUES(?,?,?,?,?,?, ?)";
 					conn = DBConnection.getInstance().getConnection();
 					pst = conn.prepareStatement(sqlQuery);
 					
@@ -244,6 +244,7 @@ public class Cart implements Serializable {
 						pst.setString(4, product.getName());
 						pst.setDouble(5, product.getPrice());
 						pst.setInt(6, product.getNewQty());
+						pst.setString(7, date);
 						
 						pst.execute();
 					}
@@ -253,4 +254,16 @@ public class Cart implements Serializable {
 				}
 			}
 
+		public String getDate() {
+			System.out.println(date);
+			return date;
+		}
+
+		public void setDate(String date) {
+			this.date = date;
+		}
+
+			
+			
+			
 }

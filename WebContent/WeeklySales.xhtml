@@ -81,7 +81,9 @@
 					<h:outputText value="#{prod.date}" />
 				</p:column>
 				<p:column headerText="Price">
-					$<h:outputText value="#{prod.price }" />
+					$<h:outputText value="#{prod.price }" >
+					<f:convertNumber pattern="#0.00" />
+					</h:outputText>
 				</p:column>	
 				<f:facet name="footer">
         		<h:panelGroup style="display:block; text-align:right">
@@ -104,7 +106,9 @@
 					<h:outputText value="#{prod.date}" />
 				</p:column>
 				<p:column headerText="Price">
-					$<h:outputText value="#{prod.price }" />
+					$<h:outputText value="#{prod.price }" >
+					<f:convertNumber pattern="#0.00" />
+					</h:outputText>
 				</p:column>	
 				<f:facet name="footer">
         		<h:panelGroup style="display:block; text-align:right">
@@ -127,7 +131,9 @@
 					<h:outputText value="#{prod.date}" />
 				</p:column>
 				<p:column headerText="Price">
-					$<h:outputText value="#{prod.price }" />
+					$<h:outputText value="#{prod.price }" >
+					<f:convertNumber pattern="#0.00" />
+					</h:outputText>
 				</p:column>	
 				<f:facet name="footer">
         		<h:panelGroup style="display:block; text-align:right">
@@ -150,7 +156,9 @@
 					<h:outputText value="#{prod.date}" />
 				</p:column>
 				<p:column headerText="Price">
-					$<h:outputText value="#{prod.price }" />
+					$<h:outputText value="#{prod.price }" >
+					<f:convertNumber pattern="#0.00" />
+					</h:outputText>
 				</p:column>	
 				<f:facet name="footer">
         		<h:panelGroup style="display:block; text-align:right">
@@ -173,7 +181,9 @@
 					<h:outputText value="#{prod.date}" />
 				</p:column>
 				<p:column headerText="Price">
-					$<h:outputText value="#{prod.price }" />
+					$<h:outputText value="#{prod.price }" >
+					<f:convertNumber pattern="#0.00" />
+					</h:outputText>
 				</p:column>	
 				<f:facet name="footer">
         		<h:panelGroup style="display:block; text-align:right">
@@ -196,7 +206,9 @@
 					<h:outputText value="#{prod.date}" />
 				</p:column>
 				<p:column headerText="Price">
-					$<h:outputText value="#{prod.price }" />
+					$<h:outputText value="#{prod.price }" >
+					<f:convertNumber pattern="#0.00" />
+					</h:outputText>
 				</p:column>	
 				<f:facet name="footer">
         		<h:panelGroup style="display:block; text-align:right">
@@ -218,8 +230,10 @@
 				<p:column headerText="Date">
 					<h:outputText value="#{prod.date}" />
 				</p:column>
-				<p:column headerText="Price">
-					$<h:outputText value="#{prod.price }" />
+				<p:column headerText="Price">					
+					$<h:outputText value="#{prod.price }" >
+					<f:convertNumber pattern="#0.00" />
+					</h:outputText>
 				</p:column>	
 				<f:facet name="footer">
         		<h:panelGroup style="display:block; text-align:right">
