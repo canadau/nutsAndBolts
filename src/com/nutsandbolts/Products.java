@@ -20,6 +20,7 @@ public class Products {
 	private int week;
 	private int id;
 	private String picture;
+	private Boolean greatDeal;
 	
 	public Products() {}
 	public Products(int sku, String name, String description, double price, int qty, String picture) {
@@ -30,6 +31,18 @@ public class Products {
 		this.price = price;
 		this.qty = qty;
 		this.picture = picture;
+	}
+	
+	// For home page
+	public Products(int sku, String name, String description, double price, int qty, String picture, Boolean greatDeal) {
+		super();
+		this.sku = sku;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.qty = qty;
+		this.picture = picture;
+		this.greatDeal = greatDeal;
 	}
 	
 	// For cart and receipt pages
@@ -164,6 +177,14 @@ public class Products {
 	}
 	public void setPicture(String picture) {
 		this.picture = picture;
+	}
+	
+	public Boolean getGreatDeal() {
+		return greatDeal;
+	}
+	
+	public void setGreatDeal() {
+		this.greatDeal = greatDeal;
 	}
 	
 	public void addProduct(int sku, String name, String description, double price ) {

@@ -47,5 +47,28 @@ public class ProductsDB implements Serializable {
 		return products;
 	}
 	
-	
+	public List<Products> getProductFromDBIfGreatDeal() {
+		try {
+
+
+			String createSQL = "SELECT sku, name, description, price, qty, picture , greatDeal FROM products ";
+			DBConnection inst = DBConnection.getInstance();
+			Connection conn = inst.getConnection();
+
+			PreparedStatement pst = conn.prepareStatement(createSQL);	
+			
+			ResultSet rSet = pst.executeQuery();
+			
+			while (rSet.next()) {
+				product = new Products(rSet.getInt(1), rSet.getString(2), rSet.getString(3), rSet.getDouble(4), rSet.getInt(5), rSet.getString(6), rSet.getBoolean(7));
+				if (rSet.getBoolean(7)) {
+				products.add(product);
+				}
+			}
+
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return products;
+	}
 }

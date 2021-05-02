@@ -57,19 +57,31 @@
 	<div class="home">			
 		<div class="hello">
 		
-		<h:form>
-			<h1> Home Page </h1><br/>
-			<h2>Welcome to Nuts and Bolts. Here you can absolutely buy a product.**</h2>	
-			<br></br>
-			<br></br>
-			<h3>*not really</h3>	
-			<h4>*not yet</h4>
-			<br></br>	
-			<p id="savetime0">Please click the button to save the time</p><br/>		
-					
-			<h:commandButton id="submit" value="Submit" action="saveTime" />
-			
-		</h:form>
+		<p:growl id="growl" showDetail="true" life="2000" redisplay="true" />
+		<div class="home_great_deals">
+		
+		<ui:repeat var="prod" value="#{products.getProductFromDBIfGreatDeal()}">
+			 
+			<div class="contener_row">
+										
+	        		<h:form id="form">
+	        		<div class="card">
+						  <h3 class="name">#{prod.name}</h3>
+						  <h6 class="sku">sku##{prod.sku}</h6>
+						  <p:graphicImage class="picture" value="#{prod.picture}" height="100px" width="100px"></p:graphicImage>
+						  <p class="price">$#{prod.price}</p>						  
+						  <p class="description">#{prod.description}</p>
+						<div class="card_button"> 
+						<p:commandButton ajax="true" update="growl ico" value="#{prod.qty > 0? 'Add to Cart':'Out of Stock'}" actionListener="#{cart.addToCart2(prod)}" disabled="#{prod.qty > 0? false:true}"/>
+						</div>  
+					</div>		
+					</h:form>					
+									
+				</div>	
+						
+			</ui:repeat>		
+		</div>
+		
 		</div>
 		
 
