@@ -57,12 +57,22 @@
 	<div class="home">			
 		<div class="hello">
 		
+		<div>
+		<h1>
+		Nuts and Bolts Hardware Store
+		</h1>
+		<h2>
+		Great Deals:
+		</h2>
+		</div>
+		
 		<p:growl id="growl" showDetail="true" life="2000" redisplay="true" />
 		<div class="home_great_deals">
 		
 		<ui:repeat var="prod" value="#{products.getProductFromDBIfGreatDeal()}">
 			 
 			<div class="contener_row">
+					<a href="products.xhtml">
 										
 	        		<h:form id="form">
 	        		<div class="card">
@@ -71,12 +81,13 @@
 						  <p:graphicImage class="picture" value="#{prod.picture}" height="100px" width="100px"></p:graphicImage>
 						  <p class="price">$#{prod.price}</p>						  
 						  <p class="description">#{prod.description}</p>
-						<div class="card_button"> 
+						<!--  <div class="card_button"> 
 						<p:commandButton ajax="true" update="growl ico" value="#{prod.qty > 0? 'Add to Cart':'Out of Stock'}" actionListener="#{cart.addToCart2(prod)}" disabled="#{prod.qty > 0? false:true}"/>
-						</div>  
-					</div>		
+						</div>  -->
+					</div>	
+						
 					</h:form>					
-									
+					</a>			
 				</div>	
 						
 			</ui:repeat>		
