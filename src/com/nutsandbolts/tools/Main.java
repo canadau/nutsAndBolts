@@ -41,21 +41,19 @@ public class Main {
 		 * 
 		 * }
 		 */
-		
-		WeeklySalesTwo sale = new WeeklySalesTwo();
-		for (Entry<Integer, List<Products>> map : sale.getOrders().entrySet()) {
-
-			for (Products pro : map.getValue()) {
-				System.out.println("Week "+ map.getKey() + " Day: " + pro.getDay());
-				System.out.println("ID: " + pro.getId());
-				System.out.println("Name: " + pro.getName() +" Qty: " + pro.getQty());
-				System.out.println("\t\tDate: "+ pro.getDate());
-				System.out.println("\tWeek Name: "+ pro.getWeek());
-				
-			}
-			System.out.println("---------------------------------");
-		}
-		System.out.println("Total rows: " + sale.index);
+		/*
+		 * WeeklySalesTwo sale = new WeeklySalesTwo(); for (Entry<Integer,
+		 * List<Products>> map : sale.getOrders().entrySet()) {
+		 * 
+		 * for (Products pro : map.getValue()) { System.out.println("Week "+
+		 * map.getKey() + " Day: " + pro.getDay()); System.out.println("ID: " +
+		 * pro.getId()); System.out.println("Name: " + pro.getName() +" Qty: " +
+		 * pro.getQty()); System.out.println("\t\tDate: "+ pro.getDate());
+		 * System.out.println("\tWeek Name: "+ pro.getWeek());
+		 * 
+		 * } System.out.println("---------------------------------"); }
+		 * System.out.println("Total rows: " + sale.index);
+		 */
 		/*
 		 * for (int in : sale.weeks()) { System.out.println(in); }
 		 */

@@ -12,7 +12,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import com.nutsandbolts.Products;
@@ -31,7 +30,7 @@ public class WeeklySalesTwo implements Serializable {
 	int dayOfWeek;
 	int weekOfYear;
 	public int index = 0;
-	private int selectOne;
+	private int selectOne= 1;
 	public List<String> range;
 	public List<Integer> weeksList = new ArrayList<Integer>();
 	public List<Products> sunday;
@@ -42,11 +41,10 @@ public class WeeklySalesTwo implements Serializable {
 	public List<Products> friday;
 	public List<Products> saturday;
 	public boolean isEmpty = false;
+	public List<Date> rangeDate = new ArrayList<Date>();
 	
-	public HashMap<Integer, List<Products>> getOrders(){		
-		int week = 1;
-		int weekOfYearN = 0;
-		int dayOfWeekN = 0;
+	public List<Products> getOrders() {
+
 		monday = new ArrayList<Products>();
 		sunday = new ArrayList<Products>();
 		tusday = new ArrayList<Products>();
@@ -56,15 +54,25 @@ public class WeeklySalesTwo implements Serializable {
 		saturday = new ArrayList<Products>();
 		Calendar cal = Calendar.getInstance();
 		products = new ArrayList<>();
-		SimpleDateFormat formater = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss a");
+		
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(rangeDate.get(1));
+		c.add(Calendar.DATE, 1);
+		Date dt = c.getTime();
+
+		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+
 		String dateTime;
 		try {
 
-			String createSQL = "SELECT name, price, qty, dateTime, id FROM orders ORDER BY dateTime, id";
+			String createSQL = "SELECT name, price, qty, dateTime, id FROM orders WHERE dateTime BETWEEN ? AND ? ORDER BY dateTime, id;";
+
 			DBConnection inst = DBConnection.getInstance();
 			Connection conn = inst.getConnection();
-
 			PreparedStatement pst = conn.prepareStatement(createSQL);	
+			
+			pst.setString(1, formater.format(rangeDate.get(0)));
+			pst.setString(2, formater.format(dt));
 			
 			ResultSet rSet = pst.executeQuery();
 			
@@ -77,24 +85,8 @@ public class WeeklySalesTwo implements Serializable {
 
 				product = new Products(dayOfWeek, weekOfYear, rSet.getString(1), rSet.getDouble(2), rSet.getInt(3), dateTime, rSet.getInt(5));
 				
-				if (dayOfWeekN == 0) {
-					products.add(product);
+				products.add(product);
 					
-				} else if (weekOfYear == weekOfYearN  ) {
-					products.add(product);
-					
-				} else {
-					
-					productsList.put(week, products);
-					products = new ArrayList<>();
-					products.add(product);
-					week++;
-					productsList.put(week, products);
-				}
-				
-				weekOfYearN = weekOfYear;
-				dayOfWeekN = dayOfWeek;
-				
 				index++;
 		
 			}
@@ -102,42 +94,32 @@ public class WeeklySalesTwo implements Serializable {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return productsList;
-	}
-	
-	public List<Integer> weeks() {
-		weeksList.clear();
-		for (Entry<Integer, List<Products>> map : getOrders().entrySet()) {
-			weeksList.add(map.getKey());
-
-		}
 		divideDays();
-		if (selectOne > 0) isEmpty = true;
-		return weeksList;
+		return products;
 	}
 	
+
 	public void divideDays() {
 
-		for (Entry<Integer, List<Products>> map : getOrders().entrySet()) {
-			if (map.getKey() == selectOne) {
-				for (Products product : map.getValue()) {
-					if (product.getDay() == 1) {
-						sunday.add(product);
-					} else if (product.getDay() == 2) {
-						monday.add(product);
-					} else if (product.getDay() == 3) {
-						tusday.add(product);
-					} else if (product.getDay() == 4) {
-						wedensday.add(product);
-					} else if (product.getDay() == 5) {
-						thusrday.add(product);
-					} else if (product.getDay() == 6) {
-						friday.add(product);
-					} else if (product.getDay() == 7) {
-						saturday.add(product);
-					}
+		for (Products prod : products) {
+
+				if (prod.getDay() == 1) {
+					sunday.add(prod);
+					isEmpty = true;
+				} else if (prod.getDay() == 2) {
+					monday.add(prod);
+				} else if (prod.getDay() == 3) {
+					tusday.add(prod);
+				} else if (prod.getDay() == 4) {
+					wedensday.add(prod);
+				} else if (prod.getDay() == 5) {
+					thusrday.add(prod);
+				} else if (prod.getDay() == 6) {
+					friday.add(prod);
+				} else if (prod.getDay() == 7) {
+					saturday.add(prod);
 				}
-			}
+				
 		}
 
 	}
@@ -168,7 +150,7 @@ public class WeeklySalesTwo implements Serializable {
 		return quantities;
 	}
 	
-	public String totalSales() {
+	public double totalSales() {
 		double total = 0;
 		DecimalFormat df = new DecimalFormat("0.00");
 		df.setRoundingMode(RoundingMode.DOWN);
@@ -181,7 +163,7 @@ public class WeeklySalesTwo implements Serializable {
 		total = Double.parseDouble(total(friday)) + total;
 		total = Double.parseDouble(total(saturday)) + total;
 
-		return df.format(total);
+		return total;
 	}
 	
 	public int itemQuantity(List<Products> products) {
@@ -270,6 +252,14 @@ public class WeeklySalesTwo implements Serializable {
 
 	public void setEmpty(boolean isEmpty) {
 		this.isEmpty = isEmpty;
+	}
+
+	public List<Date> getRangeDate() {
+		return rangeDate;
+	}
+
+	public void setRangeDate(List<Date> rangeDate) {
+		this.rangeDate = rangeDate;
 	}
 
 	

@@ -25,7 +25,7 @@ public class AuthorizationFilter implements Filter{
 	//private static final String[] customerLoginRequiredURLs = {"/page.xhtml"};
 
 	private static final String[] adminLoginRequiredURLs = {"/registerEmployee.xhtml",
-			"/addProduct.xhtml", "/updateProduct.xhtml", "/WeeklySales.xhtml"};
+			"/addProduct.xhtml", "/updateProduct.xhtml", "/eeklySales.xhtml"};
 
 	private static final String[] customerOrAdminLoginRequiredURLs = {"/orderHistory.xhtml"};
 

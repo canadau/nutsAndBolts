@@ -20,7 +20,7 @@ public class Products {
 	private int week;
 	private int id;
 	private String picture;
-	private Boolean greatDeal;
+	private int greatDeal;
 	
 	public Products() {}
 	public Products(int sku, String name, String description, double price, int qty, String picture) {
@@ -34,7 +34,7 @@ public class Products {
 	}
 	
 	// For home page
-	public Products(int sku, String name, String description, double price, int qty, String picture, Boolean greatDeal) {
+	public Products(int sku, String name, String description, double price, int qty, String picture, int greatDeal) {
 		super();
 		this.sku = sku;
 		this.name = name;
@@ -179,13 +179,13 @@ public class Products {
 		this.picture = picture;
 	}
 	
-	public Boolean getGreatDeal() {
+	public int getGreatDeal() {
 		return greatDeal;
 	}
-	
-	public void setGreatDeal() {
+	public void setGreatDeal(int greatDeal) {
 		this.greatDeal = greatDeal;
 	}
+	
 	
 	public void addProduct(int sku, String name, String description, double price ) {
 

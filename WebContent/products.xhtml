@@ -59,12 +59,16 @@
 	        		<h:form id="form">
 	        		<div class="card">
 						  <h3 class="name">#{prod.name}</h3>
+						  <c:if test="#{employeelogin.employee.userName != null or employeelogin.customer.firstName != null }">
+						  	<p:commandButton ajax="true" update="growl form" value="#{prod.greatDeal==0? 'Mark great deal' : 'Unmark great deal'}" actionListener="#{products.markGreatDeal(prod.sku, prod.greatDeal)}" />
+						  </c:if>
 						  <h6 class="sku">sku##{prod.sku}</h6>
 						  <p:graphicImage class="picture" value="#{prod.picture}" height="100px" width="100px"></p:graphicImage>
 						  <p class="price">$#{prod.price}</p>						  
 						  <p class="description">#{prod.description}</p>
-						<div class="card_button"> 
-						<p:commandButton ajax="true" update="growl ico" value="#{prod.qty > 0? 'Add to Cart':'Out of Stock'}" actionListener="#{cart.addToCart2(prod)}" disabled="#{prod.qty > 0? false:true}"/>
+						  
+						<div class="card_button"> 						
+							<p:commandButton ajax="true" update="growl ico" value="#{prod.qty > 0? 'Add to Cart':'Out of Stock'}" actionListener="#{cart.addToCart2(prod)}" disabled="#{prod.qty > 0? false:true}"/>
 						</div>  
 					</div>		
 					</h:form>					
